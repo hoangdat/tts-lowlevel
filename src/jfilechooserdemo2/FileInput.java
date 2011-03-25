@@ -8,12 +8,16 @@ package jfilechooserdemo2;
  *
  * @author thaodv
  */
-import java.io.BufferedInputStream;
+import XML_Processing.XML_Creator;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * This program reads a text file line by line and print to the console. It uses
@@ -22,44 +26,43 @@ import java.io.IOException;
  */
 public class FileInput {
 
-    public FileInput(File file) {
+    String inputText;
+    StringBuffer sbResult = new StringBuffer();
+    ArrayList<String> listLines = new ArrayList();
 
+    public ArrayList<String> getListLines() {
+        return listLines;
+    }
 
+    
+   
+
+    public StringBuffer getSbResult() {
+        return sbResult;
+    }
+    public FileInput(File file)  {
         FileInputStream fis = null;
-        BufferedInputStream bis = null;
-        DataInputStream dis = null;
+        InputStreamReader isr = null;
+       
+        BufferedReader br;
+        String eachline = new String();
 
         try {
-            fis = new FileInputStream(file);
-
-            // Here BufferedInputStream is added for fast reading.
-            bis = new BufferedInputStream(fis);
-            dis = new DataInputStream(bis);
-            //System.out.println(dis.readByte());
-            // dis.available() returns 0 if the file does not have more lines.
-//      while (dis.available() != 0) {
-//
-//      // this statement reads the line from the file and print it to
-//        // the console.
-//       // System.out.println(dis.readUTF());
-//          String str = dis.readUTF();
-//          System.out.println(str);
-//          System.out.println("hehe");
-//      }
-            System.out.println("hehe");
-            try {
-                System.out.println(dis.readUTF());
-            } catch (Exception e) {
-                System.out.println(e.toString());
+            fis = new FileInputStream(file);            
+            isr = new InputStreamReader(fis,"UTF-8");
+            br = new BufferedReader(isr);
+            eachline = br.readLine();
+            while(eachline!=null){
+                listLines.add(eachline);
+                 sbResult.append(eachline);
+                eachline = br.readLine();
             }
-
-
-            System.out.println("hehe");
-
+            
             // dispose all the resources after using them.
             fis.close();
-            bis.close();
-            dis.close();
+            isr.close();
+            br.close();
+            
 
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
