@@ -3,6 +3,10 @@
  */
 package jfilechooserdemo2;
 
+import XML_Processing.XML_Creator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.stream.XMLStreamException;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -17,12 +21,13 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-
 /**
  * The application's main frame.
  */
 public class JFileChooserDemo2View extends FrameView {
+
     private FileInput fileInput;
+    private XML_Creator xml_Creator;
 
     public JFileChooserDemo2View(SingleFrameApplication app) {
         super(app);
@@ -157,14 +162,14 @@ public class JFileChooserDemo2View extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -209,11 +214,11 @@ public class JFileChooserDemo2View extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -233,6 +238,8 @@ public class JFileChooserDemo2View extends FrameView {
 
         fileChooser.setDialogTitle(resourceMap.getString("fileChooser.dialogTitle")); // NOI18N
         fileChooser.setFileFilter(new MyCustomFilter());
+        fileChooser.setSelectedFile(new java.io.File("C:\\Programming\\TDPSOLA_SVN\\Debug\\FormOfSPESIALS"));
+        fileChooser.setMultiSelectionEnabled(true);
         fileChooser.setName("fileChooser"); // NOI18N
 
         setComponent(mainPanel);
@@ -244,9 +251,27 @@ public class JFileChooserDemo2View extends FrameView {
         // TODO add your handling code here:
         int returnVal = fileChooser.showOpenDialog(this.getFrame());
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            System.out.println(file.toString());
-            fileInput = new FileInput(file);
+            fileChooser.setMultiSelectionEnabled(true);
+            File[] file = fileChooser.getSelectedFiles();
+            try {
+                xml_Creator = new XML_Creator();
+            } catch (XMLStreamException ex) {
+                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(file.length);
+            for (int i = 0; i < file.length; i++) {
+                fileInput = new FileInput(file[i]);
+                try {
+                    //System.out.println(fileInput.getSbResult());
+                    //System.out.println(fileInput.getSbResult().toString());
+                    xml_Creator.WriteXML(fileInput.getListLines(),file[i],i);
+                } catch (XMLStreamException ex) {
+                    Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            System.out.println("OK");
+
+
             // ... code that loads the contents of the file in the text area
         } else {
             // ...
