@@ -14,14 +14,24 @@ public class ReadWavExample {
 
             // Get the number of audio channels in the wav file
             int numChannels = wavFile.getNumChannels();
+            long numFrames = wavFile.getNumFrames();
+            System.out.println("numFrames: " + numFrames);
 
             // Create a buffer of 100 frames
-            double[] buffer = new double[100 * numChannels];
+            //double[] buffer = new double[100 * numChannels];
+            double[] buffer = new double[(int) numFrames * numChannels];
+
 
             int framesRead;
             double min = Double.MAX_VALUE;
             double max = Double.MIN_VALUE;
+//            int offset= 0;
+//            int numFramesReaded = wavFile.readFrames(buffer, offset, (int)numFrames);
+//            WavFile wavFile2 = WavFile.newWavFile(new File("WriteExample1.wav"), 2, wavFile.getNumFrames(), 16, wavFile.getSampleRate());
+//            wavFile2.writeFrames(buffer, offset, numFramesReaded);
+//            wavFile2.close();
 
+            ////////////////////////////////////////////////////////////////////
             do {
                 // Read frames into buffer
                 framesRead = wavFile.readFrames(buffer, 100);
@@ -36,9 +46,37 @@ public class ReadWavExample {
                     }
                 }
             } while (framesRead != 0);
-
             // Close the wavFile
             wavFile.close();
+            ////////////////////////////////////////////////////////////////////
+            System.out.println("buffer.length: " + buffer.length);
+            ////////////////////////////////////////////////////////////////////
+            WavFile wavFile2 = WavFile.newWavFile(new File("WriteExample1.wav"), wavFile.getNumChannels(), numFrames, wavFile.getValidBits(), wavFile.getSampleRate());
+            int offset = 0;
+
+            long frameCounter = 0;
+            double[] bufferToWrite = new double[100];
+
+            // Loop until all frames written
+            while (frameCounter < numFrames) {
+                // Determine how many frames to write, up to a maximum of the buffer size
+                long remaining = wavFile2.getFramesRemaining();
+                int toWrite = (remaining > 100) ? 100 : (int) remaining;
+                for (int s = 0; s < toWrite; s++, frameCounter++) {
+                    bufferToWrite[s] = buffer[offset + s];
+                }
+                // Write the buffer
+                wavFile2.writeFrames(buffer,offset, toWrite);
+                offset += toWrite;
+            }
+
+            // Close the wavFile
+            
+            wavFile2.close();
+            ///////////////////////////////////////////////////////////////////
+
+
+
 
             // Output the minimum and maximum value
             System.out.printf("Min: %f, Max: %f\n", min, max);
