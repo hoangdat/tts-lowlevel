@@ -1,6 +1,7 @@
 package WavFile;
 
 import java.io.*;
+import javax.sound.sampled.*;
 
 public class ReadWavExample {
 
@@ -63,26 +64,29 @@ public class ReadWavExample {
                 long remaining = wavFile2.getFramesRemaining();
                 int toWrite = (remaining > 100) ? 100 : (int) remaining;
                 for (int s = 0; s < toWrite; s++, frameCounter++) {
-                    bufferToWrite[s] = buffer[offset + s];
+                    bufferToWrite[s] = buffer[offset + s];                    
                 }
-                // Write the buffer
-                wavFile2.writeFrames(buffer,offset, toWrite);
+                try {
+                    wavFile2.writeFrames(bufferToWrite,  toWrite);
+                    // Write the buffer
+                } catch (Exception e) {
+                    System.err.println("this: " + e);
+                }
                 offset += toWrite;
+                System.out.println("offset: " + offset + " " + frameCounter);
             }
-
             // Close the wavFile
-            
             wavFile2.close();
             ///////////////////////////////////////////////////////////////////
-
-
-
-
             // Output the minimum and maximum value
             System.out.printf("Min: %f, Max: %f\n", min, max);
         } catch (Exception e) {
             System.err.println(e);
         }
+    }
+/////////////////////////////////////////////////////////////
+    public void writeWav(){
+
     }
 //	public static void main(String[] args)
 //	{
