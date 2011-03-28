@@ -51,6 +51,7 @@ public class FileInput {
             fis = new FileInputStream(file);            
             isr = new InputStreamReader(fis,"UTF-8");
             br = new BufferedReader(isr);
+            
             eachline = br.readLine();
             while(eachline!=null){
                 listLines.add(eachline);
