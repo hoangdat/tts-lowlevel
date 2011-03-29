@@ -37,7 +37,6 @@ package WAV_Processing;
 /*
 |<---            this code is formatted to fit into 80 columns             --->|
  */
-import com.sun.org.apache.bcel.internal.classfile.SourceFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -48,6 +47,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 /**	<titleabbrev>AudioDataBuffer</titleabbrev>
 <title>Buffering of audio data in memory</title>
@@ -101,6 +101,7 @@ public class AudioDataBuffer {
     /** The size of the temporary read buffer, in frames.
      */
     private static final int BUFFER_LENGTH = 1024;
+    private static final int MAXBUFFERSIZE = 1024*1024;
     File sourceFile;
 
     public AudioDataBuffer(File srcFile) throws UnsupportedAudioFileException, IOException {
@@ -120,20 +121,31 @@ public class AudioDataBuffer {
         AudioInputStream inputAIS = AudioSystem.getAudioInputStream(sourceFile);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         int nBufferSize = BUFFER_LENGTH * audioFormat.getFrameSize();
-        byte[] abBuffer = new byte[nBufferSize];
+        //byte[] abBuffer = new byte[nBufferSize];
+        byte[] abBuffer = new byte[MAXBUFFERSIZE];
+        int count = 0;
+        /*
         while (true) {
             if (DEBUG) {
                 out("trying to read (bytes): " + abBuffer.length);
             }
             int nBytesRead = inputAIS.read(abBuffer);
+            System.out.println("nBytesRead: "+nBytesRead);
+            System.out.println("FrameSize "+audioFormat.getFrameSize());
             if (DEBUG) {
                 out("read (bytes): " + nBytesRead);
             }
             if (nBytesRead == -1) {
                 break;
             }
+            //baos.write(abBuffer, 0, nBytesRead);
             baos.write(abBuffer, 0, nBytesRead);
+            count++;
+            System.out.println("count: "+count);
         }
+         /
+         */
+        
 
         /* Here's the byte array everybody wants.
          */
