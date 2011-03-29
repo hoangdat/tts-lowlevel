@@ -3,6 +3,9 @@
  */
 package jfilechooserdemo2;
 
+import WAV_Processing.AudioDataBuffer;
+import WAV_Processing.WAV_Processing;
+import WAV_Processing.WAV_Reading;
 import WavFile.ReadWavExample;
 import XML_Processing.XML_Creator;
 import org.jdesktop.application.Action;
@@ -12,6 +15,11 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -235,7 +243,7 @@ public class JFileChooserDemo2View extends FrameView {
 
         fileChooser.setDialogTitle(resourceMap.getString("fileChooser.dialogTitle")); // NOI18N
         fileChooser.setFileFilter(new MyCustomFilter());
-        fileChooser.setSelectedFile(new java.io.File("C:\\Programming\\TDPSOLA_SVN\\Debug\\FormOfSPESIALS"));
+        fileChooser.setSelectedFile(new java.io.File("C:\\Programming\\NetBeansProjects\\TTS_Lowlevel_SVN"));
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.setName("fileChooser"); // NOI18N
 
@@ -249,44 +257,48 @@ public class JFileChooserDemo2View extends FrameView {
         int returnVal = fileChooser.showOpenDialog(this.getFrame());
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             fileChooser.setMultiSelectionEnabled(true);
-            /*{
+            try {
+                /*{
                 // this block code is used to read Text Database
                 File[] file = fileChooser.getSelectedFiles();
                 try {
-                    xml_Creator = new XML_Creator();
+                xml_Creator = new XML_Creator();
                 } catch (XMLStreamException ex) {
-                    Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println(file.length);
                 for (int i = 0; i < file.length; i++) {
-                    fileInput = new FileInput(file[i]);
-                    try {
-                        //System.out.println(fileInput.getSbResult());
-                        //System.out.println(fileInput.getSbResult().toString());
-                        xml_Creator.WriteXML(fileInput.getListLines(), file[i], i);
-                    } catch (XMLStreamException ex) {
-                        Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                fileInput = new FileInput(file[i]);
+                try {
+                //System.out.println(fileInput.getSbResult());
+                //System.out.println(fileInput.getSbResult().toString());
+                xml_Creator.WriteXML(fileInput.getListLines(), file[i], i);
+                } catch (XMLStreamException ex) {
+                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
                 System.out.println("OK");
-            }*/
-            /////////////////////////////////////////////////////////////////////////////
-            /*
-            File[] wavFile = fileChooser.getSelectedFiles();
-            try {
+                }*/
+                /////////////////////////////////////////////////////////////////////////////
+                /*
+                File[] wavFile = fileChooser.getSelectedFiles();
+                try {
                 for (int i = 0; i < wavFile.length; i++) {
-                    WAV_Reading wav_Reader = new WAV_Reading(wavFile[i]);
-
+                WAV_Reading wav_Reader = new WAV_Reading(wavFile[i]);
                 }
-                
                 // ... code that loads the contents of the file in the text area
+                } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
+                ///////////////////////////////////////////////////////////////////////////////
+                AudioDataBuffer audioDataBuffer = new AudioDataBuffer(fileChooser.getSelectedFile());
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-            ///////////////////////////////////////////////////////////////////////////////
-            ReadWavExample readWav = new ReadWavExample(fileChooser.getSelectedFile());
+            }
         } else {
             // ...
         }
