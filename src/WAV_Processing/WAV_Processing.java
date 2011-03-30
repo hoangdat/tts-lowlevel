@@ -42,7 +42,7 @@ public class WAV_Processing extends WaveFileReader{
         fileOutStrm.write(buffer, offset, byteLength);
         ///////////////////////
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer);
-        AudioInputStream audioInputStream2 = new AudioInputStream(,audioFileFormat.getFormat(), len);
+    //    AudioInputStream audioInputStream2 = new AudioInputStream(,audioFileFormat.getFormat(), len);
         
 
     }

@@ -4,6 +4,7 @@
 package jfilechooserdemo2;
 
 import WAV_Processing.AudioDataBuffer;
+import WAV_Processing.TestAOS;
 import WAV_Processing.WAV_Processing;
 import WAV_Processing.WAV_Reading;
 import WavFile.ReadWavExample;
@@ -293,7 +294,7 @@ public class JFileChooserDemo2View extends FrameView {
                 Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
                 }*/
                 ///////////////////////////////////////////////////////////////////////////////
-                AudioDataBuffer audioDataBuffer = new AudioDataBuffer(fileChooser.getSelectedFile());
+                TestAOS testAOS = new TestAOS(fileChooser.getSelectedFile());
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
