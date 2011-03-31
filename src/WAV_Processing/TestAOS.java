@@ -6,6 +6,7 @@ package WAV_Processing;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFileFormat.Type;
 import javax.sound.sampled.AudioFormat;
@@ -102,8 +103,19 @@ public class TestAOS {
             if (DEBUG) {
                 System.out.println("OscillatorFileAOS.main(): read (bytes): " + nBytesRead);
             }
+            ////////////////////////////////////////////////////////////////////
+            ArrayList arrayListByte= new ArrayList();
+            for (int i = nBytesRead / 3; i < nBytesRead / 2; i++) {
+                arrayListByte.add(abData[i]);
+            }
+            lLengthInBytes = arrayListByte.size();
+            byte[] byteArrToWrite = new byte[(int) lLengthInBytes];             
+            for (int i = 0; i < byteArrToWrite.length; i++) {
+                byteArrToWrite[i] = ((Byte)(arrayListByte.get(i))).byteValue();
+
+            }
+           ////////////////////////////////////////////////////////////////////
             AudioOutputStream audioOutputStream = null;
-            lLengthInBytes = nBytesRead/2;
             audioOutputStream = AudioSystemShadow.getAudioOutputStream(
                     type,
                     audioFormat,
@@ -111,8 +123,9 @@ public class TestAOS {
                     dataOutputStream);
             ////////////////////////////////////////////////////////////////////////
             if (nBytesRead >= 0) {
-                int nBytesWritten = audioOutputStream.write(abData,0, (int)lLengthInBytes);
-                // ghi tu vi tri offset, so byte la len
+                //int nBytesWritten = audioOutputStream.write(abData,0, (int)nBytesRead/2);
+                int nBytesWritten = audioOutputStream.write(byteArrToWrite, 0, (int)lLengthInBytes);
+                // ghi tu vi tri offset cua buffer, so byte la len
                 if (DEBUG) {
                     System.out.println("OscillatorFileAOS.main(): written: " + nBytesWritten);
                 }
@@ -127,7 +140,7 @@ public class TestAOS {
          *	Note that this is important to do backpatching of the
          *	header, if possible.
          */
-        
+
 
 
 

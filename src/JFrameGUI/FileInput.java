@@ -1,4 +1,4 @@
-package jfilechooserdemo2;
+package JFrameGUI;
 
 /*
  * To change this template, choose Tools | Templates

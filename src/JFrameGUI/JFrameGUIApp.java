@@ -2,7 +2,7 @@
  * JFileChooserDemo2App.java
  */
 
-package jfilechooserdemo2;
+package JFrameGUI;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -10,13 +10,13 @@ import org.jdesktop.application.SingleFrameApplication;
 /**
  * The main class of the application.
  */
-public class JFileChooserDemo2App extends SingleFrameApplication {
+public class JFrameGUIApp extends SingleFrameApplication {
 
     /**
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        show(new JFileChooserDemo2View(this));
+        show(new JFrameGUIView(this));
     }
 
     /**
@@ -31,14 +31,14 @@ public class JFileChooserDemo2App extends SingleFrameApplication {
      * A convenient static getter for the application instance.
      * @return the instance of JFileChooserDemo2App
      */
-    public static JFileChooserDemo2App getApplication() {
-        return Application.getInstance(JFileChooserDemo2App.class);
+    public static JFrameGUIApp getApplication() {
+        return Application.getInstance(JFrameGUIApp.class);
     }
 
     /**
      * Main method launching the application.
      */
     public static void main(String[] args) {
-        launch(JFileChooserDemo2App.class, args);
+        launch(JFrameGUIApp.class, args);
     }
 }

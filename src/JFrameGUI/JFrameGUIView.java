@@ -1,7 +1,7 @@
 /*
  * JFileChooserDemo2View.java
  */
-package jfilechooserdemo2;
+package JFrameGUI;
 
 import WAV_Processing.AudioDataBuffer;
 import WAV_Processing.TestAOS;
@@ -30,12 +30,12 @@ import javax.swing.JFrame;
 /**
  * The application's main frame.
  */
-public class JFileChooserDemo2View extends FrameView {
+public class JFrameGUIView extends FrameView {
 
     private FileInput fileInput;
     private XML_Creator xml_Creator;
 
-    public JFileChooserDemo2View(SingleFrameApplication app) {
+    public JFrameGUIView(SingleFrameApplication app) {
         super(app);
 
         initComponents();
@@ -98,15 +98,15 @@ public class JFileChooserDemo2View extends FrameView {
         });
     }
 
-    @Action
-    public void showAboutBox() {
-        if (aboutBox == null) {
-            JFrame mainFrame = JFileChooserDemo2App.getApplication().getMainFrame();
-            aboutBox = new JFileChooserDemo2AboutBox(mainFrame);
-            aboutBox.setLocationRelativeTo(mainFrame);
-        }
-        JFileChooserDemo2App.getApplication().show(aboutBox);
-    }
+//    @Action
+//    public void showAboutBox() {
+//        if (aboutBox == null) {
+//            JFrame mainFrame = JFrameGUIApp.getApplication().getMainFrame();
+//            aboutBox = new JFileChooserDemo2AboutBox(mainFrame);
+//            aboutBox.setLocationRelativeTo(mainFrame);
+//        }
+//        JFrameGUIApp.getApplication().show(aboutBox);
+//    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -140,7 +140,7 @@ public class JFileChooserDemo2View extends FrameView {
         jToolBar1.setRollover(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(jfilechooserdemo2.JFileChooserDemo2App.class).getContext().getResourceMap(JFileChooserDemo2View.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(JFrameGUI.JFrameGUIApp.class).getContext().getResourceMap(JFrameGUIView.class);
         jOpenButton.setText(resourceMap.getString("jOpenButton.text")); // NOI18N
         jOpenButton.setFocusable(false);
         jOpenButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -189,7 +189,7 @@ public class JFileChooserDemo2View extends FrameView {
         openFileMenuItem.setName("openFileMenuItem"); // NOI18N
         fileMenu.add(openFileMenuItem);
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(jfilechooserdemo2.JFileChooserDemo2App.class).getContext().getActionMap(JFileChooserDemo2View.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(JFrameGUI.JFrameGUIApp.class).getContext().getActionMap(JFrameGUIView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
@@ -296,9 +296,9 @@ public class JFileChooserDemo2View extends FrameView {
                 ///////////////////////////////////////////////////////////////////////////////
                 TestAOS testAOS = new TestAOS(fileChooser.getSelectedFile());
             } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(JFileChooserDemo2View.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             // ...
