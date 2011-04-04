@@ -264,8 +264,6 @@ public class JFrameGUIView extends FrameView {
                 for (int i = 0; i < file.length; i++) {
                     fileInput = new FileInput(file[i]);
                     try {
-                        //System.out.println(fileInput.getSbResult());
-                        //System.out.println(fileInput.getSbResult().toString());
                         xml_Creator.WriteXML(fileInput.getListLines(), file[i], i);
                     } catch (XMLStreamException ex) {
                         Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
@@ -313,5 +311,5 @@ public class JFrameGUIView extends FrameView {
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
-    private JDialog aboutBox;
+    
 }
