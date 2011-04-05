@@ -7,11 +7,18 @@ package XML_Processing;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.stream.XMLEventReader;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.events.XMLEvent;
 
 /**
  *
@@ -22,14 +29,16 @@ public abstract class XML_Reader {
     XMLInputFactory xMLInputFactory;
     private XMLStreamReader xMLStreamReader;
     FileInputStream fileInputStream;
+    XMLEventReader xMLEventReader;
+    ////////////////////////////////////////////////////////////////////////////
 
-    public XML_Reader(File inputFile) throws XMLStreamException, FileNotFoundException {       
-        fileInputStream = new FileInputStream(inputFile);       
+    public XML_Reader(File inputFile) throws XMLStreamException, FileNotFoundException {
+        fileInputStream = new FileInputStream(inputFile);
     }
     ////////////////////////////////////////////////////////////////////////////
 
     public XML_Reader(String str) throws XMLStreamException, FileNotFoundException {
-            fileInputStream = new FileInputStream(new File(str));
+        fileInputStream = new FileInputStream(new File(str));
     }
     ////////////////////////////////////////////////////////////////////////////
 //        System.out.println(xMLStreamReader.CHARACTERS);//4
@@ -40,9 +49,8 @@ public abstract class XML_Reader {
 //        System.out.println(xMLStreamReader.START_ELEMENT);//1
 //        System.out.println(xMLStreamReader.NAMESPACE);//13
 
-   // Doc cac thong tin chi tiet
-   public  abstract void ReadDetails();
-
+    // Doc cac thong tin chi tiet
+    public abstract void ReadDetails();
 
     /**
      * @return the xMLStreamReader
@@ -55,7 +63,7 @@ public abstract class XML_Reader {
      * 
      */
     public void setxMLStreamReader() {
-         xMLInputFactory = XMLInputFactory.newInstance();
+        xMLInputFactory = XMLInputFactory.newInstance();
         try {
             xMLStreamReader = xMLInputFactory.createXMLStreamReader(fileInputStream);
         } catch (XMLStreamException ex) {
