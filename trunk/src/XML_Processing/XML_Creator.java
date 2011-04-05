@@ -26,6 +26,7 @@ public class XML_Creator {
     XMLStreamWriter xmlStrWr;
     FileWriter fileWriter;
     int idOfSentence;
+    int idOfSyllable;
 
     public XMLStreamWriter getXtw() {
         return xmlStrWr;
@@ -33,6 +34,7 @@ public class XML_Creator {
 
     public XML_Creator() throws XMLStreamException {
         idOfSentence = 1;
+        idOfSyllable = 1;
         xof = XMLOutputFactory.newInstance();
         xmlStrWr = null;
         try {
@@ -157,6 +159,7 @@ public class XML_Creator {
             xmlStrWr.writeStartElement("Syllable");
             ////////////////////////////////////////
             {
+                xmlStrWr.writeAttribute("Syl_ID", ((Integer)idOfSyllable++).toString());
                 xmlStrWr.writeAttribute("Syllable_Name", SylName);
 //                xmlStrWr.writeStartElement("Syllable_Name");
 //                xmlStrWr.writeCharacters(SylName);

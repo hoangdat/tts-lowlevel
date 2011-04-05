@@ -29,7 +29,7 @@ public abstract class XML_Reader {
     XMLInputFactory xMLInputFactory;
     private XMLStreamReader xMLStreamReader;
     FileInputStream fileInputStream;
-    XMLEventReader xMLEventReader;
+    
     ////////////////////////////////////////////////////////////////////////////
 
     public XML_Reader(File inputFile) throws XMLStreamException, FileNotFoundException {
