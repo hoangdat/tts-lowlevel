@@ -4,9 +4,10 @@
  */
 package XML_Processing;
 
-import XML_Processing.Syllable;
+import JFrameGUI.FileInput;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.stream.XMLStreamException;
@@ -25,6 +26,7 @@ public class XMLTextDBSylReader extends XML_Reader {
     int fileID;
     String fileName;
     Syllable syllable;
+    ArrayList<Syllable> sylArray = new ArrayList<Syllable>();
 
     public XMLTextDBSylReader(String str) throws XMLStreamException, FileNotFoundException {
         super(str);
@@ -87,11 +89,12 @@ public class XMLTextDBSylReader extends XML_Reader {
         ////////////////////////////////////////////////////////////////////////
         // in ra ket qua
         for (int i = 0; i < allSentencesInText.size(); i++) {
-             int sizeOfSen = allSentencesInText.get(i).getSyllablesInSen().size();
-            for (int j = 1; j < sizeOfSen; j++) {
-                System.out.println(allSentencesInText.get(i).getSyllablesInSen().get(j).getSylName());
+            int sizeOfSen = allSentencesInText.get(i).getSyllablesInSen().size();
+            for (int j = 0; j < sizeOfSen; j++) {
+                sylArray.add(allSentencesInText.get(i).getSyllablesInSen().get(j));
             }
         }
+        System.out.println(sylArray.size());
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -125,15 +128,65 @@ public class XMLTextDBSylReader extends XML_Reader {
     }
     ////////////////////////////////////////////////////////////////////////////
 
+    public void ReadListOfSyllable(ArrayList<String> ListLines) {
+        //Name	Tone	Length	Position	PhraseLen	Pos/Len	NumOfPhone
+        //LeftSyl	L-Tone	RighSyl	R-Tone	CarryingFile	Initial	Middle
+        //Nucleus	Final	LeftPhone	RightPhone	InitialType
+        //MiddleType	NucleusType	FinalType	LeftPhoneType	RightPhoneType
+        //Energy
+        for (int i = 1; i < ListLines.size(); i++) {
+            StringTokenizer tokenizer = new StringTokenizer(ListLines.get(i));
+            while (tokenizer.hasMoreTokens()) {
+                String name = tokenizer.nextToken();
+                int tone = StrToInt(tokenizer.nextToken());
+                int length = StrToInt(tokenizer.nextToken());
+                int position = StrToInt(tokenizer.nextToken());
+                int PhraseLen = StrToInt(tokenizer.nextToken());
+                String posPlen = tokenizer.nextToken();
+                int numOfPhone = StrToInt(tokenizer.nextToken());
+                String LSyl = tokenizer.nextToken();
+                int LTone = StrToInt(tokenizer.nextToken());
+                String RSyl = tokenizer.nextToken();
+                int RTone = StrToInt(tokenizer.nextToken());
+                String carryingFile = tokenizer.nextToken();
+                String initial = tokenizer.nextToken();
+                String middle = tokenizer.nextToken();
+                String nucleus = tokenizer.nextToken();
+                String finalPh = tokenizer.nextToken();
+                //Nucleus	Final	LeftPhone	RightPhone	InitialType	
+                //MiddleType	NucleusType	FinalType	LeftPhoneType	RightPhoneType
+                //Energy
+                String lPhone = tokenizer.nextToken();
+                String rPhone = tokenizer.nextToken();
+                String initialType = tokenizer.nextToken();
+                String middleTYpe = tokenizer.nextToken();
+                String nucleusType = tokenizer.nextToken();
+                String finalType = tokenizer.nextToken();
+                String lPhoneType = tokenizer.nextToken();
+                String rPhoneType = tokenizer.nextToken();
+                float energy = (Float.parseFloat(tokenizer.nextToken()));
+            }
+
+        }
+
+    }
+
     public static void main(String[] args) {
         try {
             XMLTextDBSylReader xMLTextDBSylReader = new XMLTextDBSylReader("Text_DB_Syllable.xml");
             xMLTextDBSylReader.ReadDetails();
+
+
+            FileInput f = new FileInput("ListOfSyllable.tdd");
+            xMLTextDBSylReader.ReadListOfSyllable(f.getListLines());
+
         } catch (XMLStreamException ex) {
             Logger.getLogger(XMLTextDBSylReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(XMLTextDBSylReader.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }
 
     /**
