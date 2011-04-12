@@ -114,7 +114,7 @@ public class XML_Creator {
                         xmlStrWr.writeEndElement();
                         xmlStrWr.writeStartElement("sentence");
                         xmlStrWr.writeAttribute("id", ((Integer) idOfSentence++).toString());
-                        this.WriteSyl(SylName, StartIndex, EndIndex);
+                        //this.WriteSyl(SylName, StartIndex, EndIndex);
                     } else {
                         this.WriteSyl(SylName, StartIndex, EndIndex);
                     }
