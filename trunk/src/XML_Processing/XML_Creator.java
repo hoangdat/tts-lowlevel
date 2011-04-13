@@ -108,6 +108,7 @@ public class XML_Creator {
                         xmlStrWr.writeAttribute("id", ((Integer) idOfSentence++).toString());
                         this.WriteSyl(SylName, StartIndex, EndIndex);
                     } else if (isEndParaghrp == true) {
+                        this.WriteSyl(SylName, StartIndex, EndIndex);
                         xmlStrWr.writeEndElement();
                     } else if (SylName.compareTo("SILS") == 0) {
                         this.WriteSyl(SylName, StartIndex, EndIndex);

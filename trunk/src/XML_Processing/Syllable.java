@@ -23,10 +23,11 @@ public class Syllable {
      */
     private int PhraseLen;
     private int numOfPhone;
+    private String carryingFile ;
     private String intialPhoneme = "";
     private String middlePhoneme = "";
     private String NucleusPhoneme = "";
-    private int finalPhoneme;
+    private String finalPhoneme;
     private String initialType = "";
     private String middleType = "";
     private String nucleusType = "";
@@ -223,7 +224,7 @@ public class Syllable {
     /**
      * @return the finalPhoneme
      */
-    public int getFinalPhoneme() {
+    public String getFinalPhoneme() {
         return finalPhoneme;
     }
 
@@ -231,7 +232,7 @@ public class Syllable {
      * @param finalPhoneme the finalPhoneme to set
      */
     public void setFinalPhoneme(int finalPhoneme) {
-        this.finalPhoneme = finalPhoneme;
+        this.setFinalPhoneme(finalPhoneme);
     }
 
     /**
@@ -330,5 +331,51 @@ public class Syllable {
      */
     public void setEnergy(float energy) {
         this.energy = energy;
+    }
+    /**
+     * @param
+     */
+    public boolean setSyllable(String name, int tone, int phraseLen, int numOfPhone, String carryingFile,
+            String initial, String middle, String nucleus, String finalph,
+            String initialT, String middleT, String nucleusT, String finalT, float energy){
+       if(name.compareTo(sylName)==0){
+           setSylTone(tone);
+           setPhraseLen(phraseLen);
+           setNumOfPhone(numOfPhone);
+           setCarryingFile(carryingFile);
+           setIntialPhoneme(initial);
+           setMiddlePhoneme(middle);
+           setNucleusPhoneme(nucleus);
+           setFinalPhoneme(finalph);
+           setInitialType(initialT);
+           setMiddleType(middleT);
+           setNucleusType(nucleusT);
+           setFinalType(finalT);
+           setEnergy(energy);
+           return true;
+       }else{
+           return false;
+       }
+    }
+
+    /**
+     * @return the carryingFile
+     */
+    public String getCarryingFile() {
+        return carryingFile;
+    }
+
+    /**
+     * @param carryingFile the carryingFile to set
+     */
+    public void setCarryingFile(String carryingFile) {
+        this.carryingFile = carryingFile;
+    }
+
+    /**
+     * @param finalPhoneme the finalPhoneme to set
+     */
+    public void setFinalPhoneme(String finalPhoneme) {
+        this.finalPhoneme = finalPhoneme;
     }
 }
