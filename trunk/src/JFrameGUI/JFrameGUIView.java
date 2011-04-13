@@ -3,7 +3,7 @@
  */
 package JFrameGUI;
 
-import WAV_Processing.TestAOS;
+
 import XML_Processing.XML_Creator;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -12,13 +12,10 @@ import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 import javax.swing.Icon;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.xml.stream.XMLStreamException;
 

@@ -19,6 +19,7 @@
             <xs:attribute name = "end_index" type="xs:integer"/>
             <xs:attribute name = "position" type="xs:integer"/>
             <xs:attribute name = "num_of_phone" type="xs:integer"/>
+            <xs:attribute name="energy" type="xs:float"/>
             <xs:sequence>
                 <xs:element name = "initial" type ="xs:string">
                     <xs:complexType>
