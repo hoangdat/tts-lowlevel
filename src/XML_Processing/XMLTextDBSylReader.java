@@ -26,7 +26,7 @@ public class XMLTextDBSylReader extends XML_Reader {
     int fileID;
     String fileName;
     Syllable syllable;
-    ArrayList<Syllable> sylArray = new ArrayList<Syllable>();
+    private ArrayList<Syllable> sylArray = new ArrayList<Syllable>();
 
     public XMLTextDBSylReader(String str) throws XMLStreamException, FileNotFoundException {
         super(str);
@@ -91,17 +91,17 @@ public class XMLTextDBSylReader extends XML_Reader {
         for (int i = 0; i < allSentencesInText.size(); i++) {
             int sizeOfSen = allSentencesInText.get(i).getSyllablesInSen().size();
             for (int j = 0; j < sizeOfSen; j++) {
-                sylArray.add(allSentencesInText.get(i).getSyllablesInSen().get(j));
+                getSylArray().add(allSentencesInText.get(i).getSyllablesInSen().get(j));
             }
         }
-        System.out.println(sylArray.size());
+        System.out.println(getSylArray().size());
     }
     ////////////////////////////////////////////////////////////////////////////
 
     public void ReadFileDetails() {
         fileID = StrToInt((xMLStreamReader.getAttributeValue(0)));
         fileName = xMLStreamReader.getAttributeValue(1);
-        System.out.println(fileID + " " + fileName);
+       // System.out.println(fileID + " " + fileName);
 
     }
     ////////////////////////////////////////////////////////////////////////////
@@ -134,44 +134,53 @@ public class XMLTextDBSylReader extends XML_Reader {
         //Nucleus	Final	LeftPhone	RightPhone	InitialType
         //MiddleType	NucleusType	FinalType	LeftPhoneType	RightPhoneType
         //Energy
-        for (int i = 1; i < ListLines.size(); i++) {
+        int indexOfSyl=0;
+         boolean setSyllable;
+        for (int i = 1; i < ListLines.size(); i++,indexOfSyl++) {
             StringTokenizer tokenizer = new StringTokenizer(ListLines.get(i));
             while (tokenizer.hasMoreTokens()) {
-                String name = tokenizer.nextToken();
-                int tone = StrToInt(tokenizer.nextToken());
+                String name = tokenizer.nextToken();//
+                int tone = StrToInt(tokenizer.nextToken());//
                 int length = StrToInt(tokenizer.nextToken());
                 int position = StrToInt(tokenizer.nextToken());
-                int PhraseLen = StrToInt(tokenizer.nextToken());
+                int PhraseLen = StrToInt(tokenizer.nextToken());//
                 String posPlen = tokenizer.nextToken();
-                int numOfPhone = StrToInt(tokenizer.nextToken());
+                int numOfPhone = StrToInt(tokenizer.nextToken());//
                 String LSyl = tokenizer.nextToken();
                 int LTone = StrToInt(tokenizer.nextToken());
                 String RSyl = tokenizer.nextToken();
                 int RTone = StrToInt(tokenizer.nextToken());
-                String carryingFile = tokenizer.nextToken();
-                String initial = tokenizer.nextToken();
-                String middle = tokenizer.nextToken();
-                String nucleus = tokenizer.nextToken();
-                String finalPh = tokenizer.nextToken();
+                String carryingFile = tokenizer.nextToken();//
+                String initial = tokenizer.nextToken();//
+                String middle = tokenizer.nextToken();//
+                String nucleus = tokenizer.nextToken();//
+                String finalPh = tokenizer.nextToken();//
                 //Nucleus	Final	LeftPhone	RightPhone	InitialType	
                 //MiddleType	NucleusType	FinalType	LeftPhoneType	RightPhoneType
                 //Energy
                 String lPhone = tokenizer.nextToken();
                 String rPhone = tokenizer.nextToken();
-                String initialType = tokenizer.nextToken();
-                String middleTYpe = tokenizer.nextToken();
-                String nucleusType = tokenizer.nextToken();
-                String finalType = tokenizer.nextToken();
+                String initialType = tokenizer.nextToken();//
+                String middleTYpe = tokenizer.nextToken();//
+                String nucleusType = tokenizer.nextToken();//
+                String finalType = tokenizer.nextToken();//
                 String lPhoneType = tokenizer.nextToken();
                 String rPhoneType = tokenizer.nextToken();
-                float energy = (Float.parseFloat(tokenizer.nextToken()));
+                float energy = (Float.parseFloat(tokenizer.nextToken()));//
+                //
+                setSyllable = getSylArray().get(indexOfSyl).setSyllable(name, tone, PhraseLen, numOfPhone, carryingFile, initial, middle, nucleus, finalPh, initial, middle, nucleus, finalPh, energy);
+                if(setSyllable==false){
+                    System.out.println("break:"+indexOfSyl+" "+i);
+                }
+
+                
             }
 
         }
 
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         try {
             XMLTextDBSylReader xMLTextDBSylReader = new XMLTextDBSylReader("Text_DB_Syllable.xml");
             xMLTextDBSylReader.ReadDetails();
@@ -180,6 +189,7 @@ public class XMLTextDBSylReader extends XML_Reader {
             FileInput f = new FileInput("ListOfSyllable.tdd");
             xMLTextDBSylReader.ReadListOfSyllable(f.getListLines());
 
+
         } catch (XMLStreamException ex) {
             Logger.getLogger(XMLTextDBSylReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -187,12 +197,26 @@ public class XMLTextDBSylReader extends XML_Reader {
         }
 
 
-    }
+    }*/
 
     /**
      * @return the allSentencesInText
      */
     public ArrayList<Sentence> getAllSentencesInText() {
         return allSentencesInText;
+    }
+
+    /**
+     * @return the sylArray
+     */
+    public ArrayList<Syllable> getSylArray() {
+        return sylArray;
+    }
+
+    /**
+     * @param sylArray the sylArray to set
+     */
+    public void setSylArray(ArrayList<Syllable> sylArray) {
+        this.sylArray = sylArray;
     }
 }
