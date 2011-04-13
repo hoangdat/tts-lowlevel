@@ -65,6 +65,7 @@ public class TextDBCreator {
         String carryingFile = syls.get(0).getCarryingFile();
         String sylName;
         boolean startSylPh = false, startSen = false, startFile = false;
+        int id_file = 0, id_sen = 0, id_phrase = 0, id_syl = 0;
 
         for (int i = 0; i < syls.size(); i++) {
             System.out.println("this: " + i);
@@ -81,9 +82,9 @@ public class TextDBCreator {
             } else if (i < syls.size() - 2) {
                 if (syls.get(i + 1).getCarryingFile().compareTo(carryingFile) != 0) {
                     isEndFile = true;
+                } else {
+                    isEndFile = false;
                 }
-            } else {
-                isEndFile = false;
             }
             sylName = syls.get(i).getSylName();
             ////////////////////////////////////////////////////////////////////
@@ -119,37 +120,46 @@ public class TextDBCreator {
             ////////////////////////////////////////////////////////////////////
             if (isStartFile) {
                 streamWriter.writeStartElement("file");
+                streamWriter.writeAttribute("id_file", ((Integer)id_file).toString());
                 streamWriter.writeAttribute("file_name", syls.get(i).getCarryingFile());
-                startFile = !startFile;
+                startFile = true;
+                id_file++;
             }
             //
             if (isStartSentence) {
                 streamWriter.writeStartElement("sentence");
-                startSen = !startSen;
+                streamWriter.writeAttribute("id_sen", ((Integer)id_sen).toString());
+                startSen = true;
+                id_sen++;
+                id_phrase = 0;
                 // streamWriter.writeAttribute("", syls.get(i).getCarryingFile());
             }
             //
 
             if (isStartSylPhrase) {
                 streamWriter.writeStartElement("phrase");
-                startSylPh = !startSylPh;
+                streamWriter.writeAttribute("id_phrase", ((Integer)id_phrase).toString());
+                streamWriter.writeAttribute("length", ((Integer)syls.get(i).getPhraseLen()).toString());
+                startSylPh = true;
+                id_phrase++;
+                id_syl = 0;
             }
             //
-            WriteSyl(syls.get(i), i);
+            WriteSyl(syls.get(i), id_syl++);
             //
             if (isEndSylPhrase && startSylPh) {
                 streamWriter.writeEndElement();
-                startSylPh = !startSylPh;
+                startSylPh = false;
             }
             //
-            if (isEndSentence && startSen) {
+            if (isEndSentence && startSen && isEndSylPhrase) {
                 streamWriter.writeEndElement();
-                startSen = !startSen;
+                startSen = false;
             }
             //
-            if (isEndFile&&startFile) {
+            if (isEndFile && startFile && isEndSentence) {
                 streamWriter.writeEndElement();
-                startFile = !startFile;
+                startFile = false;
             }
 
         }//end for
