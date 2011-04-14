@@ -7,9 +7,10 @@ package XML_Processing;
  */
 public class SylPhrase {
 
-	private int numberOfSyllables;
+	private int phraseLen;
+        private int id_phrase;
 	private int phraseLevel;
-	private String text;
+	private String phraseContent;
 
 	/**
 	 * vi tri bat dau cua cum tu trong file am thanh
@@ -31,14 +32,14 @@ public class SylPhrase {
      * @return the numberOfSyllables
      */
     public int getNumberOfSyllables() {
-        return numberOfSyllables;
+        return phraseLen;
     }
 
     /**
      * @param numberOfSyllables the numberOfSyllables to set
      */
     public void setNumberOfSyllables(int numberOfSyllables) {
-        this.numberOfSyllables = numberOfSyllables;
+        this.phraseLen = numberOfSyllables;
     }
 
     /**
@@ -58,15 +59,15 @@ public class SylPhrase {
     /**
      * @return the text
      */
-    public String getText() {
-        return text;
+    public String getContent() {
+        return phraseContent;
     }
 
     /**
      * @param text the text to set
      */
-    public void setText(String text) {
-        this.text = text;
+    public void setContent(String text) {
+        this.phraseContent = text;
     }
 
     /**

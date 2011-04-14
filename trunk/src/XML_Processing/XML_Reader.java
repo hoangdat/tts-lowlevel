@@ -8,9 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.stream.XMLEventReader;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +15,6 @@ import java.util.logging.Logger;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 
 /**
  *

@@ -4,7 +4,6 @@
  */
 package XML_Processing;
 
-import JFrameGUI.FileInput;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -18,6 +17,7 @@ import javax.xml.stream.events.XMLEvent;
  *
  * @author thaodv_bkit
  */
+// tu ngay 14/04/2011 ko can dung class nay nua
 public class XMLTextDBSylReader extends XML_Reader {
 
     private XMLStreamReader xMLStreamReader;
