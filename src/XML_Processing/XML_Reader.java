@@ -7,6 +7,7 @@ package XML_Processing;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ public abstract class XML_Reader {
     XMLInputFactory xMLInputFactory;
     private XMLStreamReader xMLStreamReader;
     FileInputStream fileInputStream;
+    private ArrayList<Sentence> allSentences ;
     
     ////////////////////////////////////////////////////////////////////////////
 
@@ -65,5 +67,35 @@ public abstract class XML_Reader {
         } catch (XMLStreamException ex) {
             Logger.getLogger(XML_Reader.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * @return the allSentences
+     */
+    public ArrayList<Sentence> getAllSentences() {
+        return allSentences;
+    }
+
+    /**
+     * @param allSentences the allSentences to set
+     */
+    public void setAllSentences(ArrayList<Sentence> allSentences) {
+        this.allSentences = allSentences;
+    }
+
+    /**
+     * @param indexOfSentence index of sentence to be returned
+     */
+    public Sentence getSentenceAt(int indexOfSentence){
+        return allSentences.get(indexOfSentence);
+    }
+    
+    /**
+     * 
+     * @param str
+     * @return
+     */
+    public int StrToInt(String str) {
+        return Integer.parseInt(str);
     }
 }
