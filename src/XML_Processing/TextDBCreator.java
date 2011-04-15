@@ -177,7 +177,7 @@ public class TextDBCreator {
             streamWriter.writeAttribute("name", syl.getSylName());
             streamWriter.writeAttribute("start_index", ((Integer) syl.getStartIndex()).toString());
             streamWriter.writeAttribute("end_index", ((Integer) syl.getEndIndex()).toString());
-            streamWriter.writeAttribute("position", ((Integer) syl.getSylPosition()).toString());
+            //streamWriter.writeAttribute("position", ((Integer) syl.getSylPosition()).toString());
             streamWriter.writeAttribute("numOfPhone", ((Integer) syl.getNumOfPhone()).toString());
             streamWriter.writeAttribute("energy", ((Float) syl.getEnergy()).toString());
         }
@@ -193,12 +193,12 @@ public class TextDBCreator {
             streamWriter.writeCharacters(syl.getMiddlePhoneme());
             streamWriter.writeEndElement();
             ////////////////////////////////////////////////////////////////////
-            streamWriter.writeStartElement("initial");
+            streamWriter.writeStartElement("nucleus");
             streamWriter.writeAttribute("type", syl.getNucleusType());
             streamWriter.writeCharacters(syl.getNucleusPhoneme());
             streamWriter.writeEndElement();
             ////////////////////////////////////////////////////////////////////
-            streamWriter.writeStartElement("initial");
+            streamWriter.writeStartElement("final");
             streamWriter.writeAttribute("type", syl.getFinalType());
             streamWriter.writeCharacters(syl.getFinalPhoneme());
             streamWriter.writeEndElement();
