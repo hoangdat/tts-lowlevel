@@ -123,9 +123,7 @@ public class XMLTextDBSylReader extends XML_Reader {
     }
     ////////////////////////////////////////////////////////////////////////////
 
-    public int StrToInt(String str) {
-        return Integer.parseInt(str);
-    }
+    
     ////////////////////////////////////////////////////////////////////////////
 
     public void ReadListOfSyllable(ArrayList<String> ListLines) {
