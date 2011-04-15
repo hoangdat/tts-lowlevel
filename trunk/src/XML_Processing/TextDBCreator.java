@@ -177,9 +177,9 @@ public class TextDBCreator {
             streamWriter.writeAttribute("name", syl.getSylName());
             streamWriter.writeAttribute("start_index", ((Integer) syl.getStartIndex()).toString());
             streamWriter.writeAttribute("end_index", ((Integer) syl.getEndIndex()).toString());
-            streamWriter.writeAttribute("end_index", ((Integer) syl.getSylPosition()).toString());
-            streamWriter.writeAttribute("end_index", ((Integer) syl.getNumOfPhone()).toString());
-            streamWriter.writeAttribute("end_index", ((Float) syl.getEnergy()).toString());
+            streamWriter.writeAttribute("position", ((Integer) syl.getSylPosition()).toString());
+            streamWriter.writeAttribute("numOfPhone", ((Integer) syl.getNumOfPhone()).toString());
+            streamWriter.writeAttribute("energy", ((Float) syl.getEnergy()).toString());
         }
         ////////////////////////////////////////////////////////////////////////
         {
