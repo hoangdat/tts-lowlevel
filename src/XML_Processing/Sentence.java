@@ -11,10 +11,13 @@ import java.util.HashMap;
  */
 public class Sentence {
 
-	private ArrayList<Syllable> syllablesInSen =new ArrayList<Syllable>();
+	
 	private ArrayList<SylPhrase> sylPhrases = new ArrayList<SylPhrase>();
-	private int IDofSentence;
+	private int iDofSentence;
+        private int iDofFile;
 	private String carryingFile;
+        private String senContent;
+
 	
     
 
@@ -24,10 +27,7 @@ public class Sentence {
 	public void Sentence(){
 	}
         ///////////////////////////////////
-        public void addSyllable(Syllable s){
-            syllablesInSen.add(s);
-        }
-
+        
 	
 
 	public int getSentenceLength(){
@@ -53,10 +53,7 @@ public class Sentence {
     /**
      * @return the syllablesInSen
      */
-    public ArrayList<Syllable> getSyllablesInSen() {
-        return syllablesInSen;
-    }
-
+    
     
 
     /**
@@ -70,21 +67,21 @@ public class Sentence {
      * @param sylPhrases the sylPhrases to set
      */
     public void setSylPhrases(ArrayList<SylPhrase> sylPhrases) {
-        this.sylPhrases = sylPhrases;
+        this.setSylPhrases(sylPhrases);
     }
 
     /**
      * @return the IDofSentence
      */
     public int getIDofSentence() {
-        return IDofSentence;
+        return iDofSentence;
     }
 
     /**
      * @param IDofSentence the IDofSentence to set
      */
     public void setIDofSentence(int IDofSentence) {
-        this.IDofSentence = IDofSentence;
+        this.iDofSentence = IDofSentence;
     }
 
     /**
@@ -100,6 +97,37 @@ public class Sentence {
     public void setCarryingFile(String carryingFile) {
         this.carryingFile = carryingFile;
     }
+
+    /**
+     * @return the senContent
+     */
+    public String getSenContent() {
+        return senContent;
+    }
+
+    /**
+     * @param senContent the senContent to set
+     */
+    public void setSenContent(String senContent) {
+        this.senContent = senContent;
+    }
+
+    /**
+     * @return the iDofFile
+     */
+    public int getiDofFile() {
+        return iDofFile;
+    }
+
+    /**
+     * @param iDofFile the iDofFile to set
+     */
+    public void setiDofFile(int iDofFile) {
+        this.iDofFile = iDofFile;
+    }
+
+    
+    
 
     
 
