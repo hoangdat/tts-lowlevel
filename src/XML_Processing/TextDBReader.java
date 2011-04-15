@@ -55,6 +55,22 @@ public class TextDBReader extends XML_Reader {
                         ReadPhraseDetails();
                     } else if (xMLStreamReader.getName().toString().compareTo("syllable") == 0) {
                         ReadSylDetails();
+                    } else if (xMLStreamReader.getName().toString().compareTo("initial") == 0) {
+                        syllable.setIntialPhoneme(xMLStreamReader.getElementText());
+                        syllable.setInitialType(xMLStreamReader.getAttributeValue(0));
+                    } else if (xMLStreamReader.getName().toString().compareTo("middle") == 0) {
+                        syllable.setMiddlePhoneme(xMLStreamReader.getElementText());
+                        syllable.setMiddleType(xMLStreamReader.getAttributeValue(0));
+                    } else if (xMLStreamReader.getName().toString().compareTo("nucleus") == 0) {
+                        syllable.setNucleusPhoneme(xMLStreamReader.getElementText());
+                        syllable.setNucleusType(xMLStreamReader.getAttributeValue(0));
+                    } else if (xMLStreamReader.getName().toString().compareTo("final") == 0) {
+                        syllable.setFinalPhoneme(xMLStreamReader.getElementText());
+                        syllable.setFinalType(xMLStreamReader.getAttributeValue(0));
+                    } else if (xMLStreamReader.getName().toString().compareTo("tone") == 0) {
+                        syllable.setSylTone(StrToInt(xMLStreamReader.getElementText()));
+                    } else if (xMLStreamReader.getName().toString().compareTo("syllable") == 0) {
+                        ReadSylDetails();
                     } else if (xMLStreamReader.getName().toString().compareTo("root") == 0) {
                         continue;
                     } else {
@@ -83,7 +99,7 @@ public class TextDBReader extends XML_Reader {
             Logger.getLogger(XMLTextDBSylReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         ////////////////////////////////////////////////////////////////////////
-      
+
     }
 
     private void ReadFileDetails() {
@@ -107,18 +123,21 @@ public class TextDBReader extends XML_Reader {
     }
 
     private void ReadSylDetails() {
-        //id_syl="0" name="SILP" start_index="0" end_index="2850" end_index="0" end_index="0" end_index="6944.88"
+        //id_syl="1" name="mặt" start_index = "0" end_index="2850" position = "1" num_of_phone = "3" energy="1023.4">
         syllable = new Syllable();
         syllable.setIDofSyllable(StrToInt(xMLStreamReader.getAttributeValue(0)));
         syllable.setSylName(xMLStreamReader.getAttributeValue(1));
         syllable.setStartIndex(StrToInt(xMLStreamReader.getAttributeValue(2)));
         syllable.setEndIndex(StrToInt(xMLStreamReader.getAttributeValue(3)));
-        syllable.set
-        
+        syllable.setSylPosition(StrToInt(xMLStreamReader.getAttributeValue(4)));
+        syllable.setNumOfPhone(StrToInt(xMLStreamReader.getAttributeValue(5)));
+        syllable.setEnergy(Float.parseFloat(xMLStreamReader.getAttributeValue(6)));
+
+
     }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        
+
         String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
         TextDBReader textDBReader = new TextDBReader(textDBLocation);
     }
