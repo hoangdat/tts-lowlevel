@@ -88,12 +88,12 @@ public class XMLTextDBSylReader extends XML_Reader {
         }
         ////////////////////////////////////////////////////////////////////////
         // in ra ket qua
-        for (int i = 0; i < allSentencesInText.size(); i++) {
-            int sizeOfSen = allSentencesInText.get(i).getSyllablesInSen().size();
-            for (int j = 0; j < sizeOfSen; j++) {
-                getSylArray().add(allSentencesInText.get(i).getSyllablesInSen().get(j));
-            }
-        }
+//        for (int i = 0; i < allSentencesInText.size(); i++) {
+//            int sizeOfSen = allSentencesInText.get(i).getSyllablesInSen().size();
+//            for (int j = 0; j < sizeOfSen; j++) {
+//                getSylArray().add(allSentencesInText.get(i).getSyllablesInSen().get(j));
+//            }
+//        }
         System.out.println(getSylArray().size());
     }
     ////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ public class XMLTextDBSylReader extends XML_Reader {
         syllable.setSylName(xMLStreamReader.getAttributeValue(1));
         syllable.setStartIndex(StrToInt(xMLStreamReader.getAttributeValue(2)));
         syllable.setEndIndex(StrToInt(xMLStreamReader.getAttributeValue(3)));
-        sentence.addSyllable(syllable);
+       // sentence.addSyllable(syllable);
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -166,7 +166,7 @@ public class XMLTextDBSylReader extends XML_Reader {
                 String rPhoneType = tokenizer.nextToken();
                 float energy = (Float.parseFloat(tokenizer.nextToken()));//
                 //
-                setSyllable = getSylArray().get(indexOfSyl).setSyllable(name, tone, PhraseLen, numOfPhone, carryingFile, initial, middle, nucleus, finalPh, initial, middle, nucleus, finalPh, energy);
+                setSyllable = getSylArray().get(indexOfSyl).setSyllable(name, tone, PhraseLen, numOfPhone, carryingFile, initial, middle, nucleus, finalPh, initialType, middleTYpe, nucleusType, finalType, energy);
                 if(setSyllable==false){
                     System.out.println("break:"+indexOfSyl+" "+i);
                 }

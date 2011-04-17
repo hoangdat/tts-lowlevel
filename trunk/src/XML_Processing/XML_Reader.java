@@ -23,10 +23,10 @@ import javax.xml.stream.XMLStreamReader;
  */
 public abstract class XML_Reader {
 
-    XMLInputFactory xMLInputFactory;
+    private XMLInputFactory xMLInputFactory;
     private XMLStreamReader xMLStreamReader;
-    FileInputStream fileInputStream;
-    private ArrayList<Sentence> allSentences ;
+    private FileInputStream fileInputStream;
+    private ArrayList<Sentence> allSentences = new ArrayList<Sentence>();
     
     ////////////////////////////////////////////////////////////////////////////
 

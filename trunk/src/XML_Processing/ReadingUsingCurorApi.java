@@ -31,13 +31,13 @@ public class ReadingUsingCurorApi {
 
             Integer eventType = xmlReader.next();
             if (eventType.equals(XMLEvent.START_ELEMENT)){
-                System.out.print(" " + xmlReader.getName() + " ");
+                System.out.print("start: " + xmlReader.getName() + " ");
             }else if (eventType.equals(XMLEvent.CHARACTERS)){
-                System.out.print(" " + xmlReader.getText() + " ");
+                System.out.print("character:  " + xmlReader.getText() + " ");
             }else if (eventType.equals(XMLEvent.ATTRIBUTE)){
-                System.out.print(" " + xmlReader.getName() + " ");
+                System.out.print("attribute: " + xmlReader.getName() + " ");
             }else if (eventType.equals(XMLEvent.END_ELEMENT)){
-                System.out.print(" " + xmlReader.getName() + " ");
+                System.out.print("end: " + xmlReader.getName() + " ");
             }
         }
         xmlReader.close();
