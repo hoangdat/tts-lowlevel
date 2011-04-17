@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<root>
+    <sentence id="1">tôi không hề thích toán
+        <parse id="1">
+            <C level="1" explain="giới từ">nhưng</C>
+            <P level="1" explain="đại từ">tôi</P>
+            <VP level="1" explain="cụm động từ">không hề thích toán
+                <R level="2" explain="phụ từ">không</R>
+                <V level="2" explain="động từ">hề</V>
+                <VP level="2" explain="cụm động từ">thích toán
+                    <V level="3" explain="động từ">thích</V>
+                    <N level="3" explain="danh từ">toán</N>
+                </VP>
+            </VP>
+        </parse>
+    </sentence>
+    <sentence id="2">tôi thích võ thuật hơn
+        <parse id="1">
+            <P level="1" explain="đại từ">tôi</P>
+            <VP level="1" explain="cụm động từ">thích võ thuật hơn
+                <V level="2" explain="động từ">thích</V>
+                <NP level="2" explain="cụm danh từ">võ thuật hơn
+                    <N level="3" explain="danh từ">võ thuật</N>
+                    <A level="3" explain="null">hơn</A>
+                </NP>
+            </VP>
+        </parse>
+    </sentence>
+    <sentence id="3">còn nữa tôi rất ghét môn văn
+        <parse id="1">
+            <RP level="1" explain="cụm phụ từ">còn nữa
+                <R level="2" explain="phụ từ">còn</R>
+                <R level="2" explain="phụ từ">nữa</R>
+            </RP>
+            <P level="1" explain="đại từ">tôi</P>
+            <VP level="1" explain="cụm động từ">rất ghét môn văn
+                <R level="2" explain="phụ từ">rất</R>
+                <V level="2" explain="động từ">ghét</V>
+                <NP level="2" explain="cụm danh từ">môn văn
+                    <N level="3" explain="danh từ">môn</N>
+                    <N level="3" explain="danh từ">văn</N>
+                </NP>
+            </VP>
+        </parse>
+    </sentence>
+</root>
