@@ -11,7 +11,6 @@ public class SylPhrase {
 
 	private int phraseLen;
         private int id_phrase;
-	private int phraseLevel;
 	private String phraseContent;
         private ArrayList<Syllable> syllablesInPh =new ArrayList<Syllable>();
 
@@ -46,19 +45,7 @@ public class SylPhrase {
         this.setPhraseLen(numberOfSyllables);
     }
 
-    /**
-     * @return the phraseLevel
-     */
-    public int getPhraseLevel() {
-        return phraseLevel;
-    }
-
-    /**
-     * @param phraseLevel the phraseLevel to set
-     */
-    public void setPhraseLevel(int phraseLevel) {
-        this.phraseLevel = phraseLevel;
-    }
+    
 
     /**
      * @return the text

@@ -17,7 +17,6 @@ public class Syllable {
      */
     private int sylDuration;
     private String sylTranscript = "";
-    private int sylPosition;
     /**
      * length of phrase carry the syllable
      */
@@ -137,19 +136,9 @@ public class Syllable {
         this.sylTranscript = sylTranscript;
     }
 
-    /**
-     * @return the sylPosition
-     */
-    public int getSylPosition() {
-        return sylPosition;
-    }
+   
 
-    /**
-     * @param sylPosition the sylPosition to set
-     */
-    public void setSylPosition(int sylPosition) {
-        this.sylPosition = sylPosition;
-    }
+   
 
     /**
      * @return the PhraseLen

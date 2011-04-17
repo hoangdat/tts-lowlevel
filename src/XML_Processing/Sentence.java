@@ -18,12 +18,6 @@ public class Sentence {
 	private String carryingFile;
         private String senContent;
 
-	
-    
-
-
-
-
 	public void Sentence(){
 	}
         ///////////////////////////////////
