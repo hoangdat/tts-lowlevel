@@ -120,7 +120,7 @@ public class TextDBCreator {
             ////////////////////////////////////////////////////////////////////
             if (isStartFile) {
                 streamWriter.writeStartElement("file");
-                streamWriter.writeAttribute("id_file", ((Integer)id_file).toString());
+                streamWriter.writeAttribute("id_file", ((Integer) id_file).toString());
                 streamWriter.writeAttribute("file_name", syls.get(i).getCarryingFile());
                 startFile = true;
                 id_file++;
@@ -128,7 +128,7 @@ public class TextDBCreator {
             //
             if (isStartSentence) {
                 streamWriter.writeStartElement("sentence");
-                streamWriter.writeAttribute("id_sen", ((Integer)id_sen).toString());
+                streamWriter.writeAttribute("id_sen", ((Integer) id_sen).toString());
                 startSen = true;
                 id_sen++;
                 id_phrase = 0;
@@ -138,8 +138,8 @@ public class TextDBCreator {
 
             if (isStartSylPhrase) {
                 streamWriter.writeStartElement("phrase");
-                streamWriter.writeAttribute("id_phrase", ((Integer)id_phrase).toString());
-                streamWriter.writeAttribute("length", ((Integer)syls.get(i).getPhraseLen()).toString());
+                streamWriter.writeAttribute("id_phrase", ((Integer) id_phrase).toString());
+                streamWriter.writeAttribute("length", ((Integer) syls.get(i).getPhraseLen()).toString());
                 startSylPh = true;
                 id_phrase++;
                 id_syl = 0;
@@ -177,9 +177,11 @@ public class TextDBCreator {
             streamWriter.writeAttribute("name", syl.getSylName());
             streamWriter.writeAttribute("start_index", ((Integer) syl.getStartIndex()).toString());
             streamWriter.writeAttribute("end_index", ((Integer) syl.getEndIndex()).toString());
-            //streamWriter.writeAttribute("position", ((Integer) syl.getSylPosition()).toString());
+
+            //streamWriter.writeAttribute("end_index", ((Integer) syl.getSylPosition()).toString());
             streamWriter.writeAttribute("numOfPhone", ((Integer) syl.getNumOfPhone()).toString());
             streamWriter.writeAttribute("energy", ((Float) syl.getEnergy()).toString());
+
         }
         ////////////////////////////////////////////////////////////////////////
         {

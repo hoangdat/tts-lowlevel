@@ -9,53 +9,54 @@ import java.util.ArrayList;
  */
 public class Sentence {
 
-	
-	private ArrayList<SylPhrase> phrases = new ArrayList<SylPhrase>();
-        private ArrayList<LevelPhrase> levelPhrases = new ArrayList<LevelPhrase>();
-	private int iDofSentence;
-        private int iDofFile;
-	private String carryingFile;
-        private String senContent;
+    private ArrayList<SylPhrase> sylPhrases = new ArrayList<SylPhrase>();
+    private ArrayList<LevelPhrase> levelPhrases = new ArrayList<LevelPhrase>();
+    private int iDofSentence;
+    private int iDofFile;
+    private String carryingFile;
+    private String senContent;
+    private int maxLevelOfSylPhrase;
 
-	public void Sentence(){
-	}
-        ///////////////////////////////////
-        
-	
 
-	public int getSentenceLength(){
-		return 0;
-	}
+    public void Sentence() {
+    }
+    ///////////////////////////////////
 
-	/**
-	 * 
-	 * @param lengthOfSylPhrase
-	 */
-	public ArrayList<Phrase> getSylPharseByLength(int lengthOfSylPhrase){
-		return null;
-	}
+    public int getSentenceLength() {
+        return 0;
+    }
 
-	/**
-	 * 
-	 * @param level
-	 */
-	public ArrayList<LevelPhrase> getSylPhraseByLevel(int level){
-		return null;
-	}
+    /**
+     *
+     * @param lengthOfSylPhrase
+     */
+    public ArrayList<Phrase> getSylPharseByLength(int lengthOfSylPhrase) {
+        return null;
+    }
+
+    /**
+     *
+     * @param level
+     */
+    public ArrayList<LevelPhrase> getPhraseByLevel(int level) {
+        ArrayList<LevelPhrase> phrases = new ArrayList<LevelPhrase>();
+        for (int i = 0; i < levelPhrases.size(); i++) {
+            if(levelPhrases.get(i).getLevel()==level){
+                phrases.add(levelPhrases.get(i));
+            }
+        }
+        return phrases;
+    }
 
     /**
      * @return the syllablesInSen
      */
-    
-    
-
     /**
      * @return the sylPhrases
      */
     public ArrayList<SylPhrase> getSylPhrases() {
-        return phrases;
+        return sylPhrases;
     }
-
 
     /**
      * @return the IDofSentence
@@ -95,8 +96,13 @@ public class Sentence {
     /**
      * @param senContent the senContent to set
      */
-    public void setSenContent(String senContent) {
-        this.senContent = senContent;
+    public void setSenContent() {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < sylPhrases.size(); i++) {
+            sb.append(sylPhrases.get(i).getContent()).append(" ");
+        }
+        this.setSenContent(sb.toString().trim());
+
     }
 
     /**
@@ -120,10 +126,26 @@ public class Sentence {
         return levelPhrases;
     }
 
-    
-    
+    /**
+     * @param senContent the senContent to set
+     */
+    public void setSenContent(String senContent) {
+        this.senContent = senContent;
+    }
 
-    
+    /**
+     * @return the maxLevelOfSylPhrase
+     */
+    public int getMaxLevelOfSylPhrase() {
+        return maxLevelOfSylPhrase;
+    }
 
-    
+    /**
+     * @param maxLevelOfSylPhrase the maxLevelOfSylPhrase to set
+     */
+    public void setMaxLevelOfSylPhrase(int maxLevelOfSylPhrase) {
+        this.maxLevelOfSylPhrase = maxLevelOfSylPhrase;
+    }
+
+   
 }
