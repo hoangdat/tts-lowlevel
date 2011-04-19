@@ -29,7 +29,7 @@ public class TextInputReader extends XML_Reader {
         super(str);
         setxMLStreamReader();
         xMLStreamReader = getxMLStreamReader();
-
+        ReadDetails();
     }
 
     @Override
@@ -85,7 +85,7 @@ public class TextInputReader extends XML_Reader {
         sentence.setiDofFile(StrToInt(xMLStreamReader.getAttributeValue(0)));
         try {
             xMLStreamReader.next();
-            sentence.setSenContent(xMLStreamReader.getText());
+            sentence.setSenContent(xMLStreamReader.getText().trim());
         } catch (XMLStreamException ex) {
             Logger.getLogger(TextInputReader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +116,6 @@ public class TextInputReader extends XML_Reader {
     //////////////
 
     private void setLevelPhrase() {
-
         //1221122233
         int currentLevel = 1;
         int currentLevelIndex = 0;
@@ -136,10 +135,13 @@ public class TextInputReader extends XML_Reader {
                     }
                 }
             }
-            currentLevel++;
+            
             if (!isFound) {
+                sentence.setMaxLevelOfSylPhrase(currentLevel-1);
+                //System.out.println("max: "+sentence.getMaxLevelOfSylPhrase());
                 break;
             }
+            currentLevel++;
         }
     }
     ////////////////////////////////
@@ -148,16 +150,16 @@ public class TextInputReader extends XML_Reader {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             ArrayList<LevelPhrase> levelPhrases = this.getAllSentences().get(i).getLevelPhrases();
             for (int j = 0; j < levelPhrases.size(); j++) {
-                System.out.println(i + " : " + levelPhrases.get(j).getContent()+" : "+levelPhrases.get(j).haveSubLevel());
+                System.out.println(i + " : " + levelPhrases.get(j).getContent() + " : " + levelPhrases.get(j).haveSubLevel());
             }
         }
     }
 
-//    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-//        String textDBLocation = System.getProperty("user.dir") + "\\result.xml";
-//        TextInputReader textInputReader = new TextInputReader(textDBLocation);
-//        textInputReader.ReadDetails();
-//        textInputReader.printDetails();
-//
-//    }
+    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+        String textDBLocation = System.getProperty("user.dir") + "\\result.xml";
+        TextInputReader textInputReader = new TextInputReader(textDBLocation);
+
+        textInputReader.printDetails();
+
+    }
 }

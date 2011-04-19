@@ -24,11 +24,14 @@ public class TextDBReader extends XML_Reader {
     private int fileId;
     private String fileName;
     private String nameOfElement;
+    private int numberOfSylPhrase;
 
     public TextDBReader(String textDBLocation) throws XMLStreamException, FileNotFoundException {
         super(textDBLocation);
         setxMLStreamReader();
         xMLStreamReader = getxMLStreamReader();
+        ReadDetails();
+        //setNumberOfSylPhrase();
     }
 
     @Override
@@ -88,6 +91,7 @@ public class TextDBReader extends XML_Reader {
                         phrase.setPhraseLen();
                         sentence.getSylPhrases().add(phrase);
                     } else if (nameOfElement.compareTo("sentence") == 0) {
+                        sentence.setSenContent();
                         getAllSentences().add(sentence);
                     }
                 } else if (eventType.equals(XMLEvent.CHARACTERS)) {
@@ -150,6 +154,7 @@ public class TextDBReader extends XML_Reader {
          for (int i = 0; i < this.getAllSentences().size(); i++) {
             for (int j = 0; j < this.getAllSentences().get(i).getSylPhrases().size(); j++) {
                 System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getContent()+": "+ this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
+                //System.out.println(i + " : " + this.getAllSentences().get(i).getSenContent());
             }
         }
     }
@@ -170,12 +175,27 @@ public class TextDBReader extends XML_Reader {
         this.fileName = fileName;
     }
 
-//      public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-//
-//        String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
-//        TextDBReader textDBReader = new TextDBReader(textDBLocation);
-//        textDBReader.ReadDetails();
-//        textDBReader.printDetails();
-//
-//    }
+    /**
+     * @return the numberOfSylPhrase
+     */
+    public int getNumberOfSylPhrase() {
+        return numberOfSylPhrase;
+    }
+
+    /**
+     * @param numberOfSylPhrase the numberOfSylPhrase to set
+     */
+    public void setNumberOfSylPhrase() {
+        for (int i = 0; i < this.getAllSentences().size(); i++) {
+            numberOfSylPhrase += this.getAllSentences().get(i).getSylPhrases().size();
+        }
+    }
+
+      public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+
+        String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
+        TextDBReader textDBReader = new TextDBReader(textDBLocation);
+        textDBReader.printDetails();
+
+    }
 }
