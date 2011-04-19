@@ -49,6 +49,8 @@ public abstract class XML_Reader {
 
     // Doc cac thong tin chi tiet
     public abstract void ReadDetails();
+    public abstract void ReadSentenceDetails();
+    public abstract void ReadPhraseDetails();
 
     /**
      * @return the xMLStreamReader
