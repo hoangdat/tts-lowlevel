@@ -23,4 +23,14 @@ public class XMLTextDBParsedReader extends XML_Reader{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public void ReadSentenceDetails() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void ReadPhraseDetails() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

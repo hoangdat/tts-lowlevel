@@ -252,21 +252,25 @@ public class JFrameGUIView extends FrameView {
             {
                 // this block code is used to read Text Database
                 File[] file = fileChooser.getSelectedFiles();
-                try {
-                    xml_Creator = new XML_Creator();
-                } catch (XMLStreamException ex) {
-                    Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                System.out.println(file.length);
                 for (int i = 0; i < file.length; i++) {
-                    fileInput = new FileInput(file[i]);
-                    try {
-                        xml_Creator.WriteXML(fileInput.getListLines(), file[i], i);
-                    } catch (XMLStreamException ex) {
-                        Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    RenameWavFile r = new RenameWavFile(file[i]);
                 }
-                System.out.println("OK");
+
+//                try {
+//                    xml_Creator = new XML_Creator();
+//                } catch (XMLStreamException ex) {
+//                    Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                System.out.println(file.length);
+//                for (int i = 0; i < file.length; i++) {
+//                    fileInput = new FileInput(file[i]);
+//                    try {
+//                        xml_Creator.WriteXML(fileInput.getListLines(), file[i], i);
+//                    } catch (XMLStreamException ex) {
+//                        Logger.getLogger(JFrameGUIView.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//                System.out.println("OK");
             }
             /////////////////////////////////////////////////////////////////////////////
                 /*

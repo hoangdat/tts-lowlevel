@@ -84,12 +84,14 @@ public class TextDBReader extends XML_Reader {
                     if (nameOfElement.compareTo("syllable") == 0) {
                         phrase.getSyllablesInPh().add(syllable);
                     } else if (nameOfElement.compareTo("phrase") == 0) {
+                        phrase.setContent();
+                        phrase.setPhraseLen();
                         sentence.getSylPhrases().add(phrase);
                     } else if (nameOfElement.compareTo("sentence") == 0) {
                         getAllSentences().add(sentence);
                     }
                 } else if (eventType.equals(XMLEvent.CHARACTERS)) {
-                    System.out.println("Characters");
+                    //System.out.println("Characters");
                     continue;
                 } else if (eventType.equals(XMLEvent.END_DOCUMENT)) {
                     continue;
@@ -116,7 +118,7 @@ public class TextDBReader extends XML_Reader {
         setFileName(xMLStreamReader.getAttributeValue(1));
     }
 
-    private void ReadSentenceDetails() {
+    public void ReadSentenceDetails() {
         sentence = new Sentence();
         sentence.setIDofSentence(StrToInt((xMLStreamReader.getAttributeValue(0))));
         sentence.setiDofFile(fileId);
@@ -125,7 +127,7 @@ public class TextDBReader extends XML_Reader {
 
     }
 
-    private void ReadPhraseDetails() {
+    public void ReadPhraseDetails() {
         phrase = new SylPhrase();
         phrase.setId_phrase(StrToInt(xMLStreamReader.getAttributeValue(0)));
         phrase.setPhraseLen(StrToInt(xMLStreamReader.getAttributeValue(1)));
@@ -143,15 +145,16 @@ public class TextDBReader extends XML_Reader {
         syllable.setNumOfPhone(StrToInt(xMLStreamReader.getAttributeValue(4)));
         syllable.setEnergy(Float.parseFloat(xMLStreamReader.getAttributeValue(5)));
     }
-
-    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-
-        String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
-        TextDBReader textDBReader = new TextDBReader(textDBLocation);
-        textDBReader.ReadDetails();
-        System.out.println(textDBReader.getFileName());
-
+    //////
+    public void printDetails(){
+         for (int i = 0; i < this.getAllSentences().size(); i++) {
+            for (int j = 0; j < this.getAllSentences().get(i).getSylPhrases().size(); j++) {
+                System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getContent()+": "+ this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
+            }
+        }
     }
+
+  
 
     /**
      * @return the fileName
@@ -166,4 +169,13 @@ public class TextDBReader extends XML_Reader {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
+//      public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+//
+//        String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
+//        TextDBReader textDBReader = new TextDBReader(textDBLocation);
+//        textDBReader.ReadDetails();
+//        textDBReader.printDetails();
+//
+//    }
 }

@@ -217,4 +217,9 @@ public class XMLTextDBSylReader extends XML_Reader {
     public void setSylArray(ArrayList<Syllable> sylArray) {
         this.sylArray = sylArray;
     }
+
+    @Override
+    public void ReadPhraseDetails() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

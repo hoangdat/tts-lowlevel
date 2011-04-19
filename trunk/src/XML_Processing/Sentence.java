@@ -1,8 +1,6 @@
 package XML_Processing;
 
-import XML_Processing.SylPhrase;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author thaodv-bkit
@@ -12,7 +10,8 @@ import java.util.HashMap;
 public class Sentence {
 
 	
-	private ArrayList<SylPhrase> sylPhrases = new ArrayList<SylPhrase>();
+	private ArrayList<SylPhrase> phrases = new ArrayList<SylPhrase>();
+        private ArrayList<LevelPhrase> levelPhrases = new ArrayList<LevelPhrase>();
 	private int iDofSentence;
         private int iDofFile;
 	private String carryingFile;
@@ -32,7 +31,7 @@ public class Sentence {
 	 * 
 	 * @param lengthOfSylPhrase
 	 */
-	public ArrayList<SylPhrase> getSylPharseByLength(int lengthOfSylPhrase){
+	public ArrayList<Phrase> getSylPharseByLength(int lengthOfSylPhrase){
 		return null;
 	}
 
@@ -40,7 +39,7 @@ public class Sentence {
 	 * 
 	 * @param level
 	 */
-	public ArrayList<SylPhrase> getSylPhraseByLevel(int level){
+	public ArrayList<LevelPhrase> getSylPhraseByLevel(int level){
 		return null;
 	}
 
@@ -54,15 +53,9 @@ public class Sentence {
      * @return the sylPhrases
      */
     public ArrayList<SylPhrase> getSylPhrases() {
-        return sylPhrases;
+        return phrases;
     }
 
-    /**
-     * @param sylPhrases the sylPhrases to set
-     */
-    public void setSylPhrases(ArrayList<SylPhrase> sylPhrases) {
-        this.setSylPhrases(sylPhrases);
-    }
 
     /**
      * @return the IDofSentence
@@ -118,6 +111,13 @@ public class Sentence {
      */
     public void setiDofFile(int iDofFile) {
         this.iDofFile = iDofFile;
+    }
+
+    /**
+     * @return the levelPhrases
+     */
+    public ArrayList<LevelPhrase> getLevelPhrases() {
+        return levelPhrases;
     }
 
     
