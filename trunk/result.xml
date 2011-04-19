@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <root>
-    <sentence id="1">tôi không hề thích toán
+    <sentence id="1">nhưng tôi không hề thích toán
         <parse id="1">
             <C level="1" explain="giới từ">nhưng</C>
             <P level="1" explain="đại từ">tôi</P>
@@ -26,12 +26,9 @@
             </VP>
         </parse>
     </sentence>
-    <sentence id="3">còn nữa tôi rất ghét môn văn
+    <sentence id="3">và tôi rất ghét môn văn
         <parse id="1">
-            <RP level="1" explain="cụm phụ từ">còn nữa
-                <R level="2" explain="phụ từ">còn</R>
-                <R level="2" explain="phụ từ">nữa</R>
-            </RP>
+            <RP level="1" explain="phụ từ">và</RP>
             <P level="1" explain="đại từ">tôi</P>
             <VP level="1" explain="cụm động từ">rất ghét môn văn
                 <R level="2" explain="phụ từ">rất</R>
