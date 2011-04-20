@@ -15,7 +15,7 @@ public class Sentence {
     private int iDofFile;
     private String carryingFile;
     private String senContent;
-    private int maxLevelOfSylPhrase;
+    private int maxLevelOfPhrase;
 
 
     public void Sentence() {
@@ -94,12 +94,12 @@ public class Sentence {
     }
 
     /**
-     * @param senContent the senContent to set
+     * 
      */
     public void setSenContent() {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < sylPhrases.size(); i++) {
-            sb.append(sylPhrases.get(i).getContent()).append(" ");
+            sb.append(sylPhrases.get(i).getPhraseContent()).append(" ");
         }
         this.setSenContent(sb.toString().trim());
 
@@ -136,16 +136,18 @@ public class Sentence {
     /**
      * @return the maxLevelOfSylPhrase
      */
-    public int getMaxLevelOfSylPhrase() {
-        return maxLevelOfSylPhrase;
+    public int getMaxLevelOfLevelPhrase() {
+        return maxLevelOfPhrase;
     }
 
     /**
      * @param maxLevelOfSylPhrase the maxLevelOfSylPhrase to set
      */
-    public void setMaxLevelOfSylPhrase(int maxLevelOfSylPhrase) {
-        this.maxLevelOfSylPhrase = maxLevelOfSylPhrase;
+    public void setMaxLevelOfLevellPhrase(int maxLevelOfSylPhrase) {
+        this.maxLevelOfPhrase = maxLevelOfSylPhrase;
     }
+
+    
 
    
 }

@@ -40,19 +40,7 @@ public class Phrase {
         this.setPhraseLen(numberOfSyllables);
     }
 
-    /**
-     * @return the text
-     */
-    public String getContent() {
-        return getPhraseContent();
-    }
 
-    /**
-     * @param text the text to set
-     */
-    public void setContent(String text) {
-        this.setPhraseContent(text);
-    }
 
     /**
      * @return the startIndex

@@ -30,6 +30,7 @@ public class TextInputReader extends XML_Reader {
         setxMLStreamReader();
         xMLStreamReader = getxMLStreamReader();
         ReadDetails();
+
     }
 
     @Override
@@ -54,6 +55,7 @@ public class TextInputReader extends XML_Reader {
                     } else if (nameOfElement.compareTo("parse") == 0) {
                         ReadParseDetails();
                     } else if (nameOfElement.compareTo("root") == 0) {
+                    } else if (nameOfElement.compareTo("punc") == 0) {
                     } else {
                         ReadPhraseDetails();
                     }
@@ -65,7 +67,8 @@ public class TextInputReader extends XML_Reader {
 
                     //////////
                     if (nameOfElement.compareTo("sentence") == 0) {
-                        this.setLevelPhrase();
+                        this.setLevelOfPhrase();
+                        this.addSubLevel();
                         this.getAllSentences().add(sentence);
                     }
                 } else {
@@ -106,7 +109,8 @@ public class TextInputReader extends XML_Reader {
         levelPhrase.setLevel(lv);
         try {
             xMLStreamReader.next();
-            levelPhrase.setContent(xMLStreamReader.getText());
+            levelPhrase.setPhraseContent(xMLStreamReader.getText());
+            levelPhrase.setSyllableIn();
         } catch (XMLStreamException ex) {
             Logger.getLogger(TextInputReader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,7 +119,7 @@ public class TextInputReader extends XML_Reader {
     }
     //////////////
 
-    private void setLevelPhrase() {
+    private void setLevelOfPhrase() {
         //1221122233
         int currentLevel = 1;
         int currentLevelIndex = 0;
@@ -128,17 +132,17 @@ public class TextInputReader extends XML_Reader {
                     isFound = true;
                     for (int j = currentLevelIndex + 1; j < level.size(); j++) {
                         if ((int) level.get(j) - currentLevel == 1) {
-                            sentence.getLevelPhrases().get(currentLevelIndex).addToSubLevel(j);
+                            sentence.getLevelPhrases().get(currentLevelIndex).addIndexOfSubLevel(j);
                         } else {
                             break;
                         }
                     }
                 }
             }
-            
+
             if (!isFound) {
-                sentence.setMaxLevelOfSylPhrase(currentLevel-1);
-                //System.out.println("max: "+sentence.getMaxLevelOfSylPhrase());
+                sentence.setMaxLevelOfLevellPhrase(currentLevel - 1);
+                //System.out.println("max: "+sentence.getMaxLevelOfLevelPhrase());
                 break;
             }
             currentLevel++;
@@ -146,11 +150,39 @@ public class TextInputReader extends XML_Reader {
     }
     ////////////////////////////////
 
+    public void addSubLevel() {
+        ArrayList<LevelPhrase> lps = sentence.getLevelPhrases();
+        int size = lps.size();
+        for (int i = size - 1; i >= 0; i--) {
+            //kiem tra phrase thu i co subLevel va Len >=2 hay ko
+            //neu khong co subLevel va Len >=2 thi tao them cac LevelPhrase
+            //add LevelPhrase vao vi tri sau vi tri thu i
+            //thiet lap subLevelIndex cua phrase thu i la index cua cac
+            //thiet lap lai maxLevel cua sentence
+            int phraseLen = lps.get(i).getPhraseLen();
+            ArrayList<String> syllableIn = lps.get(i).getSyllableIn();
+            if ((!lps.get(i).haveSubLevel()) && (phraseLen > 1)) {
+                for (int j = 0; j < phraseLen; j++) {
+                    LevelPhrase lvphs = new LevelPhrase();
+                    int m = lps.get(i).getLevel() + 1;
+                    lvphs.setLevel(m);
+                    if (m > sentence.getMaxLevelOfLevelPhrase()) {
+                        sentence.setMaxLevelOfLevellPhrase(m);
+                    }
+                    lvphs.setPhraseContent(syllableIn.get(j).toString());
+                    lps.get(i).addIndexOfSubLevel(i + j);
+                    sentence.getLevelPhrases().add(i + j + 1, lvphs);
+                }
+            }
+
+        }
+    }
+
     public void printDetails() {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             ArrayList<LevelPhrase> levelPhrases = this.getAllSentences().get(i).getLevelPhrases();
             for (int j = 0; j < levelPhrases.size(); j++) {
-                System.out.println(i + " : " + levelPhrases.get(j).getContent() + " : " + levelPhrases.get(j).haveSubLevel());
+                System.out.println(i + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).haveSubLevel() + " : " + levelPhrases.get(j).getPhraseLen());
             }
         }
     }

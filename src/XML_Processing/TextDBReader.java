@@ -153,7 +153,7 @@ public class TextDBReader extends XML_Reader {
     public void printDetails(){
          for (int i = 0; i < this.getAllSentences().size(); i++) {
             for (int j = 0; j < this.getAllSentences().get(i).getSylPhrases().size(); j++) {
-                System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getContent()+": "+ this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
+                System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseContent()+": "+ this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
                 //System.out.println(i + " : " + this.getAllSentences().get(i).getSenContent());
             }
         }
