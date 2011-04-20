@@ -25,9 +25,10 @@ public class UnitSearching {
 
     public UnitSearching() throws XMLStreamException, FileNotFoundException {
         textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
-        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result.xml");
+        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result2.xml");
         allSenInTextDB = textDBReader.getAllSentences();
         allSenInTextInput = textInputReader.getAllSentences();
+        textInputReader.printDetails();
         this.searchTextInput();
     }
     //
@@ -40,7 +41,7 @@ public class UnitSearching {
     }
 
     public void searchSentence(Sentence s) {
-        for (int j = 0; j < s.getMaxLevelOfSylPhrase(); j++) {
+        for (int j = 1; j <= s.getMaxLevelOfLevelPhrase(); j++) {
             ArrayList<LevelPhrase> lp = s.getPhraseByLevel(j);
             int sizeOfPhrase = lp.size();
             for (int i = 0; i < sizeOfPhrase; i++) {
@@ -57,14 +58,17 @@ public class UnitSearching {
         String phraseContent = levelPhrase.getPhraseContent();
         int indexFound;
         for (int i = 0; i < allSenInTextDB.size(); i++) {
-            indexFound = allSenInTextDB.get(i).getSenContent().indexOf(phraseContent);
-            if (indexFound > 0) {
-                System.out.println("tim thay: " + phraseContent + ": tai vi tri thu: " + indexFound + ": cua cau thu: " + i);
+            for (int j = 0; j < allSenInTextDB.get(i).getSylPhrases().size(); j++) {
+                indexFound = allSenInTextDB.get(i).getSylPhrases().get(j).getPhraseContent().indexOf(phraseContent);
+                if (indexFound > 0) {
+                    System.out.println("tim thay: " + phraseContent + ": tai vi tri thu: " + indexFound + ": cua cau thu: " + i);
+                }
             }
         }
     }
 
     //
+    ////
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
         UnitSearching unitSearching = new UnitSearching();
     }

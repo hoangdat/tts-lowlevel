@@ -6,6 +6,7 @@
 package XML_Processing;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -53,7 +54,7 @@ public class LevelPhrase extends Phrase {
     /*
      *
      */
-     public void addToSubLevel(int indexOfPhrase){
+     public void addIndexOfSubLevel(int indexOfPhrase){
          subLevel.add(indexOfPhrase);
      }
 
@@ -68,11 +69,21 @@ public class LevelPhrase extends Phrase {
      * @param syllableIn the syllableIn to set
      */
     public void setSyllableIn() {
+        String pc = this.getPhraseContent();
+        StringTokenizer stk = new StringTokenizer(pc);
+        setPhraseLen(stk.countTokens());
         
+        while(stk.hasMoreTokens()){
+            syllableIn.add(stk.nextToken());
+        }
     }
 
-     /*
-      *
-      */
 
+    public void setPhraseContent(String phraseContent) {
+        super.setPhraseContent(phraseContent);
+        //this.setSyllableIn();
+    }
+
+
+    
 }
