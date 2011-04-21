@@ -37,16 +37,30 @@ public class Sentence {
     /**
      *
      * @param level level of LevelPhrase to get
-     * @return An ArrayList of LevelPhrase at level
+     * @return An ArrayList of LevelPhrase at level lv
      */
-    public ArrayList<LevelPhrase> getPhraseByLevel(int level) {
+    public ArrayList<LevelPhrase> getPhraseByLevel(int lv) {
         ArrayList<LevelPhrase> phrases = new ArrayList<LevelPhrase>();
         for (int i = 0; i < levelPhrases.size(); i++) {
-            if(levelPhrases.get(i).getLevel()==level){
+            if(levelPhrases.get(i).getLevel()==lv){
                 phrases.add(levelPhrases.get(i));
             }
         }
         return phrases;
+    }
+
+    /*
+     * @param level level of LevelPhrase to get
+     * @return an array of indexes of LevelPhrase at lv
+     */
+    public ArrayList<Integer> getIndexesOfPhraseByLevel(int lv){
+        ArrayList<Integer> indexes = new ArrayList<Integer>();
+        for (int i = 0; i < levelPhrases.size(); i++) {
+            if(levelPhrases.get(i).getLevel()==lv){
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 
     /**
