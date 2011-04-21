@@ -111,7 +111,7 @@ public class Phrase {
      * @param phraseContent the phraseContent to set
      */
     public void setPhraseContent(String phraseContent) {
-        this.phraseContent = phraseContent;
+        this.phraseContent = " "+phraseContent.trim()+" ";
     }
 
     

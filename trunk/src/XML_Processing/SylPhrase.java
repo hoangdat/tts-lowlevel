@@ -5,6 +5,7 @@
 package XML_Processing;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -37,7 +38,7 @@ public class SylPhrase extends Phrase {
         for (int i = 0; i < syllablesInPh.size(); i++) {
             sb.append(syllablesInPh.get(i).getSylName()).append(" ");
         }
-        this.setPhraseContent(sb.toString().trim());
+        this.setPhraseContent(sb.toString());
     }
     /**
      * @return the syllablesInPh
@@ -51,5 +52,14 @@ public class SylPhrase extends Phrase {
      */
     public void setSyllablesInPh(ArrayList<Syllable> syllablesInPh) {
         this.syllablesInPh = syllablesInPh;
+    }
+    
+    /*
+     *@param indexOfSpace vi tri dau cach tim thay LevelPhrase
+     *@return id cua syllable tai vi tri dau cach truyen vao
+     */
+    public int getSylIDbyIndexOfSpace(int indexOfSpace){      
+        int countTokens = new StringTokenizer(this.getPhraseContent().substring(0, indexOfSpace)).countTokens();
+        return countTokens;
     }
 }

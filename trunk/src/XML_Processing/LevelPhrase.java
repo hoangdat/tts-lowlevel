@@ -79,8 +79,9 @@ public class LevelPhrase extends Phrase {
     }
 
 
+    @Override
     public void setPhraseContent(String phraseContent) {
-        super.setPhraseContent(phraseContent);
+        super.setPhraseContent(phraseContent.trim());
         //this.setSyllableIn();
     }
 

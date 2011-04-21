@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
-import java.util.Stack;
 
 /**
  *
@@ -24,6 +23,7 @@ public class TextInputReader extends XML_Reader {
     private Sentence sentence;
     private LevelPhrase levelPhrase;
     private ArrayList<Integer> level;
+    int id_levelPhrase;
 
     public TextInputReader(String str) throws XMLStreamException, FileNotFoundException {
         super(str);
@@ -82,7 +82,7 @@ public class TextInputReader extends XML_Reader {
     ///////////
 
     public void ReadSentenceDetails() {
-
+        id_levelPhrase = 0;
         sentence = new Sentence();
         level = new ArrayList<Integer>();
         sentence.setiDofFile(StrToInt(xMLStreamReader.getAttributeValue(0)));
@@ -105,11 +105,12 @@ public class TextInputReader extends XML_Reader {
     public void ReadPhraseDetails() {
 
         levelPhrase = new LevelPhrase();
+        levelPhrase.setId_phrase(id_levelPhrase++);
         int lv = StrToInt(xMLStreamReader.getAttributeValue(0));
         levelPhrase.setLevel(lv);
         try {
             xMLStreamReader.next();
-            levelPhrase.setPhraseContent(xMLStreamReader.getText());
+            levelPhrase.setPhraseContent(xMLStreamReader.getText().trim());
             levelPhrase.setSyllableIn();
         } catch (XMLStreamException ex) {
             Logger.getLogger(TextInputReader.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,6 +165,7 @@ public class TextInputReader extends XML_Reader {
             if ((!lps.get(i).haveSubLevel()) && (phraseLen > 1)) {
                 for (int j = 0; j < phraseLen; j++) {
                     LevelPhrase lvphs = new LevelPhrase();
+                    lvphs.setId_phrase(id_levelPhrase++);
                     int m = lps.get(i).getLevel() + 1;
                     lvphs.setLevel(m);
                     if (m > sentence.getMaxLevelOfLevelPhrase()) {
@@ -182,16 +184,14 @@ public class TextInputReader extends XML_Reader {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             ArrayList<LevelPhrase> levelPhrases = this.getAllSentences().get(i).getLevelPhrases();
             for (int j = 0; j < levelPhrases.size(); j++) {
-                System.out.println(i + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).haveSubLevel() + " : " + levelPhrases.get(j).getPhraseLen());
+                System.out.println(i + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getId_phrase());
             }
         }
     }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        String textDBLocation = System.getProperty("user.dir") + "\\result.xml";
+        String textDBLocation = System.getProperty("user.dir") + "\\result4.xml";
         TextInputReader textInputReader = new TextInputReader(textDBLocation);
-
         textInputReader.printDetails();
-
     }
 }
