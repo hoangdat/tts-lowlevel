@@ -36,7 +36,8 @@ public class Sentence {
 
     /**
      *
-     * @param level
+     * @param level level of LevelPhrase to get
+     * @return An ArrayList of LevelPhrase at level
      */
     public ArrayList<LevelPhrase> getPhraseByLevel(int level) {
         ArrayList<LevelPhrase> phrases = new ArrayList<LevelPhrase>();
@@ -101,7 +102,7 @@ public class Sentence {
         for (int i = 0; i < sylPhrases.size(); i++) {
             sb.append(sylPhrases.get(i).getPhraseContent()).append(" ");
         }
-        this.setSenContent(sb.toString().trim());
+        this.setSenContent(" "+sb.toString().trim()+" ");
 
     }
 
