@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  */
 public class LevelPhrase extends Phrase {
     private int level;
-    private ArrayList<Integer> subLevel = new ArrayList<Integer>();
+    private ArrayList<Integer> indexesOfSubLevel = new ArrayList<Integer>();
     private ArrayList<String> syllableIn = new ArrayList<String>();
     public LevelPhrase(){
         
@@ -36,15 +36,15 @@ public class LevelPhrase extends Phrase {
     /**
      * @return the subLevel
      */
-    public ArrayList<Integer> getSubLevel() {
-        return subLevel;
+    public ArrayList<Integer> getIndexesOfSubLevel() {
+        return indexesOfSubLevel;
     }
 
     /*
      * kiem tra xem phrase co subLevel hay khong
      */
     public boolean haveSubLevel() {
-        if (subLevel.size() > 0) {
+        if (indexesOfSubLevel.size() > 0) {
             return true;
         } else {
             return false;
@@ -55,7 +55,7 @@ public class LevelPhrase extends Phrase {
      *
      */
      public void addIndexOfSubLevel(int indexOfPhrase){
-         subLevel.add(indexOfPhrase);
+         indexesOfSubLevel.add(indexOfPhrase);
      }
 
     /**

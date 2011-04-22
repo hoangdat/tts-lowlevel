@@ -5,6 +5,7 @@
 package XML_Processing;
 
 import java.io.FileNotFoundException;
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +69,8 @@ public class TextInputReader extends XML_Reader {
                     //////////
                     if (nameOfElement.compareTo("sentence") == 0) {
                         this.setLevelOfPhrase();
-                        this.addSubLevel();
+                        //this.addSubLevel();
+                        //this.setLevelOfPhrase();//set lai level sau khi da add them subLevel
                         this.getAllSentences().add(sentence);
                     }
                 } else {
@@ -124,12 +126,13 @@ public class TextInputReader extends XML_Reader {
         //1221122233
         int currentLevel = 1;
         int currentLevelIndex = 0;
+
         while (true) {
             boolean isFound = false;
             for (int i = 0; i < level.size(); i++) {
                 if ((int) level.get(i) == currentLevel) {
                     //neu phan tu hien tai co gia tri = currentLevel thi cap nhat lai vi tri cua currentLevel
-                    currentLevelIndex = i;
+                    currentLevelIndex = i;                    
                     isFound = true;
                     for (int j = currentLevelIndex + 1; j < level.size(); j++) {
                         if ((int) level.get(j) - currentLevel == 1) {
@@ -172,7 +175,7 @@ public class TextInputReader extends XML_Reader {
                         sentence.setMaxLevelOfLevellPhrase(m);
                     }
                     lvphs.setPhraseContent(syllableIn.get(j).toString());
-                    lps.get(i).addIndexOfSubLevel(i + j);
+                    //lps.get(i).addIndexOfSubLevel(i + j+1);
                     sentence.getLevelPhrases().add(i + j + 1, lvphs);
                 }
             }
@@ -184,7 +187,7 @@ public class TextInputReader extends XML_Reader {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             ArrayList<LevelPhrase> levelPhrases = this.getAllSentences().get(i).getLevelPhrases();
             for (int j = 0; j < levelPhrases.size(); j++) {
-                System.out.println(i + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getId_phrase());
+                System.out.println(i + " : " +j+" : "+ levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getLevel());
             }
         }
     }
