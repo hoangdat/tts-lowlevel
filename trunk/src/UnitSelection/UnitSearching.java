@@ -22,9 +22,10 @@ public class UnitSearching {
 
     TextInputReader textInputReader;
     TextDBReader textDBReader;
-    ArrayList<Sentence> allSenInTextDB;
+    public static ArrayList<Sentence> allSenInTextDB;
     ArrayList<Sentence> allSenInTextInput;
     Stack<Integer> indexesOfLP;
+    private ArrayList<LevelPhrase> foundLPhs = new ArrayList<LevelPhrase>();
 
     public UnitSearching() throws XMLStreamException, FileNotFoundException {
         textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
@@ -67,31 +68,38 @@ public class UnitSearching {
         // remove gia tri trong indexes cua LP do
         // add chi so cua SubLP cua LP do vao stack indexes tai vi tri cua LP do
         // tim kiem ket thuc khi indexesOfLP empty
-        indexesOfLP = new Stack<Integer>();
+        indexesOfLP = new Stack<Integer>();        
+        int topOfStack;
         boolean isFoundLevelPhrase;
         ArrayList<Integer> indexesOfLevelPhrase = s.getIndexesOfPhraseByLevel(1);
         //// chuyen indexesOfLevelPhrase tu Array sang Stack
         addIndexesOfLPtoStack(indexesOfLevelPhrase);
+        // in ra indexes ban dau
+        System.out.println("indexesOfLP : "+indexesOfLP.toString());
         // bat dau tim kiem LP
         while (!indexesOfLP.isEmpty()) {
-            LevelPhrase topLP = s.getLevelPhrases().get((int) indexesOfLP.pop());
+            topOfStack = (int) indexesOfLP.pop();
+            LevelPhrase topLP = s.getLevelPhrases().get(topOfStack);
             isFoundLevelPhrase = this.searchLevelPhrase(topLP);
             if (!isFoundLevelPhrase) {
                 //neu ko tim thay LP
                 if(topLP.haveSubLevel()){
-                    System.out.println(topLP.getIndexesOfSubLevel().toString());
+                    System.out.println("IndexesOfSubLevel of Top "+topLP.getIndexesOfSubLevel().toString());
                     addIndexesOfLPtoStack(topLP.getIndexesOfSubLevel());
-                    System.out.println(":: "+indexesOfLP.toString());
+                    System.out.println("indexesOfLP : "+indexesOfLP.toString());
                     System.out.println("ko thay: " + topLP.getPhraseContent()+" :va da add subLevel de tim kiem");
                 }else{
+                    topLP.setIsFound(false);
+                    getFoundLPhs().add(topLP);
                     System.out.println("ko thay: " + topLP.getPhraseContent()+" :va LP nay ko co subLevel");
                 }
             } else{
                 //neu tim thay LP
-
+                topLP.setIsFound(true);
+                getFoundLPhs().add(topLP);
             }
         }
-
+        System.out.println(getFoundLPhs().size());
     }
 
     /*
@@ -118,8 +126,6 @@ public class UnitSearching {
                 }
             }
         }
-
-
     }
 
     /*
@@ -139,20 +145,25 @@ public class UnitSearching {
                 // thi tiep tuc tim kiem trong subString con lai
                 String phrsContent = sylPhrasesInSen.get(j).getPhraseContent();
                 indexFound = phrsContent.indexOf(phContentToSearch);
-                if (indexFound >= 0) {
-                    isFound = true;
-                    sylID = sylPhrasesInSen.get(j).getSylIDbyIndexOfSpace(indexFound);
-                    //System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
-                    System.out.println(phContentToSearch + " : " + sylID);
-                    phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
-                }
+
+//                if (indexFound >= 0) {
+//                    isFound = true;
+//                    sylID = sylPhrasesInSen.get(j).getSylIDbyIndexOfSpace(indexFound);
+//                    System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
+//                    System.out.println(phContentToSearch + " - " + sylID);
+//                    phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
+//                }
                 while (indexFound >= 0 && phrsContent.length() >= phContentToSearch.length()) {
                     indexFound = phrsContent.indexOf(phContentToSearch);
                     if (indexFound == -1) {
                         break;
-                    }
+                    }else
                     if (indexFound >= 0) {
+                        isFound = true;
                         sylID = sylPhrasesInSen.get(j).getSylIDbyIndexOfSpace(indexFound);
+                        levelPhrase.getFoundSen().add(i);
+                        levelPhrase.getFoundSylPhrs().add(j);
+                        levelPhrase.getFoundSyllable().add(sylID);
                         //System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
                         System.out.println(phContentToSearch + " : " + sylID);
                         phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
@@ -168,5 +179,12 @@ public class UnitSearching {
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
         UnitSearching unitSearching = new UnitSearching();
 
+    }
+
+    /**
+     * @return the foundLPhs
+     */
+    public ArrayList<LevelPhrase> getFoundLPhs() {
+        return foundLPhs;
     }
 }
