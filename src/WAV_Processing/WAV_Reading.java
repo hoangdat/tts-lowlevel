@@ -42,27 +42,18 @@ public class WAV_Reading extends WaveFileReader {
         int frameSize = format.getFrameSize();
         float sampleRate = format.getSampleRate();
         int sampleSizeInBits = format.getSampleSizeInBits();
-        System.out.println(byteLength);
+        System.out.println(wavFile.getName()+" byteLength : "+byteLength);
         buffer = new byte[byteLength];
 //        double r = byteLength / frameLength;
 //        double lengthInSec;
 //        lengthInSec = byteLength * 8 / 256 / 1000; // 256 kbps
 //        System.out.println("FrameLength: " + frameLength + " " + byteLength + " " + r + " " + lengthInSec);
 
-        auIS.read(buffer, 0, byteLength);
+        //auIS.read(buffer, 0, byteLength);
 
         ////////////////////////////////////////////////////////////////////////
-        int byteWritten = AudioSystem.write(auIS, AudioFileFormat.Type.WAVE, new File("2_"+wavFile.getName()));
+        //int byteWritten = AudioSystem.write(auIS, AudioFileFormat.Type.WAVE, new File("2_"+wavFile.getName()));
         //System.out.println("byteWritten: " + byteWritten);
         ////////////////////////////////////////////////////////////////////////
-      
-      
-        
-
-        
-      
-        
-
-
     }
 }

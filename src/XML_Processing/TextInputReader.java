@@ -56,7 +56,7 @@ public class TextInputReader extends XML_Reader {
                     } else if (nameOfElement.compareTo("parse") == 0) {
                         ReadParseDetails();
                     } else if (nameOfElement.compareTo("root") == 0) {
-                    } else if (nameOfElement.compareTo("punc") == 0) {
+                    } else if (nameOfElement.compareTo("punc") == 0) {                     
                     } else {
                         ReadPhraseDetails();
                     }
@@ -71,6 +71,7 @@ public class TextInputReader extends XML_Reader {
                         this.setLevelOfPhrase();
                         //this.addSubLevel();
                         //this.setLevelOfPhrase();//set lai level sau khi da add them subLevel
+                        this.addSilsToSen("SILS");
                         this.getAllSentences().add(sentence);
                     }
                 } else {
@@ -105,7 +106,6 @@ public class TextInputReader extends XML_Reader {
     ////////////
 
     public void ReadPhraseDetails() {
-
         levelPhrase = new LevelPhrase();
         levelPhrase.setId_phrase(id_levelPhrase++);
         int lv = StrToInt(xMLStreamReader.getAttributeValue(0));
@@ -121,6 +121,15 @@ public class TextInputReader extends XML_Reader {
         level.add(lv);
     }
     //////////////
+    public void addSilsToSen(String str){
+        levelPhrase = new LevelPhrase();
+        levelPhrase.setId_phrase(id_levelPhrase++);
+        levelPhrase.setLevel(1);
+        levelPhrase.setPhraseContent(str);
+        levelPhrase.setSyllableIn();
+        sentence.getLevelPhrases().add(levelPhrase);
+        level.add(1);
+    }
 
     private void setLevelOfPhrase() {
         //1221122233
@@ -135,9 +144,11 @@ public class TextInputReader extends XML_Reader {
                     currentLevelIndex = i;                    
                     isFound = true;
                     for (int j = currentLevelIndex + 1; j < level.size(); j++) {
-                        if ((int) level.get(j) - currentLevel == 1) {
+                        //ke tu vi tri hien tai, neu
+                        int sub = (int) level.get(j) - currentLevel;
+                        if (sub == 1) {
                             sentence.getLevelPhrases().get(currentLevelIndex).addIndexOfSubLevel(j);
-                        } else {
+                        } else if(sub <=0 ){
                             break;
                         }
                     }
@@ -193,7 +204,7 @@ public class TextInputReader extends XML_Reader {
     }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        String textDBLocation = System.getProperty("user.dir") + "\\result4.xml";
+        String textDBLocation = System.getProperty("user.dir") + "\\result2.xml";
         TextInputReader textInputReader = new TextInputReader(textDBLocation);
         textInputReader.printDetails();
     }
