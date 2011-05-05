@@ -1,8 +1,10 @@
+package JFrameGUI;
+
 /*
  * JFileChooserDemo2App.java
  */
 
-package JFrameGUI;
+
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;

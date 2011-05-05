@@ -1,9 +1,13 @@
+package JFrameGUI;
+
 /*
  * JFileChooserDemo2View.java
  */
-package JFrameGUI;
 
 
+
+import JFrameGUI.FileInput;
+import JFrameGUI.RenameWavFile;
 import XML_Processing.XML_Creator;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -12,12 +16,9 @@ import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
-import javax.xml.stream.XMLStreamException;
 
 /**
  * The application's main frame.
@@ -125,6 +126,9 @@ public class JFrameGUIView extends FrameView {
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         fileChooser = new javax.swing.JFileChooser();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         mainPanel.setName("mainPanel"); // NOI18N
 
@@ -239,6 +243,16 @@ public class JFrameGUIView extends FrameView {
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.setName("fileChooser"); // NOI18N
 
+        jMenuBar1.setName("jMenuBar1"); // NOI18N
+
+        jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
+        jMenu1.setName("jMenu1"); // NOI18N
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText(resourceMap.getString("jMenu2.text")); // NOI18N
+        jMenu2.setName("jMenu2"); // NOI18N
+        jMenuBar1.add(jMenu2);
+
         setComponent(mainPanel);
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
@@ -251,11 +265,9 @@ public class JFrameGUIView extends FrameView {
             fileChooser.setMultiSelectionEnabled(true);
             {
                 // this block code is used to read Text Database
-                File[] file = fileChooser.getSelectedFiles();
-                for (int i = 0; i < file.length; i++) {
-                    RenameWavFile r = new RenameWavFile(file[i]);
-                }
-
+                File file = fileChooser.getSelectedFile();
+                
+            }
 //                try {
 //                    xml_Creator = new XML_Creator();
 //                } catch (XMLStreamException ex) {
@@ -271,7 +283,7 @@ public class JFrameGUIView extends FrameView {
 //                    }
 //                }
 //                System.out.println("OK");
-            }
+            
             /////////////////////////////////////////////////////////////////////////////
                 /*
             File[] wavFile = fileChooser.getSelectedFiles();
@@ -295,6 +307,9 @@ public class JFrameGUIView extends FrameView {
     }//GEN-LAST:event_openFileMenuItemActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jOpenButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

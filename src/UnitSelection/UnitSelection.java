@@ -30,10 +30,10 @@ public class UnitSelection {
     public UnitSelection() throws XMLStreamException, FileNotFoundException {
         us = new UnitSearching();
         selectedLPhrs = us.getFoundLPhs();
-        this.selectLP();
+        selectLP();
 
-        this.setIndex();
-        this.writeToTextFile();
+        setIndex();
+        writeToTextFile();
         //this.printDetails();
     }
 
@@ -80,7 +80,6 @@ public class UnitSelection {
     public void setIndex() {
         fileNames = new ArrayList<String>();
         for (int i = 0; i < selectedLPhrs.size(); i++) {
-
             fileNames.add(UnitSearching.allSenInTextDB.get(selectedLPhrs.get(i).getSelectedSen()).getCarryingFile());
             int selectedSen = selectedLPhrs.get(i).getSelectedSen();
             int selectedSylPhrs = selectedLPhrs.get(i).getSelectedSylPhrs();
