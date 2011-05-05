@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
  * @author thaodv_bkit
  */
 public class LevelPhrase extends Phrase {
+
     private int level;
     private ArrayList<Integer> indexesOfSubLevel = new ArrayList<Integer>();
     private ArrayList<String> syllableIn = new ArrayList<String>();
@@ -21,6 +22,8 @@ public class LevelPhrase extends Phrase {
     private ArrayList<Integer> foundSylPhrs = new ArrayList<Integer>();// id cua SylPhrase tim thay LP
     private ArrayList<Integer> foundSyllable = new ArrayList<Integer>();// id cua Syllable tim thay LP
     private int selectedSen, selectedSylPhrs, selectedSyllable; //id cua cau, sylphrase, syllable duoc chon sau khi co ham chi phi
+    private Syllable firstSylInLPhrs, lastSylInLPhrs;// am tiet bat dau va ket thuc cua LevelPhrase. dung de tinh khoang cach ngu canh cho cac LP ben canh
+    private int posInSen; // vi tri bat dau cua LP trong Phrase
 
     public LevelPhrase(){
         
@@ -163,6 +166,48 @@ public class LevelPhrase extends Phrase {
      */
     public void setSelectedSyllable(int selectedSyllable) {
         this.selectedSyllable = selectedSyllable;
+    }
+
+    /**
+     * @return the firstSylInLPhrs
+     */
+    public Syllable getFirstSylInLPhrs() {
+        return firstSylInLPhrs;
+    }
+
+    /**
+     * @param firstSylInLPhrs the firstSylInLPhrs to set
+     */
+    public void setFirstSylInLPhrs(Syllable firstSylInLPhrs) {
+        this.firstSylInLPhrs = firstSylInLPhrs;
+    }
+
+    /**
+     * @return the lastSylInLPhrs
+     */
+    public Syllable getLastSylInLPhrs() {
+        return lastSylInLPhrs;
+    }
+
+    /**
+     * @param lastSylInLPhrs the lastSylInLPhrs to set
+     */
+    public void setLastSylInLPhrs(Syllable lastSylInLPhrs) {
+        this.lastSylInLPhrs = lastSylInLPhrs;
+    }
+
+    /**
+     * @return the posInSen
+     */
+    public int getPosInSen() {
+        return posInSen;
+    }
+
+    /**
+     * @param posInSen the posInSen to set
+     */
+    public void setPosInSen(int posInSen) {
+        this.posInSen = posInSen;
     }
 
 

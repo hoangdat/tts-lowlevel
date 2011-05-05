@@ -53,10 +53,12 @@ public class TextInputReader extends XML_Reader {
 
                     if (nameOfElement.compareTo("sentence") == 0) {
                         ReadSentenceDetails();
+                        addSilsToSen("SILS");
                     } else if (nameOfElement.compareTo("parse") == 0) {
                         ReadParseDetails();
                     } else if (nameOfElement.compareTo("root") == 0) {
-                    } else if (nameOfElement.compareTo("punc") == 0) {                     
+                    } else if (nameOfElement.compareTo("punc") == 0) {
+                        this.addSilToSen("SIL");
                     } else {
                         ReadPhraseDetails();
                     }
@@ -95,8 +97,6 @@ public class TextInputReader extends XML_Reader {
         } catch (XMLStreamException ex) {
             Logger.getLogger(TextInputReader.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
     /////////////
 
@@ -130,6 +130,18 @@ public class TextInputReader extends XML_Reader {
         sentence.getLevelPhrases().add(levelPhrase);
         level.add(1);
     }
+    //////////
+    public void addSilToSen(String str){
+        levelPhrase = new LevelPhrase();
+        levelPhrase.setId_phrase(id_levelPhrase++);
+        int lv = StrToInt(xMLStreamReader.getAttributeValue(0));
+        levelPhrase.setLevel(lv);
+        levelPhrase.setPhraseContent(str);
+        levelPhrase.setSyllableIn();
+        sentence.getLevelPhrases().add(levelPhrase);
+        level.add(lv);
+    }
+
 
     private void setLevelOfPhrase() {
         //1221122233
@@ -204,7 +216,7 @@ public class TextInputReader extends XML_Reader {
     }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        String textDBLocation = System.getProperty("user.dir") + "\\result2.xml";
+        String textDBLocation = System.getProperty("user.dir") + "\\result5.xml";
         TextInputReader textInputReader = new TextInputReader(textDBLocation);
         textInputReader.printDetails();
     }

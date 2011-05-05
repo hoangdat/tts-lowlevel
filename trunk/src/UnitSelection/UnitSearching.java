@@ -29,11 +29,12 @@ public class UnitSearching {
 
     public UnitSearching() throws XMLStreamException, FileNotFoundException {
         textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
-        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
+        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result2.xml");
         allSenInTextDB = textDBReader.getAllSentences();
         allSenInTextInput = textInputReader.getAllSentences();
         textInputReader.printDetails();
         this.searchTextInput();
+        this.setPosInSenOfPhrs();
     }
     //
 
@@ -89,6 +90,7 @@ public class UnitSearching {
                     System.out.println("indexesOfLP : "+indexesOfLP.toString());
                     System.out.println("ko thay: " + topLP.getPhraseContent()+" :va da add subLevel de tim kiem");
                 }else{
+                    //neu ko tim thay LP va LP ko co subLevel de tim kiem
                     topLP.setIsFound(false);
                     getFoundLPhs().add(topLP);
                     System.out.println("ko thay: " + topLP.getPhraseContent()+" :va LP nay ko co subLevel");
@@ -114,19 +116,19 @@ public class UnitSearching {
     /*
      *
      */
-    public void searchSen(Sentence s) {
-        boolean isFoundLevelPhrase;
-        for (int j = 1; j <= s.getMaxLevelOfLevelPhrase(); j++) {
-            ArrayList<Integer> indexesOfLevelPhrase = s.getIndexesOfPhraseByLevel(j);
-            int sizeOfIndexes = indexesOfLevelPhrase.size();
-            for (int i = 0; i < sizeOfIndexes; i++) {
-                isFoundLevelPhrase = this.searchLevelPhrase(s.getLevelPhrases().get((int) indexesOfLevelPhrase.get(i)));
-                if (!isFoundLevelPhrase) {
-                    System.out.println("ko thay: " + s.getLevelPhrases().get((int) indexesOfLevelPhrase.get(i)).getPhraseContent());
-                }
-            }
-        }
-    }
+//    public void searchSen(Sentence s) {
+//        boolean isFoundLevelPhrase;
+//        for (int j = 1; j <= s.getMaxLevelOfLevelPhrase(); j++) {
+//            ArrayList<Integer> indexesOfLevelPhrase = s.getIndexesOfPhraseByLevel(j);
+//            int sizeOfIndexes = indexesOfLevelPhrase.size();
+//            for (int i = 0; i < sizeOfIndexes; i++) {
+//                isFoundLevelPhrase = this.searchLevelPhrase(s.getLevelPhrases().get((int) indexesOfLevelPhrase.get(i)));
+//                if (!isFoundLevelPhrase) {
+//                    System.out.println("ko thay: " + s.getLevelPhrases().get((int) indexesOfLevelPhrase.get(i)).getPhraseContent());
+//                }
+//            }
+//        }
+//    }
 
     /*
      *
@@ -167,6 +169,10 @@ public class UnitSearching {
                         //System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
                         System.out.println(phContentToSearch + " : " + sylID);
                         phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
+                         if(levelPhrase.getFirstSylInLPhrs()==null){
+                             levelPhrase.setFirstSylInLPhrs(sylPhrasesInSen.get(j).getSyllablesInPh().get(sylID));
+                             levelPhrase.setLastSylInLPhrs(sylPhrasesInSen.get(j).getSyllablesInPh().get(sylID+levelPhrase.getPhraseLen()-1));
+                         }
                     }
                 }
             }
@@ -177,8 +183,8 @@ public class UnitSearching {
     //
     ////
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        UnitSearching unitSearching = new UnitSearching();
-
+        UnitSearching unitSearching = new UnitSearching();        
+        System.out.println("keke");
     }
 
     /**
@@ -186,5 +192,19 @@ public class UnitSearching {
      */
     public ArrayList<LevelPhrase> getFoundLPhs() {
         return foundLPhs;
+    }
+
+    private void setPosInSenOfPhrs() {
+        int posToSet = 0;
+        for (int i = 0; i < getFoundLPhs().size(); i++) {
+            String phraseContent = getFoundLPhs().get(i).getPhraseContent();
+            if((phraseContent.compareTo("SIL")==0)||(phraseContent.compareTo("SILS")==0)){
+                posToSet = 0;
+            } else{
+                getFoundLPhs().get(i).setPosInSen(posToSet);
+                posToSet += getFoundLPhs().get(i).getPhraseLen();
+            }
+        }
+        
     }
 }
