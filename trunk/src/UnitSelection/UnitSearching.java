@@ -20,16 +20,23 @@ import java.util.Stack;
  */
 public class UnitSearching {
 
+    /**
+     * @return the allSenInTextDB
+     */
+    public static ArrayList<Sentence> getAllSenInTextDB() {
+        return allSenInTextDB;
+    }
+
     TextInputReader textInputReader;
     TextDBReader textDBReader;
-    public static ArrayList<Sentence> allSenInTextDB;
+    private static ArrayList<Sentence> allSenInTextDB;
     ArrayList<Sentence> allSenInTextInput;
     Stack<Integer> indexesOfLP;
     private ArrayList<LevelPhrase> foundLPhs = new ArrayList<LevelPhrase>();
 
     public UnitSearching() throws XMLStreamException, FileNotFoundException {
         textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
-        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result2.xml");
+        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
         allSenInTextDB = textDBReader.getAllSentences();
         allSenInTextInput = textInputReader.getAllSentences();
         textInputReader.printDetails();
@@ -138,8 +145,8 @@ public class UnitSearching {
         int indexFound = 0;
         boolean isFound = false;
         int sylID;
-        for (int i = 0; i < allSenInTextDB.size(); i++) {
-            ArrayList<SylPhrase> sylPhrasesInSen = allSenInTextDB.get(i).getSylPhrases();
+        for (int i = 0; i < getAllSenInTextDB().size(); i++) {
+            ArrayList<SylPhrase> sylPhrasesInSen = getAllSenInTextDB().get(i).getSylPhrases();
             for (int j = 0; j < sylPhrasesInSen.size(); j++) {
                 // tim kiem phContentToSearch trong SylPhraseContent
                 // khi tim kiem lan dau thay
