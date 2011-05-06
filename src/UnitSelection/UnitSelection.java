@@ -5,6 +5,8 @@
 package UnitSelection;
 
 import XML_Processing.LevelPhrase;
+import XML_Processing.Sentence;
+import XML_Processing.Syllable;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,14 +28,19 @@ public class UnitSelection {
     private ArrayList<LevelPhrase> selectedLPhrs;
     private ArrayList<String> fileNames;
     private String pathFile;
+    ArrayList<Sentence> allSenInTextDB;
+
 
     public UnitSelection() throws XMLStreamException, FileNotFoundException {
         us = new UnitSearching();
         selectedLPhrs = us.getFoundLPhs();
-        selectLP();
+        allSenInTextDB = UnitSearching.getAllSenInTextDB();
+        //selectLP();
+        selectLPByCost();
 
         setIndex();
         writeToTextFile();
+
         //this.printDetails();
     }
 
@@ -80,12 +87,12 @@ public class UnitSelection {
     public void setIndex() {
         fileNames = new ArrayList<String>();
         for (int i = 0; i < selectedLPhrs.size(); i++) {
-            fileNames.add(UnitSearching.allSenInTextDB.get(selectedLPhrs.get(i).getSelectedSen()).getCarryingFile());
+            fileNames.add(UnitSearching.getAllSenInTextDB().get(selectedLPhrs.get(i).getSelectedSen()).getCarryingFile());
             int selectedSen = selectedLPhrs.get(i).getSelectedSen();
             int selectedSylPhrs = selectedLPhrs.get(i).getSelectedSylPhrs();
             int selectedSyllable = selectedLPhrs.get(i).getSelectedSyllable();
-            int startIndex = UnitSearching.allSenInTextDB.get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable).getStartIndex();
-            int endIndex = UnitSearching.allSenInTextDB.get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable + selectedLPhrs.get(i).getPhraseLen() - 1).getEndIndex();
+            int startIndex = UnitSearching.getAllSenInTextDB().get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable).getStartIndex();
+            int endIndex = UnitSearching.getAllSenInTextDB().get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable + selectedLPhrs.get(i).getPhraseLen() - 1).getEndIndex();
             selectedLPhrs.get(i).setStartIndex(startIndex);
             selectedLPhrs.get(i).setEndIndex(endIndex);
         }
@@ -139,5 +146,36 @@ public class UnitSelection {
      */
     public void setPathFile(String pathFile) {
         this.pathFile = pathFile;
+    }
+
+    public void selectLPByCost() {
+        calculateCostForCandidateUnits();
+    }
+
+    private void calculateCostForCandidateUnits() {
+        for (int i = 0; i < getSelectedLPhrs().size(); i++) {
+            LevelPhrase desiredUnit = getSelectedLPhrs().get(i);
+            ArrayList<Integer> candidateUnitsSen = desiredUnit.getFoundSen();//cau chua candidate units
+            ArrayList<Integer> candidateUnitSylPhrs = desiredUnit.getFoundSylPhrs();
+            ArrayList<Integer> candidateUnitFirstSyl = desiredUnit.getFoundSyllable();
+            int numOfCandidateUnit = candidateUnitFirstSyl.size();
+            
+            for (int j = 0; j < numOfCandidateUnit; j++) {
+                DistanceVector dv = new DistanceVector();
+                Syllable firstSyllableOfCandidate = allSenInTextDB.get(candidateUnitsSen.get(j)).getSylPhrases().get(candidateUnitSylPhrs.get(j)).getSyllablesInPh().get(candidateUnitFirstSyl.get(j));
+                // set posInPhrsDistance
+                if(desiredUnit.getPosInSen() == candidateUnitFirstSyl.get(j)){
+                    dv.setPosInPhrsDis(0);
+                }else{
+                    dv.setPosInPhrsDis(1);
+                }
+            
+                
+            }
+
+
+
+
+        }
     }
 }
