@@ -113,8 +113,4 @@ public class Phrase {
     public void setPhraseContent(String phraseContent) {
         this.phraseContent = " "+phraseContent.trim()+" ";
     }
-
-    
-
-    
 }
