@@ -44,18 +44,18 @@ public class UnitSelection {
         //this.printDetails();
     }
 
-    public void selectLP() {
-        for (int i = 0; i < getSelectedLPhrs().size(); i++) {
-            System.out.println(i + getSelectedLPhrs().get(i).getPhraseContent());
-            if (getSelectedLPhrs().get(i).isFound()) {
-                getSelectedLPhrs().get(i).setSelectedSen(getSelectedLPhrs().get(i).getFoundSen().get(0));
-                getSelectedLPhrs().get(i).setSelectedSylPhrs(getSelectedLPhrs().get(i).getFoundSylPhrs().get(0));
-                getSelectedLPhrs().get(i).setSelectedSyllable(getSelectedLPhrs().get(i).getFoundSyllable().get(0));
-            } else {
-                System.out.println("khong thay: " + getSelectedLPhrs().get(i).getPhraseContent());
-            }
-        }
-    }
+//    public void selectLP() {
+//        for (int i = 0; i < getSelectedLPhrs().size(); i++) {
+//            System.out.println(i + getSelectedLPhrs().get(i).getPhraseContent());
+//            if (getSelectedLPhrs().get(i).isFound()) {
+//                getSelectedLPhrs().get(i).setSelectedSen(getSelectedLPhrs().get(i).getFoundSen().get(0));
+//                getSelectedLPhrs().get(i).setSelectedSylPhrs(getSelectedLPhrs().get(i).getFoundSylPhrs().get(0));
+//                getSelectedLPhrs().get(i).setSelectedSyllable(getSelectedLPhrs().get(i).getFoundSyllable().get(0));
+//            } else {
+//                System.out.println("khong thay: " + getSelectedLPhrs().get(i).getPhraseContent());
+//            }
+//        }
+//    }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
         new UnitSelection();

@@ -54,15 +54,15 @@ public class UnitSearching {
         }
     }
 
-    public void searchSentence(Sentence s) {
-        for (int j = 1; j <= s.getMaxLevelOfLevelPhrase(); j++) {
-            ArrayList<LevelPhrase> lp = s.getPhraseByLevel(j);
-            int sizeOfPhrase = lp.size();
-            for (int i = 0; i < sizeOfPhrase; i++) {
-                this.searchLevelPhrase(lp.get(i));
-            }
-        }
-    }
+//    public void searchSentence(Sentence s) {
+//        for (int j = 1; j <= s.getMaxLevelOfLevelPhrase(); j++) {
+//            ArrayList<LevelPhrase> lp = s.getPhraseByLevel(j);
+//            int sizeOfPhrase = lp.size();
+//            for (int i = 0; i < sizeOfPhrase; i++) {
+//                this.searchLevelPhrase(lp.get(i));
+//            }
+//        }
+//    }
 
     /*
      *
