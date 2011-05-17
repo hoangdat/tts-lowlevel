@@ -26,7 +26,6 @@ public class SylPhrase extends Phrase {
             } else {
                 len++;
             }
-
         }
         this.setPhraseLen(len);
     }
