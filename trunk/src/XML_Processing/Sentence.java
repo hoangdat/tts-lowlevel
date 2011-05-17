@@ -22,17 +22,7 @@ public class Sentence {
     }
     ///////////////////////////////////
 
-    public int getSentenceLength() {
-        return 0;
-    }
-
-    /**
-     *
-     * @param lengthOfSylPhrase
-     */
-    public ArrayList<Phrase> getSylPharseByLength(int lengthOfSylPhrase) {
-        return null;
-    }
+      
 
     /**
      *
