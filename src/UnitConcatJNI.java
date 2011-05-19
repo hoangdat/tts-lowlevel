@@ -35,5 +35,7 @@ public class UnitConcatJNI {
         UnitConcatJNI unitConcatJNI = new UnitConcatJNI();
         UnitSelection us = new UnitSelection();
         unitConcatJNI.UnitConcatenative(us.getPathFile());
+        System.out.println("hichic");
+
     }
 }
