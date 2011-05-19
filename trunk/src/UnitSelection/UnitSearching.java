@@ -36,7 +36,7 @@ public class UnitSearching {
 
     public UnitSearching() throws XMLStreamException, FileNotFoundException {
         textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
-        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
+        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result7.xml");
         allSenInTextDB = textDBReader.getAllSentences();
         allSenInTextInput = textInputReader.getAllSentences();
         textInputReader.printDetails();
@@ -83,7 +83,7 @@ public class UnitSearching {
         //// chuyen indexesOfLevelPhrase tu Array sang Stack
         addIndexesOfLPtoStack(indexesOfLevelPhrase);
         // in ra indexes ban dau
-        System.out.println("indexesOfLP : "+indexesOfLP.toString());
+        //System.out.println("indexesOfLP : "+indexesOfLP.toString());
         // bat dau tim kiem LP
         while (!indexesOfLP.isEmpty()) {
             topOfStack = (int) indexesOfLP.pop();
@@ -92,10 +92,10 @@ public class UnitSearching {
             if (!isFoundLevelPhrase) {
                 //neu ko tim thay LP
                 if(topLP.haveSubLevel()){
-                    System.out.println("IndexesOfSubLevel of Top "+topLP.getIndexesOfSubLevel().toString());
+                    //System.out.println("IndexesOfSubLevel of Top "+topLP.getIndexesOfSubLevel().toString());
                     addIndexesOfLPtoStack(topLP.getIndexesOfSubLevel());
-                    System.out.println("indexesOfLP : "+indexesOfLP.toString());
-                    System.out.println("ko thay: " + topLP.getPhraseContent()+" :va da add subLevel de tim kiem");
+                    //System.out.println("indexesOfLP : "+indexesOfLP.toString());
+                    //System.out.println("ko thay: " + topLP.getPhraseContent()+" :va da add subLevel de tim kiem");
                 }else{
                     //neu ko tim thay LP va LP ko co subLevel de tim kiem
                     topLP.setIsFound(false);
@@ -174,7 +174,7 @@ public class UnitSearching {
                         levelPhrase.getFoundSylPhrs().add(j);
                         levelPhrase.getFoundSyllable().add(sylID);
                         //System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
-                        System.out.println(phContentToSearch + " : " + sylID);
+                        //System.out.println(phContentToSearch + " : " + sylID);
                         phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
                          if(levelPhrase.getFirstSylInLPhrs()==null){
                              levelPhrase.setFirstSylInLPhrs(sylPhrasesInSen.get(j).getSyllablesInPh().get(sylID));
