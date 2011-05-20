@@ -1,0 +1,552 @@
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 2850 một
+false PTP00003_000.wav 0 5919 độc giả
+true PTP00003_000.wav 0 5919 thường xuyên
+true PTP00003_000.wav 0 2850 của
+false PTP00003_000.wav 0 5919 chuyên mục
+true PTP00003_000.wav 0 5919 tâm sự
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+false PTP00003_000.wav 0 5919 theo dõi
+true PTP00003_000.wav 0 2850 xem
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 5919 tình huống
+true PTP00003_000.wav 0 2850 nào
+true PTP00003_000.wav 0 2850 giống
+true PTP00003_000.wav 0 2850 mình
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 để
+true PTP00003_000.wav 0 2850 rút
+false PTP00003_000.wav 0 5919 kinh nghiệm
+true PTP00003_000.wav 0 2850 cho
+true PTP00003_000.wav 0 5919 bản thân
+true PTP00003_000.wav 0 8624 nhưng không thấy
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 8624 hôm nay tôi
+true PTP00003_000.wav 0 2850 muốn
+true PTP00003_000.wav 0 2850 gửi
+true PTP00003_000.wav 0 5919 tâm sự
+true PTP00003_000.wav 0 2850 của
+true PTP00003_000.wav 0 2850 mình
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 rất
+true PTP00003_000.wav 0 2850 mong
+true PTP00003_000.wav 0 2850 các
+true PTP00003_000.wav 0 2850 bạn
+true PTP00003_000.wav 0 2850 cho
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 những
+true PTP00003_000.wav 0 2850 lời
+true PTP00003_000.wav 0 2850 khuyên
+false PTP00003_000.wav 0 5919 bổ ích
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 5919 ba mươi
+true PTP00003_000.wav 0 2850 bốn
+true PTP00003_000.wav 0 2850 tuổi
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 5919 bác sĩ
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 đã
+true PTP00003_000.wav 0 2850 lập
+true PTP00003_000.wav 0 5919 gia đình
+true PTP00003_000.wav 0 2850 mười
+true PTP00003_000.wav 0 2850 năm
+true PTP00003_000.wav 0 2850 và
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 2850 một
+true PTP00003_000.wav 0 2850 bé
+false PTP00003_000.wav 0 2850 trai
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 một
+true PTP00003_000.wav 0 2850 bé
+true PTP00003_000.wav 0 2850 gái
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+false PTP00003_000.wav 0 5919 nhìn chung
+false PTP00003_000.wav 0 5919 vợ chồng
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 sống
+false PTP00003_000.wav 0 5919 hoà thuận
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 5919 nhường nhịn
+true PTP00003_000.wav 0 2850 nhau
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 chồng
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 2850 một
+true PTP00003_000.wav 0 2850 người
+true PTP00003_000.wav 0 2850 tốt
+true PTP00003_000.wav 0 2850 SIL
+false PTP00003_000.wav 0 5919 thương yêu
+true PTP00003_000.wav 0 5919 vợ con
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 nhìn
+false PTP00003_000.wav 0 5919 bề ngoài
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 ai
+true PTP00003_000.wav 0 2850 cũng
+true PTP00003_000.wav 0 2850 bảo
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 2850 người
+true PTP00003_000.wav 0 2850 vợ
+true PTP00003_000.wav 0 5919 hạnh phúc
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 nhưng
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 2850 những
+true PTP00003_000.wav 0 2850 điều
+false PTP00003_000.wav 0 5919 khổ sở
+true PTP00003_000.wav 0 2850 mà
+true PTP00003_000.wav 0 2850 chẳng
+true PTP00003_000.wav 0 2850 biết
+true PTP00003_000.wav 0 5919 tâm sự
+true PTP00003_000.wav 0 2850 cùng
+true PTP00003_000.wav 0 2850 ai
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 đó
+true PTP00003_000.wav 0 2850 là
+false PTP00003_000.wav 0 5919 thói quen
+false PTP00003_000.wav 0 5919 sinh hoạt
+false PTP00003_000.wav 0 5919 bẩn thỉu
+true PTP00003_000.wav 0 2850 và
+false PTP00003_000.wav 0 5919 luộm thuộm
+true PTP00003_000.wav 0 2850 của
+true PTP00003_000.wav 0 2850 chồng
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 mỗi
+true PTP00003_000.wav 0 2850 bữa
+true PTP00003_000.wav 0 2850 ăn
+false PTP00003_000.wav 0 5919 anh ấy
+true PTP00003_000.wav 0 2850 uống
+true PTP00003_000.wav 0 2850 năm
+true PTP00003_000.wav 0 2850 đến
+true PTP00003_000.wav 0 2850 sáu
+false PTP00003_000.wav 0 2850 chén
+true PTP00003_000.wav 0 2850 rượu
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 trừ
+true PTP00003_000.wav 0 5919 buổi sáng
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 mỗi
+true PTP00003_000.wav 0 2850 ngày
+true PTP00003_000.wav 0 2850 hút
+true PTP00003_000.wav 0 2850 hai
+true PTP00003_000.wav 0 2850 gói
+true PTP00003_000.wav 0 5919 thuốc lá
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 nhưng
+false PTP00003_000.wav 0 5919 hầu như
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 đánh
+true PTP00003_000.wav 0 2850 răng
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 rửa
+true PTP00003_000.wav 0 2850 tay
+true PTP00003_000.wav 0 2850 SIL
+false PTP00003_000.wav 0 5919 tắm rửa
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 đã
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 2850 nhiều
+true PTP00003_000.wav 0 5919 biện pháp
+true PTP00003_000.wav 0 2850 nhưng
+true PTP00003_000.wav 0 5919 nay tôi
+true PTP00003_000.wav 0 5919 cảm thấy
+true PTP00003_000.wav 0 2850 đã
+false PTP00003_000.wav 0 5919 mệt mỏi
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 từ
+false PTP00003_000.wav 0 5919 nói khéo
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 5919 giận dỗi
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 5919 nói thẳng
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 lúc
+true PTP00003_000.wav 0 2850 đầu
+true PTP00003_000.wav 0 2850 lấy
+true PTP00003_000.wav 0 5919 lý do
+true PTP00003_000.wav 0 2850 vì
+false PTP00003_000.wav 0 5919 sức khoẻ
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 khuyên
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 uống
+true PTP00003_000.wav 0 2850 ít
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 và
+true PTP00003_000.wav 0 2850 giảm
+true PTP00003_000.wav 0 2850 thuốc
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+false PTP00003_000.wav 0 5919 anh ấy
+true PTP00003_000.wav 0 5919 trả lời
+true PTP00003_000.wav 0 2850 rằng
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 anh
+false PTP00003_000.wav 0 2850 nghe
+true PTP00003_000.wav 0 2850 em
+true PTP00003_000.wav 0 5919 tất cả
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 trừ
+true PTP00003_000.wav 0 2850 hai
+true PTP00003_000.wav 0 5919 vấn đề
+true PTP00003_000.wav 0 2850 này
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 mọi
+true PTP00003_000.wav 0 5919 vấn đề
+true PTP00003_000.wav 0 2850 khác
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 rất
+true PTP00003_000.wav 0 2850 chiều
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 nhưng
+true PTP00003_000.wav 0 2850 rượu
+true PTP00003_000.wav 0 2850 và
+true PTP00003_000.wav 0 2850 thuốc
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 bỏ
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 các
+true PTP00003_000.wav 0 2850 bạn
+true PTP00003_000.wav 0 2850 biết
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 5919 thường xuyên
+false PTP00003_000.wav 0 5919 nhắc nhở
+true PTP00003_000.wav 0 2850 chồng
+true PTP00003_000.wav 0 2850 đi
+false PTP00003_000.wav 0 2850 tắm
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 đánh
+true PTP00003_000.wav 0 2850 răng
+true PTP00003_000.wav 0 2850 trước
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 đi
+true PTP00003_000.wav 0 2850 ngủ
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 5919 thậm chí
+true PTP00003_000.wav 0 2850 nhiều
+true PTP00003_000.wav 0 5919 lúc tôi
+true PTP00003_000.wav 0 2850 phải
+true PTP00003_000.wav 0 2850 rửa
+true PTP00003_000.wav 0 2850 mặt
+true PTP00003_000.wav 0 2850 SIL
+false PTP00003_000.wav 0 2850 lau
+true PTP00003_000.wav 0 2850 tay
+true PTP00003_000.wav 0 2850 SIL
+false PTP00003_000.wav 0 5919 tắm rửa
+true PTP00003_000.wav 0 2850 cho
+false PTP00003_000.wav 0 5919 anh ấy
+true PTP00003_000.wav 0 2850 vì
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 5919 không thể
+true PTP00003_000.wav 0 2850 ngủ
+true PTP00003_000.wav 0 2850 được
+true PTP00003_000.wav 0 2850 vì
+true PTP00003_000.wav 0 2850 mùi
+true PTP00003_000.wav 0 5919 cơ thể
+true PTP00003_000.wav 0 2850 của
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 mệt
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 hoặc
+true PTP00003_000.wav 0 2850 vì
+true PTP00003_000.wav 0 5919 lý do
+true PTP00003_000.wav 0 2850 gì
+true PTP00003_000.wav 0 2850 đó
+true PTP00003_000.wav 0 2850 mà
+false PTP00003_000.wav 0 5919 vợ chồng
+true PTP00003_000.wav 0 5919 không thể
+true PTP00003_000.wav 0 5919 quan hệ
+true PTP00003_000.wav 0 2850 được
+true PTP00003_000.wav 0 2850 thì
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 hề
+true PTP00003_000.wav 0 5919 vệ sinh
+false PTP00003_000.wav 0 5919 cá nhân
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 một
+true PTP00003_000.wav 0 2850 ngày
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 5919 hai ngày
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 hay
+true PTP00003_000.wav 0 2850 cả
+true PTP00003_000.wav 0 2850 tuần
+true PTP00003_000.wav 0 5919 cũng vậy
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 từ
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 lấy
+true PTP00003_000.wav 0 2850 nhau
+true PTP00003_000.wav 0 2850 SIL
+false PTP00003_000.wav 0 5919 hầu như
+true PTP00003_000.wav 0 5919 chúng tôi
+true PTP00003_000.wav 0 2850 không
+false PTP00003_000.wav 0 2850 hôn
+true PTP00003_000.wav 0 2850 nhau
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 đứng
+true PTP00003_000.wav 0 2850 gần
+true PTP00003_000.wav 0 2850 chồng
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 hay
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 5919 quan hệ
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 thường
+true PTP00003_000.wav 0 2850 phải
+false PTP00003_000.wav 0 2850 ngoảnh
+true PTP00003_000.wav 0 2850 mặt
+true PTP00003_000.wav 0 2850 đi
+true PTP00003_000.wav 0 2850 nơi
+true PTP00003_000.wav 0 2850 khác
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 8624 những lúc tôi
+true PTP00003_000.wav 0 2850 rất
+false PTP00003_000.wav 0 5919 thèm khát
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 nhưng
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 lại
+true PTP00003_000.wav 0 2850 gần
+true PTP00003_000.wav 0 5919 cảm xúc
+true PTP00003_000.wav 0 2850 lại
+false PTP00003_000.wav 0 2850 tan
+true PTP00003_000.wav 0 2850 biến
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 2850 hôm
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 mệt
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 uống
+true PTP00003_000.wav 0 2850 rượu
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 hôm
+true PTP00003_000.wav 0 2850 ấy
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 đỡ
+true PTP00003_000.wav 0 2850 hôi
+true PTP00003_000.wav 0 2850 hơn
+true PTP00003_000.wav 0 2850 tôi
+false PTP00003_000.wav 0 5919 thì thầm
+true PTP00003_000.wav 0 2850 rằng
+true PTP00003_000.wav 0 5919 hôm nay
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 rất
+true PTP00003_000.wav 0 2850 tuyệt
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 anh
+false PTP00003_000.wav 0 2850 nghe
+true PTP00003_000.wav 0 2850 rất
+true PTP00003_000.wav 0 2850 vui
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 và
+true PTP00003_000.wav 0 2850 hai
+false PTP00003_000.wav 0 5919 ngày sau
+true PTP00003_000.wav 0 2850 đó
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 5919 vệ sinh
+true PTP00003_000.wav 0 2850 rất
+false PTP00003_000.wav 0 5919 sạch sẽ
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 không
+true PTP00003_000.wav 0 2850 uống
+true PTP00003_000.wav 0 2850 rượu
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 nhưng
+true PTP00003_000.wav 0 2850 sau
+true PTP00003_000.wav 0 2850 đâu
+true PTP00003_000.wav 0 2850 lại
+true PTP00003_000.wav 0 2850 vào
+true PTP00003_000.wav 0 2850 đấy
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 2850 lúc
+true PTP00003_000.wav 0 2850 đang
+false PTP00003_000.wav 0 5919 hưng phấn
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 quên
+true PTP00003_000.wav 0 2850 nên
+true PTP00003_000.wav 0 2850 ghé
+true PTP00003_000.wav 0 2850 mặt
+true PTP00003_000.wav 0 2850 gần
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 5919 cảm xúc
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 lại
+false PTP00003_000.wav 0 5919 nguội lạnh
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 5919 thật sự
+false PTP00003_000.wav 0 5919 thèm khát
+true PTP00003_000.wav 0 2850 một
+false PTP00003_000.wav 0 5919 nụ hôn
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 và
+true PTP00003_000.wav 0 2850 một
+true PTP00003_000.wav 0 2850 lần
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 đang
+true PTP00003_000.wav 0 5919 làm việc
+true PTP00003_000.wav 0 2850 thì
+true PTP00003_000.wav 0 2850 bị
+false PTP00003_000.wav 0 2850 ngất
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 phải
+true PTP00003_000.wav 0 2850 nằm
+true PTP00003_000.wav 0 2850 ở
+true PTP00003_000.wav 0 2850 khoa
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 5919 anh ta
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 2850 sếp
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 đã
+true PTP00003_000.wav 0 5919 điều trị
+true PTP00003_000.wav 0 5919 cho tôi
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 trong
+true PTP00003_000.wav 0 2850 khoa
+true PTP00003_000.wav 0 5919 anh ta
+true PTP00003_000.wav 0 2850 là
+true PTP00003_000.wav 0 2850 người
+true PTP00003_000.wav 0 2850 được
+true PTP00003_000.wav 0 2850 mọi
+true PTP00003_000.wav 0 2850 người
+false PTP00003_000.wav 0 5919 quý mến
+true PTP00003_000.wav 0 2850 vì
+false PTP00003_000.wav 0 5919 chuyên môn
+true PTP00003_000.wav 0 2850 giỏi
+true PTP00003_000.wav 0 2850 SIL
+false PTP00003_000.wav 0 5919 nhiệt tình
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 có
+true PTP00003_000.wav 0 5919 trách nhiệm
+true PTP00003_000.wav 0 2850 và
+false PTP00003_000.wav 0 5919 nghiêm túc
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 5919 một lần
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 anh
+true PTP00003_000.wav 0 2850 đến
+true PTP00003_000.wav 0 5919 kiểm tra
+false PTP00003_000.wav 0 5919 sức khoẻ
+true PTP00003_000.wav 0 2850 cho
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 để
+true PTP00003_000.wav 0 2850 cho
+true PTP00003_000.wav 0 2850 ra
+true PTP00003_000.wav 0 2850 viện
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 hôm
+true PTP00003_000.wav 0 5919 ấy là
+true PTP00003_000.wav 0 2850 ngày
+true PTP00003_000.wav 0 2850 nghỉ
+true PTP00003_000.wav 0 2850 nên
+true PTP00003_000.wav 0 2850 trong
+true PTP00003_000.wav 0 2850 khoa
+true PTP00003_000.wav 0 2850 rất
+true PTP00003_000.wav 0 2850 vắng
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 khi
+true PTP00003_000.wav 0 2850 anh
+false PTP00003_000.wav 0 2850 cúi
+true PTP00003_000.wav 0 2850 xuống
+true PTP00003_000.wav 0 2850 khám
+true PTP00003_000.wav 0 2850 cho
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 lần
+true PTP00003_000.wav 0 5919 đầu tiên
+true PTP00003_000.wav 0 2850 tôi
+false PTP00003_000.wav 0 5919 cảm nhận
+true PTP00003_000.wav 0 2850 được
+true PTP00003_000.wav 0 2850 hơi
+false PTP00003_000.wav 0 2850 thở
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 mùi
+false PTP00003_000.wav 0 5919 da thịt
+true PTP00003_000.wav 0 2850 của
+true PTP00003_000.wav 0 12217 một người đàn ông
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+false PTP00003_000.wav 0 5919 nhắm mắt
+true PTP00003_000.wav 0 2850 và
+false PTP00003_000.wav 0 5919 anh ấy
+false PTP00003_000.wav 0 2850 hôn
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 2850 như
+true PTP00003_000.wav 0 2850 chết
+false PTP00003_000.wav 0 2850 lặng
+true PTP00003_000.wav 0 2850 SIL
+true PTP00003_000.wav 0 2850 tôi
+true PTP00003_000.wav 0 5919 thật sự
+true PTP00003_000.wav 0 2850 như
+true PTP00003_000.wav 0 2850 được
+true PTP00003_000.wav 0 2850 sống
+true PTP00003_000.wav 0 2850 lại
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
+true PTP00003_000.wav 0 2850 SILS
