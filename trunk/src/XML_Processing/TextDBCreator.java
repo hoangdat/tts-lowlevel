@@ -4,7 +4,6 @@
  */
 package XML_Processing;
 
-import JFrameGUI.FileInput;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
