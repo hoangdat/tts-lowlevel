@@ -24,6 +24,8 @@ public class HalfSyl {
     private int highEnergy;
     private String leftUnitName;
     private String rightUnitName;
+    private String leftPhnmType;
+    private String rightPhnmType;
 
     public HalfSyl(){
 
@@ -210,6 +212,34 @@ public class HalfSyl {
      */
     public void setRightUnitName(String rightUnitName) {
         this.rightUnitName = rightUnitName;
+    }
+
+    /**
+     * @return the leftPhnmType
+     */
+    public String getLeftPhnmType() {
+        return leftPhnmType;
+    }
+
+    /**
+     * @param leftPhnmType the leftPhnmType to set
+     */
+    public void setLeftPhnmType(String leftPhnmType) {
+        this.leftPhnmType = leftPhnmType;
+    }
+
+    /**
+     * @return the rightPhnmType
+     */
+    public String getRightPhnmType() {
+        return rightPhnmType;
+    }
+
+    /**
+     * @param rightPhnmType the rightPhnmType to set
+     */
+    public void setRightPhnmType(String rightPhnmType) {
+        this.rightPhnmType = rightPhnmType;
     }
 
 
