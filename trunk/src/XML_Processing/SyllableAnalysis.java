@@ -19,14 +19,14 @@ public class SyllableAnalysis {
     private ArrayList<Syllable> sylDic = new ArrayList<Syllable>();
     ArrayList<String> eachLine;
     Syllable syllable;
-    String[] firstCons = {"NG", "th", "tr", "c", "NJ", "f", "X", "z", "z", "G", "k", "d", "t", "b", "m", "n", "l", "s", "ss", "h", "v", "zr", "p"};
-    String[] firstConType = {"CSN", "CSU", "CSU", "CSU", "CSN", "CFU", "CFU", "CFV", "CFV", "CFV", "CSU", "CSV", "CSU", "CSV", "CSN", "CSN", "CFL", "CFU", "CFU", "CFU", "CFV", "CFV", "CSU"};
-    String semiVowel = "w";
-    String semiVowelType = "SV";
-    String[] vowels = {"M7", "uo", "ie", "M", "7", "o", "e", "E", "7X", "aX", "a", "EX", "aX", "O", "OX", "u", "i"};//17
-    String[] vowelTypes = {"VM", "VB", "VF", "VM", "VM", "VB", "VF", "VF", "VMC", "VMC", "VM", "VFC", "VMC", "VB", "VBC", "VB", "VF"};//17
-    String[] lastPhns = {"p", "t", "k", "m", "n", "NG", "w", "j"};//8
-    String[] lastPhnTypes = {"CSU", "CSU", "CSU", "CSN", "CSN", "CSN", "SV", "SV"};//8
+    static String[] firstCons = {"NG", "th", "tr", "c", "NJ", "f", "X", "z", "z", "G", "k", "d", "t", "b", "m", "n", "l", "s", "ss", "h", "v", "zr", "p"};
+    static String[] firstConType = {"CSN", "CSU", "CSU", "CSU", "CSN", "CFU", "CFU", "CFV", "CFV", "CFV", "CSU", "CSV", "CSU", "CSV", "CSN", "CSN", "CFL", "CFU", "CFU", "CFU", "CFV", "CFV", "CSU"};
+    static String semiVowel = "w";
+    static String semiVowelType = "SV";
+    static String[] vowels = {"M7", "uo", "ie", "M", "7", "o", "e", "E", "7X", "aX", "a", "EX", "aX", "O", "OX", "u", "i"};//17
+    static String[] vowelTypes = {"VM", "VB", "VF", "VM", "VM", "VB", "VF", "VF", "VMC", "VMC", "VM", "VFC", "VMC", "VB", "VBC", "VB", "VF"};//17
+    static String[] lastPhns = {"p", "t", "k", "m", "n", "NG", "w", "j"};//8
+    static String[] lastPhnTypes = {"CSU", "CSU", "CSU", "CSN", "CSN", "CSN", "SV", "SV"};//8
     ////
     String[] csPhoneme =            {"7X", "EX", "aX", "OX", "ie", "M7", "uo", "NG", "th", "tr", "NJ", "ss", "zr"};
     //csPhoneme la dang sampa
@@ -91,7 +91,7 @@ public class SyllableAnalysis {
         for (int i = 0; i < lastPhns.length; i++) {
             if (eachLine.get(eachLine.size() - 1).compareTo(lastPhns[i]) == 0) {
                 syl.setFinalPhoneme(lastPhns[i]);
-                syl.setFinalType(firstConType[i]);
+                syl.setFinalType(lastPhnTypes[i]);
                 eachLine.remove(eachLine.size() - 1);
                 break;
             }
