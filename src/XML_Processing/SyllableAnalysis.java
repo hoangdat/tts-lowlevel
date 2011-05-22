@@ -164,6 +164,7 @@ public class SyllableAnalysis {
 
     public static void main(String[] args) {
         SyllableAnalysis sylTransDic = new SyllableAnalysis();
+        sylTransDic.getTypeOfPhonemeInHalfSylDB();
         System.out.println("");
 //        sylTransDic.ReadSylTransDic();
 //        for (int i = 0; i < sylTransDic.getSylDic().size(); i++) {
@@ -179,5 +180,46 @@ public class SyllableAnalysis {
      */
     public ArrayList<Syllable> getSylDic() {
         return sylDic;
+    }
+    
+    // lay loai cua am vi duoc ki hieu trong HalfSylDB
+    public void getTypeOfPhonemeInHalfSylDB(){
+        ArrayList<String> phonemes = new ArrayList<String>();
+        ArrayList<String> phonemesType = new ArrayList<String>();
+        for (int i = 0; i < firstCons.length; i++) {
+            phonemesType.add(firstConType[i]);
+            if(firstCons[i].length()==1){
+                phonemes.add(firstCons[i]);
+            }else {
+                for (int j = 0; j < csPhoneme.length; j++) {
+                    if(firstCons[i].compareTo(csPhoneme[j])==0){
+                        phonemes.add(csPhonemeConverted[j]);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < vowels.length; i++) {
+            phonemesType.add(vowelTypes[i]);
+            if(vowels[i].length()==1){
+                phonemes.add(vowels[i]);
+            }else {
+                for (int j = 0; j < csPhoneme.length; j++) {
+                    if(vowels[i].compareTo(csPhoneme[j])==0){
+                        phonemes.add(csPhonemeConverted[j]);
+                    }
+                }
+            }
+        }
+        ///////////////
+        //in ra am vi va loai tuong ung
+        for (int i = 0; i < phonemes.size(); i++) {
+            System.out.print("*"+phonemes.get(i)+"*,\t");
+            System.out.println("*"+phonemesType.get(i)+"*,");
+        }
+        /*
+         *
+         * {"N","T","R","c","J","f","X","z","z","G","k","d","t","b","m","n","l","s","S","h","v","r","p","U","Y","I","M","7","o","e","E","Z","B","a","A","B","O","Q","u","i","w","j"}
+         * {"CSN","CSU","CSU","CSU","CSN","CFU","CFU","CFV","CFV","CFV","CSU","CSV","CSU","CSV","CSN","CSN","CFL","CFU","CFU","CFU","CFV","CFV","CSU","VM","VB","VF","VM","VM","VB","VF","VF","VMC","VMC","VM","VFC","VMC","VB","VBC","VB","VF","SV","SV"}
+         */
     }
 }
