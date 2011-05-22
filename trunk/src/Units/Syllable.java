@@ -1,4 +1,4 @@
-package XML_Processing;
+package Units;
 
 /**
  * @author thaodv-bkit
@@ -34,6 +34,8 @@ public class Syllable {
     private String leftPhoneType = "";
     private String rightPhoneType = "";
     private float energy;
+    private String leftHalfSyl;
+    private String rightHalfSyl;
 
     public Syllable() {
     }
@@ -366,5 +368,33 @@ public class Syllable {
      */
     public void setFinalPhoneme(String finalPhoneme) {
         this.finalPhoneme = finalPhoneme;
+    }
+
+    /**
+     * @return the leftHalfSyl
+     */
+    public String getLeftHalfSyl() {
+        return leftHalfSyl;
+    }
+
+    /**
+     * @param leftHalfSyl the leftHalfSyl to set
+     */
+    public void setLeftHalfSyl(String leftHalfSyl) {
+        this.leftHalfSyl = leftHalfSyl;
+    }
+
+    /**
+     * @return the rightHalfSyl
+     */
+    public String getRightHalfSyl() {
+        return rightHalfSyl;
+    }
+
+    /**
+     * @param rightHalfSyl the rightHalfSyl to set
+     */
+    public void setRightHalfSyl(String rightHalfSyl) {
+        this.rightHalfSyl = rightHalfSyl;
     }
 }

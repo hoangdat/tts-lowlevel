@@ -4,6 +4,7 @@
  */
 package XML_Processing;
 
+import Units.Syllable;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;

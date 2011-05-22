@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package XML_Processing;
+package Units;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -17,7 +17,10 @@ public class LevelPhrase extends Phrase {
     private int level;
     private ArrayList<Integer> indexesOfSubLevel = new ArrayList<Integer>();
     private ArrayList<String> syllableIn = new ArrayList<String>();
-    private boolean isFound;// LP co duoc tim thay trong TextDB hay khong
+    private int isFound;// LP co duoc tim thay trong TextDB hay khong
+    //isFound = 1; LP duoc tim thay trong TextDB
+    //isFound = 2; LP duoc tim thay trong HalfSyl
+    //isFound = 0; LP ko duoc tim thay trong HalfSyl
     private ArrayList<Integer> foundSen = new ArrayList<Integer>();//id cua cac cau tim thay LP
     private ArrayList<Integer> foundSylPhrs = new ArrayList<Integer>();// id cua SylPhrase tim thay LP
     private ArrayList<Integer> foundSyllable = new ArrayList<Integer>();// id cua Syllable tim thay LP
@@ -97,32 +100,32 @@ public class LevelPhrase extends Phrase {
     /*
      *
      */
-    public void setIsFound(boolean f){
+    public void setIsFound(int f){
         isFound = f;
     }
 
-    public boolean isFound(){
+    public int isFound(){
         return isFound;
     }
 
     /**
      * @return the foundSen
      */
-    public ArrayList<Integer> getFoundSen() {
+    public ArrayList<Integer> getFoundIndexes1() {
         return foundSen;
     }
 
     /**
      * @return the foundSylPhrs
      */
-    public ArrayList<Integer> getFoundSylPhrs() {
+    public ArrayList<Integer> getFoundIndexes2() {
         return foundSylPhrs;
     }
 
     /**
      * @return the foundSyllable
      */
-    public ArrayList<Integer> getFoundSyllable() {
+    public ArrayList<Integer> getFoundIndexes3() {
         return foundSyllable;
     }
 

@@ -4,6 +4,9 @@
  */
 package XML_Processing;
 
+import Units.SylPhrase;
+import Units.Sentence;
+import Units.Syllable;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,11 +29,15 @@ public class TextDBReader extends XML_Reader {
     private String nameOfElement;
     private int numberOfSylPhrase;
 
-    public TextDBReader(String textDBLocation) throws XMLStreamException, FileNotFoundException {
+    public TextDBReader(String textDBLocation) {
         super(textDBLocation);
-        setxMLStreamReader();
-        xMLStreamReader = getxMLStreamReader();
-        ReadDetails();
+        try {
+            setxMLStreamReader();
+            xMLStreamReader = getxMLStreamReader();
+            ReadDetails();
+        } catch (Exception e) {
+        }
+
         //setNumberOfSylPhrase();
     }
 
@@ -150,16 +157,15 @@ public class TextDBReader extends XML_Reader {
         syllable.setEnergy(Float.parseFloat(xMLStreamReader.getAttributeValue(5)));
     }
     //////
-    public void printDetails(){
-         for (int i = 0; i < this.getAllSentences().size(); i++) {
+
+    public void printDetails() {
+        for (int i = 0; i < this.getAllSentences().size(); i++) {
             for (int j = 0; j < this.getAllSentences().get(i).getSylPhrases().size(); j++) {
-                System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseContent()+": "+ this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
+                System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseContent() + ": " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
                 //System.out.println(i + " : " + this.getAllSentences().get(i).getSenContent());
             }
         }
     }
-
-  
 
     /**
      * @return the fileName
@@ -191,7 +197,7 @@ public class TextDBReader extends XML_Reader {
         }
     }
 
-      public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
 
         String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
         TextDBReader textDBReader = new TextDBReader(textDBLocation);
