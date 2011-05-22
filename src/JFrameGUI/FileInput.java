@@ -44,7 +44,7 @@ public class FileInput {
     public FileInput(File inputFile){
         FileInputStream fis = null;
         InputStreamReader isr = null;
-
+        
         BufferedReader br;
         String eachline = new String();
 
