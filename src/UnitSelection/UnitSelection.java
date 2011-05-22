@@ -4,9 +4,9 @@
  */
 package UnitSelection;
 
-import XML_Processing.LevelPhrase;
-import XML_Processing.Sentence;
-import XML_Processing.Syllable;
+import Units.LevelPhrase;
+import Units.Sentence;
+import Units.Syllable;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,10 +37,8 @@ public class UnitSelection {
         allSenInTextDB = UnitSearching.getAllSenInTextDB();
         //selectLP();
         selectLPByCost();
-
         setIndex();
         writeToTextFile();
-
         //this.printDetails();
     }
 
@@ -48,9 +46,9 @@ public class UnitSelection {
 //        for (int i = 0; i < getSelectedLPhrs().size(); i++) {
 //            System.out.println(i + getSelectedLPhrs().get(i).getPhraseContent());
 //            if (getSelectedLPhrs().get(i).isFound()) {
-//                getSelectedLPhrs().get(i).setSelectedSen(getSelectedLPhrs().get(i).getFoundSen().get(0));
-//                getSelectedLPhrs().get(i).setSelectedSylPhrs(getSelectedLPhrs().get(i).getFoundSylPhrs().get(0));
-//                getSelectedLPhrs().get(i).setSelectedSyllable(getSelectedLPhrs().get(i).getFoundSyllable().get(0));
+//                getSelectedLPhrs().get(i).setSelectedSen(getSelectedLPhrs().get(i).getFoundIndexes1().get(0));
+//                getSelectedLPhrs().get(i).setSelectedSylPhrs(getSelectedLPhrs().get(i).getFoundIndexes2().get(0));
+//                getSelectedLPhrs().get(i).setSelectedSyllable(getSelectedLPhrs().get(i).getFoundIndexes3().get(0));
 //            } else {
 //                System.out.println("khong thay: " + getSelectedLPhrs().get(i).getPhraseContent());
 //            }
@@ -96,7 +94,6 @@ public class UnitSelection {
             selectedLPhrs.get(i).setStartIndex(startIndex);
             selectedLPhrs.get(i).setEndIndex(endIndex);
         }
-
     }
 
     /*
@@ -109,7 +106,7 @@ public class UnitSelection {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f),"UTF8"));
             for (int i = 0; i < selectedLPhrs.size(); i++) {
-                bufferedWriter.write((Boolean.valueOf(selectedLPhrs.get(i).isFound()).toString()) + " ");
+                bufferedWriter.write((Integer.valueOf(selectedLPhrs.get(i).isFound()).toString()) + " ");
                 bufferedWriter.write(fileNames.get(i) + " ");
                 //bufferedWriter.write((Integer.valueOf(selectedLPhrs.get(i).getSelectedSylPhrs()).toString()) + " ");
                 //bufferedWriter.write((Integer.valueOf(selectedLPhrs.get(i).getSelectedSyllable()).toString()) + " ");
@@ -155,9 +152,9 @@ public class UnitSelection {
     private void calculateCostForCandidateUnits() {
         for (int i = 0; i < getSelectedLPhrs().size(); i++) {
             LevelPhrase desiredUnit = getSelectedLPhrs().get(i);
-            ArrayList<Integer> candidateUnitsSen = desiredUnit.getFoundSen();//cau chua candidate units
-            ArrayList<Integer> candidateUnitSylPhrs = desiredUnit.getFoundSylPhrs();
-            ArrayList<Integer> candidateUnitFirstSyl = desiredUnit.getFoundSyllable();
+            ArrayList<Integer> candidateUnitsSen = desiredUnit.getFoundIndexes1();//cau chua candidate units
+            ArrayList<Integer> candidateUnitSylPhrs = desiredUnit.getFoundIndexes2();
+            ArrayList<Integer> candidateUnitFirstSyl = desiredUnit.getFoundIndexes3();
             int numOfCandidateUnit = candidateUnitFirstSyl.size();
             
             for (int j = 0; j < numOfCandidateUnit; j++) {
@@ -168,14 +165,8 @@ public class UnitSelection {
                     dv.setPosInPhrsDis(0);
                 }else{
                     dv.setPosInPhrsDis(1);
-                }
-            
-                
+                }   
             }
-
-
-
-
         }
     }
 }

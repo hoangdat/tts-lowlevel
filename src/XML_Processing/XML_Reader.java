@@ -4,6 +4,7 @@
  */
 package XML_Processing;
 
+import Units.Sentence;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,13 +31,21 @@ public abstract class XML_Reader {
     
     ////////////////////////////////////////////////////////////////////////////
 
-    public XML_Reader(File inputFile) throws XMLStreamException, FileNotFoundException {
-        fileInputStream = new FileInputStream(inputFile);
+    public XML_Reader(File inputFile) {
+        try {
+             fileInputStream = new FileInputStream(inputFile);
+        } catch (Exception e) {
+        }
+
     }
     ////////////////////////////////////////////////////////////////////////////
 
-    public XML_Reader(String str) throws XMLStreamException, FileNotFoundException {
-        fileInputStream = new FileInputStream(new File(str));
+    public XML_Reader(String str) {
+        try {
+            fileInputStream = new FileInputStream(new File(str));
+        } catch (Exception e) {
+        }
+
     }
     ////////////////////////////////////////////////////////////////////////////
 //        System.out.println(xMLStreamReader.CHARACTERS);//4

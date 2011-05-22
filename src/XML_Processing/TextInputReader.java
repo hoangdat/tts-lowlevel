@@ -4,6 +4,8 @@
  */
 package XML_Processing;
 
+import Units.LevelPhrase;
+import Units.Sentence;
 import java.io.FileNotFoundException;
 import java.lang.Integer;
 import java.util.ArrayList;
@@ -26,12 +28,14 @@ public class TextInputReader extends XML_Reader {
     private ArrayList<Integer> level;
     int id_levelPhrase;
 
-    public TextInputReader(String str) throws XMLStreamException, FileNotFoundException {
+    public TextInputReader(String str)  {
         super(str);
-        setxMLStreamReader();
-        xMLStreamReader = getxMLStreamReader();
-        ReadDetails();
-
+        try {
+            setxMLStreamReader();
+            xMLStreamReader = getxMLStreamReader();
+            ReadDetails();
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -73,7 +77,7 @@ public class TextInputReader extends XML_Reader {
                         this.setLevelOfPhrase();
                         //this.addSubLevel();
                         //this.setLevelOfPhrase();//set lai level sau khi da add them subLevel
-                        this.addSilsToSen("SILS");
+                        //this.addSilsToSen("SILS");
                         this.getAllSentences().add(sentence);
                     }
                 } else {
@@ -121,7 +125,8 @@ public class TextInputReader extends XML_Reader {
         level.add(lv);
     }
     //////////////
-    public void addSilsToSen(String str){
+
+    public void addSilsToSen(String str) {
         levelPhrase = new LevelPhrase();
         levelPhrase.setId_phrase(id_levelPhrase++);
         levelPhrase.setLevel(1);
@@ -131,7 +136,8 @@ public class TextInputReader extends XML_Reader {
         level.add(1);
     }
     //////////
-    public void addSilToSen(String str){
+
+    public void addSilToSen(String str) {
         levelPhrase = new LevelPhrase();
         levelPhrase.setId_phrase(id_levelPhrase++);
         int lv = StrToInt(xMLStreamReader.getAttributeValue(0));
@@ -141,7 +147,6 @@ public class TextInputReader extends XML_Reader {
         sentence.getLevelPhrases().add(levelPhrase);
         level.add(lv);
     }
-
 
     private void setLevelOfPhrase() {
         //1221122233
@@ -153,14 +158,14 @@ public class TextInputReader extends XML_Reader {
             for (int i = 0; i < level.size(); i++) {
                 if ((int) level.get(i) == currentLevel) {
                     //neu phan tu hien tai co gia tri = currentLevel thi cap nhat lai vi tri cua currentLevel
-                    currentLevelIndex = i;                    
+                    currentLevelIndex = i;
                     isFound = true;
                     for (int j = currentLevelIndex + 1; j < level.size(); j++) {
                         //ke tu vi tri hien tai, neu
                         int sub = (int) level.get(j) - currentLevel;
                         if (sub == 1) {
                             sentence.getLevelPhrases().get(currentLevelIndex).addIndexOfSubLevel(j);
-                        } else if(sub <=0 ){
+                        } else if (sub <= 0) {
                             break;
                         }
                     }
@@ -210,7 +215,7 @@ public class TextInputReader extends XML_Reader {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             ArrayList<LevelPhrase> levelPhrases = this.getAllSentences().get(i).getLevelPhrases();
             for (int j = 0; j < levelPhrases.size(); j++) {
-                System.out.println(i + " : " +j+" : "+ levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getLevel());
+                System.out.println(i + " : " + j + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getLevel());
             }
         }
     }

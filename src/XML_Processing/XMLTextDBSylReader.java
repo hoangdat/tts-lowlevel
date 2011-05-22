@@ -4,6 +4,8 @@
  */
 package XML_Processing;
 
+import Units.Sentence;
+import Units.Syllable;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
