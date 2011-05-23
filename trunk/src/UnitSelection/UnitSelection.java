@@ -165,8 +165,12 @@ public class UnitSelection {
 
     private void calculateCostFor2CandidateUnits(LevelPhrase leftLP, int i, LevelPhrase rightLP, int j) {
         //xu ly trong truong hop syllable gom 2 ban am tiet
-        if(leftLP.isFound()==0){
+        if(leftLP.isFound()==1&rightLP.isFound()==1){
+            //xy ly truong hop ca hai deu duoc tim thay trong CSDL
+            
 
+        }else{
+            System.out.println("hien tai chua xu ly buoc nay");
         }
     }
 }

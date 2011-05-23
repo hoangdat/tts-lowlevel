@@ -28,7 +28,7 @@ public class UnitSearching {
     /**
      * @return the allSenInTextDB
      */
-    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result7_fixed.xml");
+    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
     static TextDBReader textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
     static SyllableAnalysis sylTransDic = new SyllableAnalysis();
     private static ArrayList<Sentence> allSenInTextDB;
