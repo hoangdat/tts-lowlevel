@@ -57,7 +57,7 @@ public class TextInputReader extends XML_Reader {
 
                     if (nameOfElement.compareTo("sentence") == 0) {
                         ReadSentenceDetails();
-                        addSilsToSen("SILS");
+                        addSilsToSen("SIL");
                     } else if (nameOfElement.compareTo("parse") == 0) {
                         ReadParseDetails();
                     } else if (nameOfElement.compareTo("root") == 0) {
@@ -66,19 +66,19 @@ public class TextInputReader extends XML_Reader {
                     } else {
                         ReadPhraseDetails();
                     }
-
                 } else if (eventType.equals(XMLEvent.CHARACTERS)) {
                 } else if (eventType.equals(XMLEvent.END_ELEMENT)) {
                     // so sanh
                     nameOfElement = xMLStreamReader.getName().toString();
-
                     //////////
                     if (nameOfElement.compareTo("sentence") == 0) {
                         this.setLevelOfPhrase();
                         //this.addSubLevel();
                         //this.setLevelOfPhrase();//set lai level sau khi da add them subLevel
-                        //this.addSilsToSen("SILS");
+                        this.addSilsToSen("SIL");
                         this.getAllSentences().add(sentence);
+                    }else if(nameOfElement.compareTo("root") == 0){
+                        //this.addSilsToSen("SILS");
                     }
                 } else {
                     System.out.println("Don't know this event");
