@@ -121,7 +121,7 @@ public class XMLTextDBSylReader extends XML_Reader {
         syllable.setSylName(xMLStreamReader.getAttributeValue(1));
         syllable.setStartIndex(StrToInt(xMLStreamReader.getAttributeValue(2)));
         syllable.setEndIndex(StrToInt(xMLStreamReader.getAttributeValue(3)));
-       // sentence.addSyllable(syllable);
+        sylArray.add(syllable);
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -167,8 +167,10 @@ public class XMLTextDBSylReader extends XML_Reader {
                 String lPhoneType = tokenizer.nextToken();
                 String rPhoneType = tokenizer.nextToken();
                 float energy = (Float.parseFloat(tokenizer.nextToken()));//
-                //
-                setSyllable = getSylArray().get(indexOfSyl).setSyllable(name, tone, PhraseLen, numOfPhone, carryingFile, initial, middle, nucleus, finalPh, initialType, middleTYpe, nucleusType, finalType, energy);
+                //System.out.println("energy "+energy);
+
+                setSyllable = getSylArray().get(indexOfSyl).setSyllable(name, tone, PhraseLen, numOfPhone, carryingFile, initial, middle, nucleus, finalPh, initialType, middleTYpe, nucleusType, finalType, energy
+                        , LSyl, RSyl, LTone, RTone,lPhone, rPhone, lPhoneType, rPhoneType);
                 if(setSyllable==false){
                     System.out.println("break:"+indexOfSyl+" "+i);
                 }

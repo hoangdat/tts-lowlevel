@@ -59,7 +59,6 @@ public class TextDBCreator {
     ////
 
     public void WriteTextDB() throws XMLStreamException {
-
         boolean isStartDocument, isStartFile, isStartSentence, isStartSylPhrase, isStartSyllable, isEndFile = false, isEndSentence, isEndSylPhrase, isEndSyllable;
         streamWriter = outputFactory.createXMLStreamWriter(fileWriter);
         String carryingFile = syls.get(0).getCarryingFile();

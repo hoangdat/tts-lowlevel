@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
  */
 public class SylPhrase extends Phrase {
     private ArrayList<Syllable> syllablesInPh = new ArrayList<Syllable>();
+    private Syllable leftSylOfSP, rightSylOfSP;//am tiet ben trai va ben phai cua SP
 
     public SylPhrase() {
     }
@@ -61,4 +62,43 @@ public class SylPhrase extends Phrase {
         int countTokens = new StringTokenizer(this.getPhraseContent().substring(0, indexOfSpace)).countTokens();
         return countTokens;
     }
+
+    /**
+     * @return the leftSylOfSP
+     */
+    public Syllable getLeftSylOfSP() {
+        return leftSylOfSP;
+    }
+
+   
+//    public void setLeftSylOfSP() {
+//        //luu y truong hop dau phrase, dau sentence, dau file
+//        //kiem tra xem co phai la dau phrase hay ko; neu am tiet dau co id = 0 thi la dau phrase
+//        if(syllablesInPh.get(0).getIDofSyllable()!=0){
+//            //neu ko phai dau cua phrase thi lam binh thuong
+//            leftSylOfSP = syllablesInPh.
+//        }
+//    }
+
+    /**
+     * @return the rightSylOfSP
+     */
+    public Syllable getRightSylOfSP() {
+        return rightSylOfSP;
+    }
+
+    /**
+     * @param leftSylOfSP the leftSylOfSP to set
+     */
+    public void setLeftSylOfSP(Syllable leftSylOfSP) {
+        this.leftSylOfSP = leftSylOfSP;
+    }
+
+    /**
+     * @param rightSylOfSP the rightSylOfSP to set
+     */
+    public void setRightSylOfSP(Syllable rightSylOfSP) {
+        this.rightSylOfSP = rightSylOfSP;
+    }
+
 }

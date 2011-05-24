@@ -169,9 +169,27 @@ public class UnitSelection {
             //xy ly truong hop ca hai deu duoc tim thay trong CSDL
             //xu ly trong truong hop leftLP & rightLP != SILS, SILP
             //System.out.println(i );
-            int x = leftLP.getFoundIndexes1().get(i);
-            System.out.println(leftLP.getFirstSylInLPhrs().getSylName()+":"+allSenInTextDB.get(i).getSylPhrases().get(leftLP.getFoundIndexes2().get(i)).getSyllablesInPh().get(leftLP.getFoundIndexes3().get(i)).getSylName());
-
+            int leftIndex1 = leftLP.getFoundIndexes1().get(i);//chi so cua cau trong CSDL chua leftLP
+            int leftIndex2 = leftLP.getFoundIndexes2().get(i);//chi so cua SylPhrase trong CSDL chua leftLP
+            int leftIndex3 = leftLP.getFoundIndexes3().get(i);//chi so cua syllable dau tien trong CSDL cua leftLP
+            String leftSylName = leftLP.getFirstSylInLPhrs().getSylName();
+            String rightSylName = rightLP.getFirstSylInLPhrs().getSylName();
+            int rightIndex1 = rightLP.getFoundIndexes1().get(j);//chi so cua cau trong CSDL chua rightLP
+            int rightIndex2 = rightLP.getFoundIndexes2().get(j);//chi so cua SylPhrase trong CSDL chua rightLP
+            int rightIndex3 = rightLP.getFoundIndexes3().get(j);//chi so cua syllable dau tien trong CSDL cua rightLP
+            // Doi voi leftLP, ta can lay am tiet cuoi cung cua no LastSylOfLeftLP, va am tiet dau tien ben phai leftLP rightSylOfLeftLP
+            // Doi voi rightLP, ta can lay am tiet dau tien cua no FirstSylOfRightLP, va am tiet cuoi cung ben trai leftLP leftSylOfRightLP
+            // Luu y truong hop dau file va cuoi file thi cac am tiet la null
+            if(leftSylName.compareTo("SIL")==0){
+                //am tiet ben trai la SIL
+                return;
+            }
+            if(rightSylName.compareTo("SIL")==0){
+                //am tiet ben phai la SIL
+                return;
+            }
+            System.out.println(leftSylName+": "+allSenInTextDB.get(leftIndex1).getSylPhrases().get(leftIndex2).getSyllablesInPh().get(leftIndex3).getSylName());
+            System.out.println(rightSylName+ ": "+allSenInTextDB.get(rightIndex1).getSylPhrases().get(rightIndex2).getSyllablesInPh().get(rightIndex3).getSylName());
         }else{
             System.out.println("hien tai chua xu ly buoc nay");
         }

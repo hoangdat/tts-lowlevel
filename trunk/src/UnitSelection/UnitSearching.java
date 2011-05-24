@@ -28,14 +28,14 @@ public class UnitSearching {
     /**
      * @return the allSenInTextDB
      */
-    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
+    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\sentest\\sen2.xml");
     static TextDBReader textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
     static SyllableAnalysis sylTransDic = new SyllableAnalysis();
     private static ArrayList<Sentence> allSenInTextDB;
     ArrayList<Sentence> allSenInTextInput;
     ArrayList<Syllable> sylDic;
     ArrayList<HalfSyl> allHalfSyls;
-    static HalfSylDBReader halfSylDBReader = new HalfSylDBReader();
+    //static HalfSylDBReader halfSylDBReader = new HalfSylDBReader();
     Stack<Integer> indexesOfLP;
     private ArrayList<LevelPhrase> foundLPhs = new ArrayList<LevelPhrase>();
 
@@ -46,7 +46,7 @@ public class UnitSearching {
         allSenInTextInput = textInputReader.getAllSentences();
         sylDic = sylTransDic.getSylDic();
         textInputReader.printDetails();
-        allHalfSyls = halfSylDBReader.getAllHalfSyls();
+        //allHalfSyls = halfSylDBReader.getAllHalfSyls();
         this.searchTextInput();
         this.setPosInSenOfPhrs();
     }
@@ -114,7 +114,7 @@ public class UnitSearching {
                     if (!checkSyllableInSylDic(topLP)) {
                         System.out.println("ko thay: " + topLP.getPhraseContent() + " :va LP nay ko co subLevel");
                     } else {
-                        searchSyllableInHalfSylDB(topLP);
+                        //searchSyllableInHalfSylDB(topLP);
                     }
                     getFoundLPhs().add(topLP);
                     System.out.println("so luong LP tim thay" + getFoundLPhs().size());

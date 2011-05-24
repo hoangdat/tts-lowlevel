@@ -8,6 +8,7 @@ import Units.SylPhrase;
 import Units.Sentence;
 import Units.Syllable;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.stream.XMLStreamException;
@@ -35,6 +36,7 @@ public class TextDBReader extends XML_Reader {
             setxMLStreamReader();
             xMLStreamReader = getxMLStreamReader();
             ReadDetails();
+            setNeighborSylOfSyllable();
         } catch (Exception e) {
         }
 
@@ -203,5 +205,25 @@ public class TextDBReader extends XML_Reader {
         TextDBReader textDBReader = new TextDBReader(textDBLocation);
         textDBReader.printDetails();
 
+    }
+
+    private void setNeighborSylOfSyllable() {
+
+    //luu y truong hop dau phrase, dau sentence, dau file
+    //kiem tra xem co phai la dau phrase hay ko; neu am tiet dau co id = 0 thi la dau phrase
+        for (int i = 0; i <this.getAllSentences().size(); i++) {
+            Sentence sent = this.getAllSentences().get(i);
+            ArrayList<SylPhrase> sylPhrasesInSent = sent.getSylPhrases();
+            for (int j= 0; j < sylPhrasesInSent.size(); j++) {
+                SylPhrase oneSylPharse = sylPhrasesInSent.get(j);
+                ArrayList<Syllable> syllablesInPh = oneSylPharse.getSyllablesInPh();
+                for (int k = 0; k < syllablesInPh.size(); k++) {
+                    if(k==0){
+
+                    }
+                }
+            }
+
+        }
     }
 }

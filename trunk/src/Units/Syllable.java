@@ -22,7 +22,7 @@ public class Syllable {
      */
     private int PhraseLen;
     private int numOfPhone;
-    private String carryingFile ;
+    private String carryingFile;
     private String intialPhoneme = "";
     private String middlePhoneme = "";
     private String NucleusPhoneme = "";
@@ -36,6 +36,16 @@ public class Syllable {
     private float energy;
     private String leftHalfSyl;
     private String rightHalfSyl;
+    private String leftSyl;
+    private int leftTone;
+    private String rightSyl;
+    private int rightTone;
+    private String leftPhoneme;
+    private String rightPhoneme;
+    private String leftPhonemeType;
+    private String rightPhonemeType;
+
+
 
     public Syllable() {
     }
@@ -137,10 +147,6 @@ public class Syllable {
     public void setSylTranscript(String sylTranscript) {
         this.sylTranscript = sylTranscript;
     }
-
-   
-
-   
 
     /**
      * @return the PhraseLen
@@ -323,30 +329,40 @@ public class Syllable {
     public void setEnergy(float energy) {
         this.energy = energy;
     }
+
     /**
      * @param
      */
     public boolean setSyllable(String name, int tone, int phraseLen, int numOfPhone, String carryingFile,
             String initial, String middle, String nucleus, String finalph,
-            String initialT, String middleT, String nucleusT, String finalT, float energy){
-       if(name.compareTo(sylName)==0){
-           setSylTone(tone);
-           setPhraseLen(phraseLen);
-           setNumOfPhone(numOfPhone);
-           setCarryingFile(carryingFile);
-           setIntialPhoneme(initial);
-           setMiddlePhoneme(middle);
-           setNucleusPhoneme(nucleus);
-           setFinalPhoneme(finalph);
-           setInitialType(initialT);
-           setMiddleType(middleT);
-           setNucleusType(nucleusT);
-           setFinalType(finalT);
-           setEnergy(energy);
-           return true;
-       }else{
-           return false;
-       }
+            String initialT, String middleT, String nucleusT, String finalT, float energy, String leftSyl, String rightSyl,
+            int leftTone, int rightTone, String leftPhnm, String rightPhnm, String leftPhnmType, String rightPhnmType) {
+        if (name.compareTo(getSylName()) == 0) {
+            setSylTone(tone);
+            setPhraseLen(phraseLen);
+            setNumOfPhone(numOfPhone);
+            setCarryingFile(carryingFile);
+            setIntialPhoneme(initial);
+            setMiddlePhoneme(middle);
+            setNucleusPhoneme(nucleus);
+            setFinalPhoneme(finalph);
+            setInitialType(initialT);
+            setMiddleType(middleT);
+            setNucleusType(nucleusT);
+            setFinalType(finalT);
+            setEnergy(energy);
+            setLeftSyl(leftSyl);
+            setRightSyl(rightSyl);
+            setLeftTone(leftTone);
+            setRightTone(rightTone);
+            setLeftPhoneme(leftPhnm);
+            setRightPhoneme(rightPhnm);
+            setLeftPhonemeType(leftPhnmType);
+            setRightPhonemeType(rightPhnmType);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -396,5 +412,117 @@ public class Syllable {
      */
     public void setRightHalfSyl(String rightHalfSyl) {
         this.rightHalfSyl = rightHalfSyl;
+    }
+
+    /**
+     * @return the leftSyl
+     */
+    public String getLeftSyl() {
+        return leftSyl;
+    }
+
+    /**
+     * @param leftSyl the leftSyl to set
+     */
+    public void setLeftSyl(String leftSyl) {
+        this.leftSyl = leftSyl;
+    }
+
+    /**
+     * @return the leftTone
+     */
+    public int getLeftTone() {
+        return leftTone;
+    }
+
+    /**
+     * @param leftTone the leftTone to set
+     */
+    public void setLeftTone(int leftTone) {
+        this.leftTone = leftTone;
+    }
+
+    /**
+     * @return the rightSyl
+     */
+    public String getRightSyl() {
+        return rightSyl;
+    }
+
+    /**
+     * @param rightSyl the rightSyl to set
+     */
+    public void setRightSyl(String rightSyl) {
+        this.rightSyl = rightSyl;
+    }
+
+    /**
+     * @return the rightTone
+     */
+    public int getRightTone() {
+        return rightTone;
+    }
+
+    /**
+     * @param rightTone the rightTone to set
+     */
+    public void setRightTone(int rightTone) {
+        this.rightTone = rightTone;
+    }
+
+    /**
+     * @return the leftPhoneme
+     */
+    public String getLeftPhoneme() {
+        return leftPhoneme;
+    }
+
+    /**
+     * @param leftPhoneme the leftPhoneme to set
+     */
+    public void setLeftPhoneme(String leftPhoneme) {
+        this.leftPhoneme = leftPhoneme;
+    }
+
+    /**
+     * @return the rightPhoneme
+     */
+    public String getRightPhoneme() {
+        return rightPhoneme;
+    }
+
+    /**
+     * @param rightPhoneme the rightPhoneme to set
+     */
+    public void setRightPhoneme(String rightPhoneme) {
+        this.rightPhoneme = rightPhoneme;
+    }
+
+    /**
+     * @return the leftPhonemeType
+     */
+    public String getLeftPhonemeType() {
+        return leftPhonemeType;
+    }
+
+    /**
+     * @param leftPhonemeType the leftPhonemeType to set
+     */
+    public void setLeftPhonemeType(String leftPhonemeType) {
+        this.leftPhonemeType = leftPhonemeType;
+    }
+
+    /**
+     * @return the rightPhonemeType
+     */
+    public String getRightPhonemeType() {
+        return rightPhonemeType;
+    }
+
+    /**
+     * @param rightPhonemeType the rightPhonemeType to set
+     */
+    public void setRightPhonemeType(String rightPhonemeType) {
+        this.rightPhonemeType = rightPhonemeType;
     }
 }
