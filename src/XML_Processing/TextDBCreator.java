@@ -203,6 +203,20 @@ public class TextDBCreator {
             streamWriter.writeAttribute("type", syl.getFinalType());
             streamWriter.writeCharacters(syl.getFinalPhoneme());
             streamWriter.writeEndElement();
+             ////////////////////////////////////////////////////////////////////
+            streamWriter.writeStartElement("leftSyl");
+            streamWriter.writeAttribute("tone", ((Integer)syl.getLeftTone()).toString());
+            streamWriter.writeAttribute("finalPhnm", syl.getLeftPhoneme());
+            streamWriter.writeAttribute("leftPhnmType", syl.getLeftPhonemeType());
+            streamWriter.writeCharacters(syl.getLeftSyl());
+            streamWriter.writeEndElement();
+             ////////////////////////////////////////////////////////////////////
+             streamWriter.writeStartElement("rightSyl");
+            streamWriter.writeAttribute("tone", ((Integer)syl.getRightTone()).toString());
+            streamWriter.writeAttribute("finalPhnm", syl.getRightPhoneme());
+            streamWriter.writeAttribute("rightPhnmType", syl.getRightPhonemeType());
+            streamWriter.writeCharacters(syl.getRightSyl());
+            streamWriter.writeEndElement();
             ////////////////////////////////////////////////////////////////////
         }
         ////////////////////////////////////////////////////////////////////////

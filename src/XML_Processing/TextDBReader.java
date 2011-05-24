@@ -36,7 +36,7 @@ public class TextDBReader extends XML_Reader {
             setxMLStreamReader();
             xMLStreamReader = getxMLStreamReader();
             ReadDetails();
-            setNeighborSylOfSyllable();
+            //setNeighborSylOfSyllable();           
         } catch (Exception e) {
         }
 
@@ -45,7 +45,6 @@ public class TextDBReader extends XML_Reader {
 
     @Override
     public void ReadDetails() {
-
         try {
             while (xMLStreamReader.hasNext()) {
                 Integer eventType = xMLStreamReader.next();
@@ -73,6 +72,7 @@ public class TextDBReader extends XML_Reader {
                     } else if (nameOfElement.compareTo("initial") == 0) {
                         syllable.setInitialType(xMLStreamReader.getAttributeValue(0));
                         syllable.setIntialPhoneme(xMLStreamReader.getElementText());
+                        
                     } else if (nameOfElement.compareTo("middle") == 0) {
                         syllable.setMiddleType(xMLStreamReader.getAttributeValue(0));
                         syllable.setMiddlePhoneme(xMLStreamReader.getElementText());
@@ -82,10 +82,14 @@ public class TextDBReader extends XML_Reader {
                     } else if (nameOfElement.compareTo("final") == 0) {
                         syllable.setFinalType(xMLStreamReader.getAttributeValue(0));
                         syllable.setFinalPhoneme(xMLStreamReader.getElementText());
+                    } else if (nameOfElement.compareTo("leftSyl") == 0) {
+                        readLeftSylDetails();
+
+                    } else if (nameOfElement.compareTo("rightSyl") == 0) {
+                        readRightSylDetails();
+
                     } else if (nameOfElement.compareTo("tone") == 0) {
                         syllable.setSylTone(StrToInt(xMLStreamReader.getElementText()));
-                    } else if (nameOfElement.compareTo("syllable") == 0) {
-                        ReadSylDetails();
                     } else if (nameOfElement.compareTo("root") == 0) {
                         continue;
                     } else {
@@ -93,7 +97,9 @@ public class TextDBReader extends XML_Reader {
                     }
                 } else if (eventType.equals(XMLEvent.END_ELEMENT)) {
                     nameOfElement = xMLStreamReader.getName().toString();
-                    if (nameOfElement.compareTo("syllable") == 0) {
+                    if (nameOfElement.compareTo("leftSyl") == 0) {
+                    } else if (nameOfElement.compareTo("rightSyl") == 0) {
+                    } else if (nameOfElement.compareTo("syllable") == 0) {
                         phrase.getSyllablesInPh().add(syllable);
                     } else if (nameOfElement.compareTo("phrase") == 0) {
                         phrase.setContent();
@@ -112,7 +118,6 @@ public class TextDBReader extends XML_Reader {
                     System.out.println(eventType);
                     System.out.println("DON'T KNOW THIS EVENT");
                 }
-
             }
         } catch (XMLStreamException ex) {
             Logger.getLogger(XMLTextDBSylReader.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,13 +162,14 @@ public class TextDBReader extends XML_Reader {
         //syllable.setSylPosition(StrToInt(xMLStreamReader.getAttributeValue(4)));
         syllable.setNumOfPhone(StrToInt(xMLStreamReader.getAttributeValue(4)));
         syllable.setEnergy(Float.parseFloat(xMLStreamReader.getAttributeValue(5)));
+
     }
     //////
 
     public void printDetails() {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             for (int j = 0; j < this.getAllSentences().get(i).getSylPhrases().size(); j++) {
-                System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseContent() + ": " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
+                //System.out.println(i + " : " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseContent() + ": " + this.getAllSentences().get(i).getSylPhrases().get(j).getPhraseLen());
                 //System.out.println(i + " : " + this.getAllSentences().get(i).getSenContent());
             }
         }
@@ -199,31 +205,54 @@ public class TextDBReader extends XML_Reader {
         }
     }
 
-    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-
-        String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
-        TextDBReader textDBReader = new TextDBReader(textDBLocation);
-        textDBReader.printDetails();
-
-    }
-
     private void setNeighborSylOfSyllable() {
 
-    //luu y truong hop dau phrase, dau sentence, dau file
-    //kiem tra xem co phai la dau phrase hay ko; neu am tiet dau co id = 0 thi la dau phrase
-        for (int i = 0; i <this.getAllSentences().size(); i++) {
+        //luu y truong hop dau phrase, dau sentence, dau file
+        //kiem tra xem co phai la dau phrase hay ko; neu am tiet dau co id = 0 thi la dau phrase
+        for (int i = 0; i < this.getAllSentences().size(); i++) {
             Sentence sent = this.getAllSentences().get(i);
             ArrayList<SylPhrase> sylPhrasesInSent = sent.getSylPhrases();
-            for (int j= 0; j < sylPhrasesInSent.size(); j++) {
+            for (int j = 0; j < sylPhrasesInSent.size(); j++) {
                 SylPhrase oneSylPharse = sylPhrasesInSent.get(j);
                 ArrayList<Syllable> syllablesInPh = oneSylPharse.getSyllablesInPh();
                 for (int k = 0; k < syllablesInPh.size(); k++) {
-                    if(k==0){
-
+                    if (k == 0) {
                     }
                 }
             }
 
         }
+    }
+
+    private void readLeftSylDetails() {
+        try {
+            //<leftSyl tone="0" finalPhnm="NUL" leftPhnmType="NUL">NULL</leftSyl>
+            syllable.setLeftTone(StrToInt(xMLStreamReader.getAttributeValue(0)));
+            syllable.setLeftPhoneme(xMLStreamReader.getAttributeValue(1));
+            syllable.setLeftPhonemeType(xMLStreamReader.getAttributeValue(2));
+            syllable.setLeftSyl(xMLStreamReader.getElementText());
+           
+        } catch (XMLStreamException ex) {
+            Logger.getLogger(TextDBReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void readRightSylDetails() {
+        try {
+            syllable.setRightTone(StrToInt(xMLStreamReader.getAttributeValue(0)));
+            syllable.setRightPhoneme(xMLStreamReader.getAttributeValue(1));
+            syllable.setRightPhonemeType(xMLStreamReader.getAttributeValue(2));
+            syllable.setRightSyl(xMLStreamReader.getElementText());
+           
+        } catch (XMLStreamException ex) {
+            Logger.getLogger(TextDBReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+
+        String textDBLocation = System.getProperty("user.dir") + "\\Text_DB_Creator.xml";
+        TextDBReader textDBReader = new TextDBReader(textDBLocation);
+        textDBReader.printDetails();
     }
 }
