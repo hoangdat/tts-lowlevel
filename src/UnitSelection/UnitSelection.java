@@ -35,25 +35,25 @@ public class UnitSelection {
         us = new UnitSearching();
         foundLPhrs = us.getFoundLPhs();
         allSenInTextDB = UnitSearching.getAllSenInTextDB();
-        //selectLP();
+        //selectLP();//tong hop khi khong dung ham chi phi
         selectLPByCost();
         setIndex();
         writeToTextFile();
         //this.printDetails();
     }
 
-//    public void selectLP() {
-//        for (int i = 0; i < getFoundLPhrs().size(); i++) {
-//            System.out.println(i + getFoundLPhrs().get(i).getPhraseContent());
-//            if (getFoundLPhrs().get(i).isFound()) {
-//                getFoundLPhrs().get(i).setSelectedSen(getFoundLPhrs().get(i).getFoundIndexes1().get(0));
-//                getFoundLPhrs().get(i).setSelectedSylPhrs(getFoundLPhrs().get(i).getFoundIndexes2().get(0));
-//                getFoundLPhrs().get(i).setSelectedSyllable(getFoundLPhrs().get(i).getFoundIndexes3().get(0));
-//            } else {
-//                System.out.println("khong thay: " + getFoundLPhrs().get(i).getPhraseContent());
-//            }
-//        }
-//    }
+    public void selectLP() {
+        for (int i = 0; i < getFoundLPhrs().size(); i++) {
+            System.out.println(i + getFoundLPhrs().get(i).getPhraseContent());
+            if (getFoundLPhrs().get(i).isFound()==1) {
+                getFoundLPhrs().get(i).setSelectedSen(getFoundLPhrs().get(i).getFoundIndexes1().get(0));
+                getFoundLPhrs().get(i).setSelectedSylPhrs(getFoundLPhrs().get(i).getFoundIndexes2().get(0));
+                getFoundLPhrs().get(i).setSelectedSyllable(getFoundLPhrs().get(i).getFoundIndexes3().get(0));
+            } else {
+                System.out.println("khong thay: " + getFoundLPhrs().get(i).getPhraseContent());
+            }
+        }
+    }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
         new UnitSelection();
@@ -82,7 +82,7 @@ public class UnitSelection {
 //            fileNames.add(UnitSearching.allSenInTextDB.get(selectedLPhrs.get(i).getSelectedSen()).getCarryingFile());
 //        }
 //    }
-    public void setIndex() {
+    private void setIndex() {
         fileNames = new ArrayList<String>();
         for (int i = 0; i < foundLPhrs.size(); i++) {
             fileNames.add(UnitSearching.getAllSenInTextDB().get(foundLPhrs.get(i).getSelectedSen()).getCarryingFile());
@@ -99,7 +99,7 @@ public class UnitSelection {
     /*
      *
      */
-    public void writeToTextFile() {
+    private void writeToTextFile() {
 
         File f = new File(System.getProperty("user.dir")+"\\SelectedLPhrs.txt");
         this.setPathFile(f.getAbsolutePath());
@@ -167,7 +167,10 @@ public class UnitSelection {
         //xu ly trong truong hop syllable gom 2 ban am tiet
         if(leftLP.isFound()==1&rightLP.isFound()==1){
             //xy ly truong hop ca hai deu duoc tim thay trong CSDL
-            
+            //xu ly trong truong hop leftLP & rightLP != SILS, SILP
+            //System.out.println(i );
+            int x = leftLP.getFoundIndexes1().get(i);
+            System.out.println(leftLP.getFirstSylInLPhrs().getSylName()+":"+allSenInTextDB.get(i).getSylPhrases().get(leftLP.getFoundIndexes2().get(i)).getSyllablesInPh().get(leftLP.getFoundIndexes3().get(i)).getSylName());
 
         }else{
             System.out.println("hien tai chua xu ly buoc nay");
