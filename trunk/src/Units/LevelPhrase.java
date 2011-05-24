@@ -23,7 +23,7 @@ public class LevelPhrase extends Phrase {
     //isFound = 0; LP ko duoc tim thay trong HalfSyl
     private ArrayList<Integer> foundSen = new ArrayList<Integer>();//id cua cac cau tim thay LP
     private ArrayList<Integer> foundSylPhrs = new ArrayList<Integer>();// id cua SylPhrase tim thay LP
-    private ArrayList<Integer> foundSyllable = new ArrayList<Integer>();// id cua Syllable tim thay LP
+    private ArrayList<Integer> foundSyllable = new ArrayList<Integer>();// id cua Syllable trong SylPhrase tim thay LP
     private int selectedSen, selectedSylPhrs, selectedSyllable; //id cua cau, sylphrase, syllable duoc chon sau khi co ham chi phi
     private Syllable firstSylInLPhrs, lastSylInLPhrs;// am tiet bat dau va ket thuc cua LevelPhrase. dung de tinh khoang cach ngu canh cho cac LP ben canh
     private int posInSen; // vi tri bat dau cua LP trong Phrase

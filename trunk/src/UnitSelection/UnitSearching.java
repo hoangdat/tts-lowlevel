@@ -28,7 +28,8 @@ public class UnitSearching {
     /**
      * @return the allSenInTextDB
      */
-    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\sentest\\sen2.xml");
+    //static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\sentest\\sen2.xml");
+    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
     static TextDBReader textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
     static SyllableAnalysis sylTransDic = new SyllableAnalysis();
     private static ArrayList<Sentence> allSenInTextDB;
@@ -58,7 +59,7 @@ public class UnitSearching {
 
     public void searchTextInput() {
         for (int i = 0; i < allSenInTextInput.size(); i++) {
-            System.out.println(i);
+            //System.out.println(i);
             //searchSentence(allSenInTextInput.get(i));
             //searchSentence(allSenInTextInput.get(i));
             searchSentenceByLP(allSenInTextInput.get(i));
@@ -117,7 +118,7 @@ public class UnitSearching {
                         //searchSyllableInHalfSylDB(topLP);
                     }
                     getFoundLPhs().add(topLP);
-                    System.out.println("so luong LP tim thay" + getFoundLPhs().size());
+                    //System.out.println("so luong LP tim thay" + getFoundLPhs().size());
                 }
             } else {
                 //neu tim thay LP
@@ -125,7 +126,7 @@ public class UnitSearching {
                 getFoundLPhs().add(topLP);
             }
         }
-        System.out.println(getFoundLPhs().size());
+        //System.out.println(getFoundLPhs().size());
     }
 
     /*
