@@ -75,11 +75,13 @@ public class TextInputReader extends XML_Reader {
                         this.setLevelOfPhrase();
                         //this.addSubLevel();
                         //this.setLevelOfPhrase();//set lai level sau khi da add them subLevel
-                        this.addSilsToSen("SIL");
+                        this.addSilsToSen("SILS");
                         this.getAllSentences().add(sentence);
                     }else if(nameOfElement.compareTo("root") == 0){
                         //this.addSilsToSen("SILS");
                     }
+                }  else if (eventType.equals(XMLEvent.END_DOCUMENT)){
+                    
                 } else {
                     System.out.println("Don't know this event");
                 }
@@ -215,7 +217,7 @@ public class TextInputReader extends XML_Reader {
         for (int i = 0; i < this.getAllSentences().size(); i++) {
             ArrayList<LevelPhrase> levelPhrases = this.getAllSentences().get(i).getLevelPhrases();
             for (int j = 0; j < levelPhrases.size(); j++) {
-                System.out.println(i + " : " + j + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getLevel());
+                //System.out.println(i + " : " + j + " : " + levelPhrases.get(j).getPhraseContent() + " : " + levelPhrases.get(j).getLevel());
             }
         }
     }
@@ -223,6 +225,6 @@ public class TextInputReader extends XML_Reader {
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
         String textDBLocation = System.getProperty("user.dir") + "\\result5.xml";
         TextInputReader textInputReader = new TextInputReader(textDBLocation);
-        textInputReader.printDetails();
+        //textInputReader.printDetails();
     }
 }
