@@ -32,8 +32,8 @@ public class LevelPhrase extends Phrase {
     //distanceMatrix[i][j] la khoang cach giua CandUnit thu i cua LeftLP va CandUnit thu j cua RightLP
     private ArrayList<ArrayList<Float>> distanceArray = new ArrayList<ArrayList<Float>>();
     //distanceMatrix[i][j] la khoang cach giua CandUnit thu i cua LP hien tai va CandUnit thu j cua LP tiep theo
-    private ArrayList<Integer> indexOfPreBestUnit = new ArrayList<Integer>();
-    private ArrayList<Float> minDistanceFromPreUnit = new ArrayList<Float>();
+    private ArrayList<Integer> indexOfBestNextUnit = new ArrayList<Integer>();
+    private ArrayList<Float> minDistanceToNextUnit = new ArrayList<Float>();
     //indexOfPreBestUnit.get(i) la chi so cua CandUnit tot nhat cua CandUnit thu i
     public LevelPhrase(){
         
@@ -258,29 +258,29 @@ public class LevelPhrase extends Phrase {
     /**
      * @return the indexOfPreBestUnit
      */
-    public ArrayList<Integer> getIndexOfPreBestUnit() {
-        return indexOfPreBestUnit;
+    public ArrayList<Integer> getIndexOfBestNextUnit() {
+        return indexOfBestNextUnit;
     }
 
     /**
      * @param indexOfPreBestUnit the indexOfPreBestUnit to set
      */
-    public void setIndexOfPreBestUnit(ArrayList<Integer> indexOfPreBestUnit) {
-        this.indexOfPreBestUnit = indexOfPreBestUnit;
+    public void setIndexOfBestNextUnit(ArrayList<Integer> indexOfBestNextUnit) {
+        this.indexOfBestNextUnit = indexOfBestNextUnit;
     }
 
     /**
      * @return the minDistanceFromPreUnit
      */
-    public ArrayList<Float> getMinDistanceFromPreUnit() {
-        return minDistanceFromPreUnit;
+    public ArrayList<Float> getMinDistanceToNextUnit() {
+        return minDistanceToNextUnit;
     }
 
     /**
      * @param minDistanceFromPreUnit the minDistanceFromPreUnit to set
      */
-    public void setMinDistanceFromPreUnit(ArrayList<Float> minDistanceFromPreUnit) {
-        this.minDistanceFromPreUnit = minDistanceFromPreUnit;
+    public void setMinDistanceToNextUnit(ArrayList<Float> minDistanceFromPreUnit) {
+        this.minDistanceToNextUnit = minDistanceFromPreUnit;
     }
 
 
