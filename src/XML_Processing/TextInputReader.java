@@ -223,7 +223,7 @@ public class TextInputReader extends XML_Reader {
     }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        String textDBLocation = System.getProperty("user.dir") + "\\result5.xml";
+        String textDBLocation = System.getProperty("user.dir") + "\\result2.xml";
         TextInputReader textInputReader = new TextInputReader(textDBLocation);
         //textInputReader.printDetails();
     }

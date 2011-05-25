@@ -30,6 +30,7 @@ public class UnitSelection {
     private ArrayList<String> fileNames;
     private String pathFile;
     ArrayList<Sentence> allSenInTextDB;
+    private float minDistance, tmpCost;
 
     public UnitSelection() throws XMLStreamException, FileNotFoundException {
         us = new UnitSearching();
@@ -121,12 +122,7 @@ public class UnitSelection {
 
     public void printDetails() throws FileNotFoundException {
         for (int i = 0; i < foundLPhrs.size(); i++) {
-            System.out.println(foundLPhrs.get(i).getPhraseContent() + "\t"
-                    + foundLPhrs.get(i).isFound() + "\t" + fileNames.get(i)
-                    + "\t" + foundLPhrs.get(i).getSelectedSylPhrs()
-                    + "\t" + foundLPhrs.get(i).getSelectedSyllable()
-                    + "\t" + foundLPhrs.get(i).getStartIndex() + " : "
-                    + foundLPhrs.get(i).getEndIndex());
+            System.out.println(foundLPhrs.get(i).getPhraseContent() + "\t" + foundLPhrs.get(i).isFound() + "\t" + fileNames.get(i) + "\t" + foundLPhrs.get(i).getSelectedSylPhrs() + "\t" + foundLPhrs.get(i).getSelectedSyllable() + "\t" + foundLPhrs.get(i).getStartIndex() + " : " + foundLPhrs.get(i).getEndIndex());
         }
     }
 
@@ -167,16 +163,44 @@ public class UnitSelection {
 
     private void calculateCostFor2LP(LevelPhrase leftLP, LevelPhrase rightLP) {
         for (int i = 0; i < leftLP.getFoundIndexes1().size(); i++) {
+            if (i >= 250) {
+                break;
+            }
             for (int j = 0; j < rightLP.getFoundIndexes1().size(); j++) {
+                if (j >= 250) {
+                    break;
+                }
                 calculateCostFor2CandidateUnits(leftLP, i, rightLP, j);
             }
         }
+//        for (int i = 0; i < leftLP.getFoundIndexes1().size(); i++) {
+//            if(i>=250 ) break;
+//            minDistance = 100;
+//            int indexOfBestNextCand = -1;
+//            for (int j = 0; j < rightLP.getFoundIndexes1().size(); j++) {
+//                if (j >= 250) {
+//                    break;
+//                } else {
+//                    calculateCostFor2CandidateUnits(leftLP, i, rightLP, j);
+//                    if (tmpCost == 0.0) {
+//                        break;
+//                    }
+//                    if (minDistance > tmpCost) {
+//                        minDistance = tmpCost;
+//                        indexOfBestNextCand = j;
+//                    }
+//                }
+//            }
+//            leftLP.getIndexOfBestNextUnit().add(indexOfBestNextCand);
+//            leftLP.getMinDistanceToNextUnit().add(minDistance);
+//            System.out.println("min cost: " + minDistance + " tai vi tri " + indexOfBestNextCand);
+//        }
     }
 
     private void calculateCostFor2CandidateUnits(LevelPhrase leftLP, int i, LevelPhrase rightLP, int j) {
-        if (i >= 250 || j >= 250) {
-            return;
-        }
+//        if (i >= 250 || j >= 250) {
+//            return;
+//        }
         //xu ly trong truong hop syllable gom 2 ban am tiet
         if (leftLP.isFound() == 1 & rightLP.isFound() == 1) {
             //xy ly truong hop ca hai deu duoc tim thay trong CSDL
@@ -234,6 +258,7 @@ public class UnitSelection {
                 float cost2 = costOfTwoSyllable(rightSylOfLeftCandUnit, firstSylOfRightCandUnit, 2);
                 //System.out.println("cost: " + costOfTwoSyllable(rightSylOfLeftCandUnit, firstSylOfRightCandUnit, 2));
                 float totalcost = cost1 + cost2;
+                tmpCost = totalcost;
                 if (leftLP.getDistanceMatrix()[i][j] != 0) {
                     System.out.println("co nham lan trong viec tinh toan khoang cach");
                 } else {
@@ -308,7 +333,7 @@ public class UnitSelection {
         int[] dD = {0, 0, -1, 1, -1, 1, -1, 1, -1};
         int[] dC = {0, 0, 1, 4, 2, 1, 6, 1, 1};
         if (sylTone1 == sylTone2) {
-            toneDis = 0.01;
+            toneDis = 0.001;
             //System.out.println("same tone");
         } else {
             toneDis = Wd * Math.abs(dD[sylTone1] - dD[sylTone2]) + Wc * (dC[sylTone1] + dC[sylTone2]);
@@ -323,7 +348,7 @@ public class UnitSelection {
             if (phraseContent.compareTo("SILS") == 0) {
                 endSen = i;
                 for (int j = beginSen; j < endSen - 1; j++) {
-                    selectPreBestUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
+                    selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
                 }
                 beginSen = endSen + 1;
             }
@@ -336,20 +361,35 @@ public class UnitSelection {
 
     }
 
-    private void selectPreBestUnitOfaCandUnit(LevelPhrase preUnit, LevelPhrase currentUnit) {
-        float minDistance = 10;
-        int preBestIndex =0;
-        for (int i = 0; i < preUnit.getDistanceMatrix().length; i++) {
-            for (int j = 0; j < preUnit.getDistanceMatrix().length; j++) {
-                if(preUnit.getDistanceMatrix()[j][i]==0.0){
-                    break; //ko co
-                }else if(preUnit.getDistanceMatrix()[j][i]<minDistance){
-                    minDistance = preUnit.getDistanceMatrix()[j][i];
-                    preBestIndex = j;
+    private void selectBestNextUnitOfaCandUnit(LevelPhrase currentUnit, LevelPhrase nextUnit) {
+        float minDistance = 200;
+        int bestNextIndex = 0, bestIndex = 0;
+        for (int i = 0; i < currentUnit.getDistanceMatrix().length; i++) {
+            for (int j = 0; j < currentUnit.getDistanceMatrix()[i].length; j++) {
+                if (currentUnit.getDistanceMatrix()[i][j] == 0.0) {
+                    currentUnit.getDistanceMatrix()[i][j] = 200;
                 }
             }
-            currentUnit.getIndexOfPreBestUnit().add(preBestIndex);
-            currentUnit.getMinDistanceFromPreUnit().add(minDistance);
         }
+        for (int i = 0; i < currentUnit.getDistanceMatrix().length; i++) {
+            for (int j = 0; j < currentUnit.getDistanceMatrix()[i].length; j++) {
+//                if (currentUnit.getDistanceMatrix()[i][j] == 0.0) {
+//                    System.out.println("break");
+//                    isBreak = true;
+//                    break; //ko co
+//                } else
+                if (currentUnit.getDistanceMatrix()[i][j] < minDistance) {
+                    minDistance = currentUnit.getDistanceMatrix()[i][j];
+                    bestNextIndex = j;
+                    bestIndex = i;
+                }
+            }
+            currentUnit.getIndexOfBestNextUnit().add(bestNextIndex);
+            currentUnit.getMinDistanceToNextUnit().add(minDistance);
+            System.out.println("min distance " + minDistance + " tai " + bestIndex + " : " + bestNextIndex + " : " + currentUnit.getPhraseContent() + " : " + nextUnit.getPhraseContent());
+
+        }
+
+
     }
 }
