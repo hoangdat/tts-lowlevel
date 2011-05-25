@@ -24,10 +24,17 @@ public class LevelPhrase extends Phrase {
     private ArrayList<Integer> foundSen = new ArrayList<Integer>();//id cua cac cau tim thay LP
     private ArrayList<Integer> foundSylPhrs = new ArrayList<Integer>();// id cua SylPhrase tim thay LP
     private ArrayList<Integer> foundSyllable = new ArrayList<Integer>();// id cua Syllable trong SylPhrase tim thay LP
+    private ArrayList<Integer> foundEndSyllable = new ArrayList<Integer>();//vi tri cua syllable cuoi cung trong sylphrase tim thay LP
     private int selectedSen, selectedSylPhrs, selectedSyllable; //id cua cau, sylphrase, syllable duoc chon sau khi co ham chi phi
     private Syllable firstSylInLPhrs, lastSylInLPhrs;// am tiet bat dau va ket thuc cua LevelPhrase. dung de tinh khoang cach ngu canh cho cac LP ben canh
     private int posInSen; // vi tri bat dau cua LP trong Phrase
-
+    private float [][] distanceMatrix = new float[250][250];
+    //distanceMatrix[i][j] la khoang cach giua CandUnit thu i cua LeftLP va CandUnit thu j cua RightLP
+    private ArrayList<ArrayList<Float>> distanceArray = new ArrayList<ArrayList<Float>>();
+    //distanceMatrix[i][j] la khoang cach giua CandUnit thu i cua LP hien tai va CandUnit thu j cua LP tiep theo
+    private ArrayList<Integer> indexOfPreBestUnit = new ArrayList<Integer>();
+    private ArrayList<Float> minDistanceFromPreUnit = new ArrayList<Float>();
+    //indexOfPreBestUnit.get(i) la chi so cua CandUnit tot nhat cua CandUnit thu i
     public LevelPhrase(){
         
     }
@@ -211,6 +218,69 @@ public class LevelPhrase extends Phrase {
      */
     public void setPosInSen(int posInSen) {
         this.posInSen = posInSen;
+    }
+
+    /**
+     * @return the foundEndSyllable
+     */
+    public ArrayList<Integer> getFoundIndexes4() {
+        return foundEndSyllable;
+    }
+
+    /**
+     * @return the distanceMatrix
+     */
+    public float[][] getDistanceMatrix() {
+        return distanceMatrix;
+    }
+
+    /**
+     * @param distanceMatrix the distanceMatrix to set
+     */
+    public void setDistanceMatrix(float[][] distanceMatrix) {
+        this.distanceMatrix = distanceMatrix;
+    }
+
+    /**
+     * @return the distanceArray
+     */
+    public ArrayList<ArrayList<Float>> getDistanceArray() {
+        return distanceArray;
+    }
+
+    /**
+     * @param distanceArray the distanceArray to set
+     */
+    public void setDistanceArray(ArrayList<ArrayList<Float>> distanceArray) {
+        this.distanceArray = distanceArray;
+    }
+
+    /**
+     * @return the indexOfPreBestUnit
+     */
+    public ArrayList<Integer> getIndexOfPreBestUnit() {
+        return indexOfPreBestUnit;
+    }
+
+    /**
+     * @param indexOfPreBestUnit the indexOfPreBestUnit to set
+     */
+    public void setIndexOfPreBestUnit(ArrayList<Integer> indexOfPreBestUnit) {
+        this.indexOfPreBestUnit = indexOfPreBestUnit;
+    }
+
+    /**
+     * @return the minDistanceFromPreUnit
+     */
+    public ArrayList<Float> getMinDistanceFromPreUnit() {
+        return minDistanceFromPreUnit;
+    }
+
+    /**
+     * @param minDistanceFromPreUnit the minDistanceFromPreUnit to set
+     */
+    public void setMinDistanceFromPreUnit(ArrayList<Float> minDistanceFromPreUnit) {
+        this.minDistanceFromPreUnit = minDistanceFromPreUnit;
     }
 
 

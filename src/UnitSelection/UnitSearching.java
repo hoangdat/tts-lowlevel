@@ -196,6 +196,7 @@ public class UnitSearching {
                         levelPhrase.getFoundIndexes1().add(i);
                         levelPhrase.getFoundIndexes2().add(j);
                         levelPhrase.getFoundIndexes3().add(sylID);
+                        levelPhrase.getFoundIndexes4().add(sylID+levelPhrase.getPhraseLen()-1);
                         //System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
                         //System.out.println(phContentToSearch + " : " + sylID);
                         phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
