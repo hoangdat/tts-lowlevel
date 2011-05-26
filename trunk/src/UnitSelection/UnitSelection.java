@@ -362,28 +362,29 @@ public class UnitSelection {
     }
 
     private void selectBestNextUnitOfaCandUnit(LevelPhrase currentUnit, LevelPhrase nextUnit) {
-        float minDistance = 200;
+        float minDistance = 210;
         int bestNextIndex = 0, bestIndex = 0;
+//        for (int i = 0; i < currentUnit.getDistanceMatrix().length; i++) {
+//            for (int j = 0; j < currentUnit.getDistanceMatrix()[i].length; j++) {
+//                if (currentUnit.getDistanceMatrix()[i][j] == 0.0) {
+//                    currentUnit.getDistanceMatrix()[i][j] = 200;
+//                }
+//            }
+//        }
         for (int i = 0; i < currentUnit.getDistanceMatrix().length; i++) {
+            minDistance = currentUnit.getDistanceMatrix()[i][0];
             for (int j = 0; j < currentUnit.getDistanceMatrix()[i].length; j++) {
                 if (currentUnit.getDistanceMatrix()[i][j] == 0.0) {
-                    currentUnit.getDistanceMatrix()[i][j] = 200;
-                }
-            }
-        }
-        for (int i = 0; i < currentUnit.getDistanceMatrix().length; i++) {
-            for (int j = 0; j < currentUnit.getDistanceMatrix()[i].length; j++) {
-//                if (currentUnit.getDistanceMatrix()[i][j] == 0.0) {
-//                    System.out.println("break");
-//                    isBreak = true;
-//                    break; //ko co
-//                } else
+                    System.out.println("break");                   
+                    break; //ko co
+                } else
                 if (currentUnit.getDistanceMatrix()[i][j] < minDistance) {
                     minDistance = currentUnit.getDistanceMatrix()[i][j];
                     bestNextIndex = j;
                     bestIndex = i;
                 }
             }
+
             currentUnit.getIndexOfBestNextUnit().add(bestNextIndex);
             currentUnit.getMinDistanceToNextUnit().add(minDistance);
             System.out.println("min distance " + minDistance + " tai " + bestIndex + " : " + bestNextIndex + " : " + currentUnit.getPhraseContent() + " : " + nextUnit.getPhraseContent());
