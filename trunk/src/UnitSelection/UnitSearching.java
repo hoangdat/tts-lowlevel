@@ -188,15 +188,22 @@ public class UnitSearching {
 //                }
                 while (indexFound >= 0 && phrsContent.length() >= phContentToSearch.length()) {
                     indexFound = phrsContent.indexOf(phContentToSearch);
+
                     if (indexFound == -1) {
                         break;
                     } else if (indexFound >= 0) {
+                        if (phContentToSearch.trim().compareTo("SIL") == 0 || phContentToSearch.compareTo("SILS") == 0 || phContentToSearch.compareTo("SILP") == 0) {
+                            if (levelPhrase.getFoundIndexes1().size() == 1) {
+                                break;
+                            }
+                        }
                         isFound = true;
                         sylID = sylPhrasesInSen.get(j).getSylIDbyIndexOfSpace(indexFound);
                         levelPhrase.getFoundIndexes1().add(i);
                         levelPhrase.getFoundIndexes2().add(j);
                         levelPhrase.getFoundIndexes3().add(sylID);
-                        levelPhrase.getFoundIndexes4().add(sylID+levelPhrase.getPhraseLen()-1);
+                        levelPhrase.getFoundIndexes4().add(sylID + levelPhrase.getPhraseLen() - 1);
+
                         //System.out.println("tim thay: " + phContentToSearch + ": tai syllable co ID =: " + sylID+ " :tai phrase thu: "+j+": cua cau thu: " + i);
                         //System.out.println(phContentToSearch + " : " + sylID);
                         phrsContent = " " + phrsContent.substring(indexFound + phContentToSearch.length()).trim() + " ";
@@ -204,6 +211,7 @@ public class UnitSearching {
                             levelPhrase.setFirstSylInLPhrs(sylPhrasesInSen.get(j).getSyllablesInPh().get(sylID));
                             levelPhrase.setLastSylInLPhrs(sylPhrasesInSen.get(j).getSyllablesInPh().get(sylID + levelPhrase.getPhraseLen() - 1));
                         }
+
                     }
                 }
             }
@@ -252,11 +260,11 @@ public class UnitSearching {
     }
 
     private void searchSyllableInHalfSylDB(LevelPhrase topLP) {
-        for (int i = 0; i < allHalfSyls.size(); i++) {            
+        for (int i = 0; i < allHalfSyls.size(); i++) {
             if (topLP.getFirstSylInLPhrs().getLeftHalfSyl().compareTo(allHalfSyls.get(i).getHalfSylName()) == 0) {
                 //System.out.println("tim thay " + topLP.getFirstSylInLPhrs().getLeftHalfSyl() + " tai vi tri " + i);
                 topLP.getFoundIndexes1().add(i);
-            }        
+            }
             if (topLP.getFirstSylInLPhrs().getRightHalfSyl().compareTo(allHalfSyls.get(i).getHalfSylName()) == 0) {
                 //System.out.println("tim thay " + topLP.getFirstSylInLPhrs().getRightHalfSyl() + " tai vi tri " + i);
                 topLP.getFoundIndexes2().add(i);

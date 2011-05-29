@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.stream.XMLStreamException;
@@ -31,19 +31,24 @@ public class UnitSelection {
     private String pathFile;
     ArrayList<Sentence> allSenInTextDB;
     private float minDistance, tmpCost;
+    private static final int MAX_CAND_UNIT = 8;
 
     public UnitSelection() throws XMLStreamException, FileNotFoundException {
         us = new UnitSearching();
         foundLPhrs = us.getFoundLPhs();
         allSenInTextDB = UnitSearching.getAllSenInTextDB();
         //selectLP();//tong hop khi khong dung ham chi phi
-        selectLPByCost();
-        System.out.println("");
-        selectBestUnits();
-        setIndex();
+        selectLPByCost();       
+        //printCostOf2LP(4);
+        //selectBestUnits();
+        ///setIndex();
 
-        writeToTextFile();
+        //writeToTextFile();
         //this.printDetails();
+        //printBestNextUnit(4);
+        sortDistanceArray();
+        selectPreFinalCandUnits();
+         System.out.println("");
     }
 
     public void selectLP() {
@@ -162,14 +167,18 @@ public class UnitSelection {
     }
 
     private void calculateCostFor2LP(LevelPhrase leftLP, LevelPhrase rightLP) {
-        for (int i = 0; i < leftLP.getFoundIndexes1().size(); i++) {
-            if (i >= 250) {
-                break;
-            }
-            for (int j = 0; j < rightLP.getFoundIndexes1().size(); j++) {
-                if (j >= 250) {
-                    break;
-                }
+        int numberOfCandOfLeftLP = leftLP.getFoundIndexes1().size();
+        int numberOfCandOfRightLP = rightLP.getFoundIndexes1().size();
+        float[][] distanceMatrixOfLeftLP = new float[numberOfCandOfLeftLP][numberOfCandOfRightLP];
+        leftLP.setDistanceMatrix(distanceMatrixOfLeftLP);
+        for (int i = 0; i < numberOfCandOfLeftLP; i++) {
+//            if (i >= 250) {
+//                break;
+//            }
+            for (int j = 0; j < numberOfCandOfRightLP; j++) {
+//                if (j >= 250) {
+//                    break;
+//                }
                 calculateCostFor2CandidateUnits(leftLP, i, rightLP, j);
             }
         }
@@ -219,11 +228,11 @@ public class UnitSelection {
             // Luu y truong hop dau file va cuoi file thi cac am tiet la null
             if (leftSylName.compareTo("SIL") == 0) {
                 //am tiet ben trai la SIL
-                return;
+                //return;
             }
             if (rightSylName.compareTo("SIL") == 0) {
                 //am tiet ben phai la SIL
-                return;
+                //return;
             }
             Syllable lastSylOfLeftCandUnit = allSenInTextDB.get(leftIndex1).getSylPhrases().get(leftIndex2).getSyllablesInPh().get(leftIndex4);
             Syllable firstSylOfRightCandUnit = allSenInTextDB.get(rightIndex1).getSylPhrases().get(rightIndex2).getSyllablesInPh().get(rightIndex3);
@@ -235,7 +244,7 @@ public class UnitSelection {
             rightSylOfLeftCandUnit.setSylName(lastSylOfLeftCandUnit.getRightSyl());
 
             Syllable leftSylOfRightCandUnit = new Syllable();
-            leftSylOfRightCandUnit.setSylTone(firstSylOfRightCandUnit.getSylTone());
+            leftSylOfRightCandUnit.setSylTone(firstSylOfRightCandUnit.getLeftTone());
             leftSylOfRightCandUnit.setFinalPhoneme(firstSylOfRightCandUnit.getLeftPhoneme());
             leftSylOfRightCandUnit.setFinalType(firstSylOfRightCandUnit.getLeftPhonemeType());
             leftSylOfRightCandUnit.setSylName(firstSylOfRightCandUnit.getLeftSyl());
@@ -245,9 +254,11 @@ public class UnitSelection {
             // Can so sanh LastSylOfLeftCandUnit voi leftSylOfRightCandUnit; so sanh am cuoi va thanh dieu
             // Can so sanh rightSylOfLeftCandUnit voi FirstSylOfRightCand; so sanh am dau va thanh dieu
             //System.out.println(lastSylOfLeftCandUnit.getSylName()+" -- "+firstSylOfRightCandUnit.getSylName());
-            if (lastSylOfLeftCandUnit.getSylName().compareTo(leftLP.getLastSylInLPhrs().getSylName()) != 0) {
+            if (lastSylOfLeftCandUnit.getSylName().trim().compareTo(leftLP.getLastSylInLPhrs().getSylName().trim()) != 0) {
                 //System.out.println("khac tai i = "+i+" : "+j);
-            } else if (firstSylOfRightCandUnit.getSylName().compareTo(rightLP.getFirstSylInLPhrs().getSylName()) != 0) {
+                leftLP.getDistanceMatrix()[i][j] = 100;
+            } else if (firstSylOfRightCandUnit.getSylName().trim().compareTo(rightLP.getFirstSylInLPhrs().getSylName().trim()) != 0) {
+                leftLP.getDistanceMatrix()[i][j] = 100;
                 //System.out.println("khac tai j = "+j+" : "+i);
                 //System.out.println(allSenInTextDB.get(rightIndex1).getSylPhrases().get(rightIndex2).getPhraseContent());
             } else {
@@ -261,10 +272,13 @@ public class UnitSelection {
                 tmpCost = totalcost;
                 if (leftLP.getDistanceMatrix()[i][j] != 0) {
                     System.out.println("co nham lan trong viec tinh toan khoang cach");
+                } else if (totalcost == 0.0f) {
+                    System.out.println("tai sao cost lai = 0");
                 } else {
                     leftLP.getDistanceMatrix()[i][j] = totalcost;
+                    leftLP.getDistanceArray().add(new Distance(totalcost, i, j));
                 }
-                System.out.println("total cost: " + totalcost);
+                //System.out.println("total cost: " + totalcost);
             }
             //System.out.println(rightSylOfLeftCandUnit.getSylName()+" -- "+leftSylOfRightCandUnit.getSylName());
 
@@ -285,17 +299,17 @@ public class UnitSelection {
         if (i == 1) {
             //System.out.println(syl1.getFinalPhoneme()+"::"+syl2.getFinalPhoneme());
             if (syl1.getSylName().compareTo(syl2.getSylName()) == 0) {
-                cost = 0.01f;
+                cost = 0.001f;
             } else {
                 //so sanh finalPhoneme cua lastSylOfLeftCandUnit voi finalPhoneme cua leftSylOfRightCandUnit
                 if (syl1.getFinalPhoneme().compareTo(syl2.getFinalPhoneme()) == 0) {
-                    distance1 = 0;
+                    distance1 = 0.1f;
                     //System.out.println("same phoneme 1");
                 } else {
                     distance1 = 1;
                 }
                 if (syl1.getFinalType().compareTo(syl2.getFinalType()) == 0) {
-                    distance2 = 0;
+                    distance2 = 0.1f;
                     //System.out.println("same type 1");
                 } else {
                     distance2 = 1;
@@ -304,20 +318,20 @@ public class UnitSelection {
                 cost = W1 * distance1 + W2 * distance2 + W3 * distance3;
             }
         } else if (i == 2) {
-            //System.out.println(syl1.getInitiallPhoneme()+"<>"+syl2.getInitiallPhoneme());
+            //System.out.println(syl1.getInitialPhoneme()+"<>"+syl2.getInitialPhoneme());
             if (syl1.getSylName().compareTo(syl2.getSylName()) == 0) {
-                cost = 0.01f;
+                cost = 0.001f;
             } else {
                 //so sanh finalPhoneme cua lastSylOfLeftCandUnit voi finalPhoneme cua leftSylOfRightCandUnit
-                if (syl1.getInitiallPhoneme().compareTo(syl2.getInitiallPhoneme()) == 0) {
-                    distance1 = 0;
+                if (syl1.getInitialPhoneme().compareTo(syl2.getInitialPhoneme()) == 0) {
+                    distance1 = 0.1f;
                     //System.out.println("same phoneme 2");
                 } else {
                     distance1 = 1;
                 }
                 if (syl1.getInitialType().compareTo(syl2.getInitialType()) == 0) {
                     //System.out.println("same type 2");
-                    distance2 = 0;
+                    distance2 = 0.1f;
                 } else {
                     distance2 = 1;
                 }
@@ -328,12 +342,12 @@ public class UnitSelection {
         return cost;
     }
 
-    private double toneDistance(int sylTone1, int sylTone2) {
-        double toneDis, Wd = 0.1, Wc = 0.1;
+    private float toneDistance(int sylTone1, int sylTone2) {
+        float toneDis, Wd = 0.1f, Wc = 0.1f;
         int[] dD = {0, 0, -1, 1, -1, 1, -1, 1, -1};
         int[] dC = {0, 0, 1, 4, 2, 1, 6, 1, 1};
-        if (sylTone1 == sylTone2) {
-            toneDis = 0.001;
+        if ((sylTone1 == sylTone2) || (sylTone1 == 0 && sylTone2 == 1) || (sylTone1 == 1 && sylTone2 == 0)) {
+            toneDis = 0.001f;
             //System.out.println("same tone");
         } else {
             toneDis = Wd * Math.abs(dD[sylTone1] - dD[sylTone2]) + Wc * (dC[sylTone1] + dC[sylTone2]);
@@ -341,11 +355,27 @@ public class UnitSelection {
         return toneDis;
     }
 
+    /*
+     *
+     */
+    private void sortDistanceArray() {
+        for (int i = 0; i < getFoundLPhrs().size(); i++) {
+            System.out.println("LP thu: " + i);
+            Collections.sort(getFoundLPhrs().get(i).getDistanceArray());
+            for (int j = 0; j < getFoundLPhrs().get(i).getDistanceArray().size(); j++) {
+                System.out.println(getFoundLPhrs().get(i).getDistanceArray().get(j).getDistance() + " : " + getFoundLPhrs().get(i).getDistanceArray().get(j).getIndexOfPreCand() + " : " + getFoundLPhrs().get(i).getDistanceArray().get(j).getIndexOfNextCand());
+            }
+        }
+    }
+    /*
+     *
+     */
+
     private void selectBestUnits() {
         int beginSen = 0, endSen; // bat dau cau
         for (int i = 0; i < getFoundLPhrs().size(); i++) {
             String phraseContent = getFoundLPhrs().get(i).getPhraseContent().trim();
-            if (phraseContent.compareTo("SILS") == 0) {
+            if (phraseContent.compareTo("SILS") == 0 || phraseContent.compareTo("SIL") == 0) {
                 endSen = i;
                 for (int j = beginSen; j < endSen - 1; j++) {
                     selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
@@ -371,26 +401,105 @@ public class UnitSelection {
 //                }
 //            }
 //        }
-        for (int i = 0; i < currentUnit.getDistanceMatrix().length; i++) {
+        for (int i = 0; i < currentUnit.getFoundIndexes1().size(); i++) {
             minDistance = currentUnit.getDistanceMatrix()[i][0];
-            for (int j = 0; j < currentUnit.getDistanceMatrix()[i].length; j++) {
+            for (int j = 0; j < nextUnit.getFoundIndexes1().size(); j++) {
                 if (currentUnit.getDistanceMatrix()[i][j] == 0.0) {
-                    System.out.println("break");                   
-                    break; //ko co
-                } else
-                if (currentUnit.getDistanceMatrix()[i][j] < minDistance) {
+                    //System.out.println("break");
+                    //break; //ko co
+                } else if (currentUnit.getDistanceMatrix()[i][j] < minDistance && currentUnit.getDistanceMatrix()[i][j] > 0) {
                     minDistance = currentUnit.getDistanceMatrix()[i][j];
                     bestNextIndex = j;
                     bestIndex = i;
                 }
             }
-
             currentUnit.getIndexOfBestNextUnit().add(bestNextIndex);
             currentUnit.getMinDistanceToNextUnit().add(minDistance);
-            System.out.println("min distance " + minDistance + " tai " + bestIndex + " : " + bestNextIndex + " : " + currentUnit.getPhraseContent() + " : " + nextUnit.getPhraseContent());
-
+            currentUnit.getBestIndex().add(bestIndex);
+            //System.out.println("min distance " + minDistance + " tai " + bestIndex + " : " + bestNextIndex + " : " + currentUnit.getPhraseContent() + " : " + nextUnit.getPhraseContent());
         }
+    }
 
+    public void printCostOf2LP(int leftIndex) {
+        LevelPhrase leftLP = getFoundLPhrs().get(leftIndex);
+        LevelPhrase rightLP = getFoundLPhrs().get(leftIndex + 1);
+        System.out.println(leftLP.getPhraseContent() + " : " + rightLP.getPhraseContent());
+        for (int i = 0; i < leftLP.getDistanceMatrix().length; i++) {
+            for (int j = 0; j < leftLP.getDistanceMatrix()[i].length; j++) {
+                System.out.println("cost tai " + i + " : " + j + " : " + leftLP.getDistanceMatrix()[i][j]);
+            }
+        }
+    }
 
+    private boolean bestUnitsSelection() {
+        return true;
+    }
+
+    private void printBestNextUnit(int index) {
+        LevelPhrase lp = getFoundLPhrs().get(index);
+        if (lp.getMinDistanceToNextUnit().size() != lp.getIndexOfBestNextUnit().size()) {
+            System.out.println("ko biet la sai o cho nao");
+        } else {
+            for (int i = 0; i < lp.getMinDistanceToNextUnit().size(); i++) {
+                System.out.println("min dis: " + lp.getMinDistanceToNextUnit().get(i) + " tai: " + lp.getBestIndex().get(i) + " : " +
+                        lp.getIndexOfBestNextUnit().get(i));
+            }
+        }
+    }
+
+    /*
+     * giu lai M don vi ung vien tot nhat doi voi moi don vi dich
+     */
+    private void selectPreFinalCandUnits() {
+        for (int i = 0; i < getFoundLPhrs().size() - 1; i++) {
+            ArrayList<Distance> distanceArray1 = getFoundLPhrs().get(i).getDistanceArray();
+            for (int j = 0; j < distanceArray1.size(); j++) {
+                ArrayList<Integer> indexesOfPreSelectedUnit = getFoundLPhrs().get(i).getIndexesOfPreSelectedUnit();
+                if (indexesOfPreSelectedUnit.size() < MAX_CAND_UNIT) {
+                    //neu chua du so luong CAND_UNIT hoac chua co o trong indexesOfPreSelectedUnit thi add vao indexesOfPreSelectedUnit
+                    boolean isExist = false;
+                    for (int k = 0; k < indexesOfPreSelectedUnit.size(); k++) {
+                        if (indexesOfPreSelectedUnit.get(k) == distanceArray1.get(j).getIndexOfPreCand()) {
+                            isExist = true;
+                        }
+                    }
+                    if (!isExist) {
+                        indexesOfPreSelectedUnit.add(distanceArray1.get(j).getIndexOfPreCand());
+                    }
+                }
+                ////////////////////
+                ArrayList<Integer> indexesOfPreSelectedUnit2 = getFoundLPhrs().get(i + 1).getIndexesOfPreSelectedUnit();
+                if (indexesOfPreSelectedUnit2.size() < MAX_CAND_UNIT/2) {
+                    //neu chua du so luong CAND_UNIT hoac chua co o trong indexesOfPreSelectedUnit thi add vao indexesOfPreSelectedUnit
+                    boolean isExist = false;
+                    for (int k = 0; k < indexesOfPreSelectedUnit2.size(); k++) {
+                        if (indexesOfPreSelectedUnit2.get(k) == distanceArray1.get(j).getIndexOfNextCand()) {
+                            isExist = true;
+                        }
+                    }
+                    if (!isExist) {
+                        indexesOfPreSelectedUnit2.add(distanceArray1.get(j).getIndexOfNextCand());
+                    }
+                }
+            }
+        }
+    }
+    ////////
+    private void selectFinalCandUnits(){
+        ArrayList<Path> tmpPaths = new ArrayList<Path>();
+        ArrayList<Path> finalPaths = new ArrayList<Path>();
+        Path tmpPath;
+        for (int i = 0; i < getFoundLPhrs().size()-1; i++) {
+            LevelPhrase currentLP = getFoundLPhrs().get(i);
+            LevelPhrase nextLP = getFoundLPhrs().get(i + 1);
+            for (int j = 0; j < currentLP.getIndexesOfPreSelectedUnit().size(); j++) {
+                int indexOfPreSelectedUnit = currentLP.getIndexesOfPreSelectedUnit().get(j);
+                for (int k = 0; k < nextLP.getIndexesOfPreSelectedUnit().get(k); k++) {
+                    float tmpDis = currentLP.getDistanceMatrix()[indexOfPreSelectedUnit][nextLP.getIndexesOfPreSelectedUnit().get(k)];
+
+                    
+                }
+            }
+        }
     }
 }
