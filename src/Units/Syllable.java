@@ -180,7 +180,7 @@ public class Syllable {
     /**
      * @return the intialPhoneme
      */
-    public String getInitiallPhoneme() {
+    public String getInitialPhoneme() {
         return intialPhoneme;
     }
 
