@@ -495,7 +495,7 @@ public class UnitSelection {
             String phraseContent = getFoundLPhrs().get(i).getPhraseContent().trim();
             if( i>0&&(phraseContent.compareTo("SILS") == 0 || phraseContent.compareTo("SIL") == 0) ){
                 endSen = i;
-                for (int j = beginSen; j < endSen - 1; j++) {
+                for (int j = beginSen; j < endSen ; j++) {
                     //selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
                     if(j==beginSen){
                         getFoundLPhrs().get(j).getPreBestPaths().add(new Path(0, 0));
@@ -537,7 +537,7 @@ public class UnitSelection {
                 ArrayList<Path> pathByIndexOfCandUnit = currentLP.getPathByIndexOfCandUnit(indexOfPreSelectedUnitOfCurrentLp);
                 for (int i = 0; i < pathByIndexOfCandUnit.size(); i++) {
                     System.out.println("size: "+pathByIndexOfCandUnit.size());
-                    Path p = new Path(pathByIndexOfCandUnit.get(i).getDistance()+tmpDis, nextLP.getIndexesOfPreSelectedUnit().get(k));
+                    Path p = new Path(pathByIndexOfCandUnit.get(i).getDistance()+tmpDis,pathByIndexOfCandUnit.get(i).getIndexesOfPreCandUnitsInPath(), nextLP.getIndexesOfPreSelectedUnit().get(k));
                     nextLP.getPreBestPaths().add(p);
                     System.out.println("added ");
                 }

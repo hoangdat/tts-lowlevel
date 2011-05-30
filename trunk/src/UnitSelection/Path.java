@@ -25,6 +25,12 @@ public class Path implements Comparable<Path> {
         indexOfCurrentCandUnitInPath = index;
         indexesOfPreCandUnitsInPath.add(index);
     }
+    public Path(float d,ArrayList<Integer> indexes, int index) {
+        distance = d;
+        indexesOfPreCandUnitsInPath = indexes;
+        indexOfCurrentCandUnitInPath = index;
+        indexesOfPreCandUnitsInPath.add(index);
+    }
 
     public int compareTo(Path o) {
         if (this.distance > o.distance) {
