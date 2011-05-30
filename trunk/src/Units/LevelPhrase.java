@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Units;
 
 import UnitSelection.Distance;
 import UnitSelection.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -30,7 +31,7 @@ public class LevelPhrase extends Phrase {
     private int selectedSen, selectedSylPhrs, selectedSyllable; //id cua cau, sylphrase, syllable duoc chon sau khi co ham chi phi
     private Syllable firstSylInLPhrs, lastSylInLPhrs;// am tiet bat dau va ket thuc cua LevelPhrase. dung de tinh khoang cach ngu canh cho cac LP ben canh
     private int posInSen; // vi tri bat dau cua LP trong Phrase
-    private float [][] distanceMatrix;
+    private float[][] distanceMatrix;
     //distanceMatrix[i][j] la khoang cach giua CandUnit thu i cua LP hien tai va CandUnit thu j cua RightLP
     private ArrayList<Distance> distanceArray = new ArrayList<Distance>();
     //distanceMatrix[i][j] la khoang cach giua CandUnit thu i cua LP hien tai va CandUnit thu j cua LP tiep theo
@@ -38,11 +39,11 @@ public class LevelPhrase extends Phrase {
     private ArrayList<Float> minDistanceToNextUnit = new ArrayList<Float>();
     private ArrayList<Integer> bestIndex = new ArrayList<Integer>();
     private ArrayList<Integer> indexesOfPreSelectedUnit = new ArrayList<Integer>();
+    private ArrayList<Path> preBestPaths = new ArrayList<Path>(); //cac duong di toi uu phia truoc
     //chi so cua Cand thu i tuong ung voi indexOfBestNextUnit
     //indexOfPreBestUnit.get(i) la chi so cua CandUnit tot nhat cua CandUnit thu i
-    
-    public LevelPhrase(){
-        
+
+    public LevelPhrase() {
     }
 
     /**
@@ -58,6 +59,7 @@ public class LevelPhrase extends Phrase {
     public void setLevel(int level) {
         this.level = level;
     }
+
     /**
      * @return the subLevel
      */
@@ -79,9 +81,9 @@ public class LevelPhrase extends Phrase {
     /*
      *
      */
-     public void addIndexOfSubLevel(int indexOfPhrase){
-         indexesOfSubLevel.add(indexOfPhrase);
-     }
+    public void addIndexOfSubLevel(int indexOfPhrase) {
+        indexesOfSubLevel.add(indexOfPhrase);
+    }
 
     /**
      * @return the syllableIn
@@ -97,12 +99,11 @@ public class LevelPhrase extends Phrase {
         String pc = this.getPhraseContent();
         StringTokenizer stk = new StringTokenizer(pc);
         setPhraseLen(stk.countTokens());
-        
-        while(stk.hasMoreTokens()){
+
+        while (stk.hasMoreTokens()) {
             syllableIn.add(stk.nextToken());
         }
     }
-
 
     @Override
     public void setPhraseContent(String phraseContent) {
@@ -113,11 +114,11 @@ public class LevelPhrase extends Phrase {
     /*
      *
      */
-    public void setIsFound(int f){
+    public void setIsFound(int f) {
         isFound = f;
     }
 
-    public int isFound(){
+    public int isFound() {
         return isFound;
     }
 
@@ -260,7 +261,6 @@ public class LevelPhrase extends Phrase {
 //    public void setDistanceArray(ArrayList<ArrayList<Float>> distanceArray) {
 //        this.distanceArray = distanceArray;
 //    }
-
     /**
      * @return the indexOfPreBestUnit
      */
@@ -317,6 +317,41 @@ public class LevelPhrase extends Phrase {
         return indexesOfPreSelectedUnit;
     }
 
+    /**
+     * @return the preBestPaths
+     */
+    public ArrayList<Path> getPreBestPaths() {
+        return preBestPaths;
+    }
 
-    
+    /**
+     * @param preBestPaths the preBestPaths to set
+     */
+    public void setPreBestPaths(ArrayList<Path> preBestPaths) {
+        this.preBestPaths = preBestPaths;
+    }
+
+    /**
+     * @param indexOfCandUnit chi so cua don vi ung vien muon lay khoang cach
+     */
+    public ArrayList<Path> getPathByIndexOfCandUnit(int indexOfCandUnit) {
+        ArrayList<Path> result = new ArrayList<Path>();
+        int maxPath = 10000;
+        for (int i = 0; i < preBestPaths.size(); i++) {
+            ArrayList<Integer> indexesOfPreCandUnitsInPath = preBestPaths.get(i).getIndexesOfPreCandUnitsInPath();           
+                if (indexesOfPreCandUnitsInPath.get(indexesOfPreCandUnitsInPath.size()-1)== indexOfCandUnit) {
+                    result.add(preBestPaths.get(i));
+                }
+        }
+        Collections.sort(result);
+
+        if(result.size()<maxPath){
+           maxPath = result.size();
+        }
+        ArrayList<Path> subList = new ArrayList<Path>();
+        for (int i = 0; i < maxPath; i++) {
+            subList.add(result.get(i));
+        }
+        return subList;
+    }
 }

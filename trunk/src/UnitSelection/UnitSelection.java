@@ -38,7 +38,7 @@ public class UnitSelection {
         foundLPhrs = us.getFoundLPhs();
         allSenInTextDB = UnitSearching.getAllSenInTextDB();
         //selectLP();//tong hop khi khong dung ham chi phi
-        selectLPByCost();       
+        selectLPByCost();
         //printCostOf2LP(4);
         //selectBestUnits();
         ///setIndex();
@@ -48,7 +48,9 @@ public class UnitSelection {
         //printBestNextUnit(4);
         sortDistanceArray();
         selectPreFinalCandUnits();
-         System.out.println("");
+        System.out.println("");
+        selectFinalCandUnits();
+        System.out.println("hichic");
     }
 
     public void selectLP() {
@@ -441,8 +443,8 @@ public class UnitSelection {
             System.out.println("ko biet la sai o cho nao");
         } else {
             for (int i = 0; i < lp.getMinDistanceToNextUnit().size(); i++) {
-                System.out.println("min dis: " + lp.getMinDistanceToNextUnit().get(i) + " tai: " + lp.getBestIndex().get(i) + " : " +
-                        lp.getIndexOfBestNextUnit().get(i));
+                System.out.println("min dis: " + lp.getMinDistanceToNextUnit().get(i) + " tai: " + lp.getBestIndex().get(i) + " : "
+                        + lp.getIndexOfBestNextUnit().get(i));
             }
         }
     }
@@ -469,7 +471,7 @@ public class UnitSelection {
                 }
                 ////////////////////
                 ArrayList<Integer> indexesOfPreSelectedUnit2 = getFoundLPhrs().get(i + 1).getIndexesOfPreSelectedUnit();
-                if (indexesOfPreSelectedUnit2.size() < MAX_CAND_UNIT/2) {
+                if (indexesOfPreSelectedUnit2.size() < MAX_CAND_UNIT / 2) {
                     //neu chua du so luong CAND_UNIT hoac chua co o trong indexesOfPreSelectedUnit thi add vao indexesOfPreSelectedUnit
                     boolean isExist = false;
                     for (int k = 0; k < indexesOfPreSelectedUnit2.size(); k++) {
@@ -485,19 +487,59 @@ public class UnitSelection {
         }
     }
     ////////
-    private void selectFinalCandUnits(){
-        ArrayList<Path> tmpPaths = new ArrayList<Path>();
-        ArrayList<Path> finalPaths = new ArrayList<Path>();
-        Path tmpPath;
-        for (int i = 0; i < getFoundLPhrs().size()-1; i++) {
-            LevelPhrase currentLP = getFoundLPhrs().get(i);
-            LevelPhrase nextLP = getFoundLPhrs().get(i + 1);
-            for (int j = 0; j < currentLP.getIndexesOfPreSelectedUnit().size(); j++) {
-                int indexOfPreSelectedUnit = currentLP.getIndexesOfPreSelectedUnit().get(j);
-                for (int k = 0; k < nextLP.getIndexesOfPreSelectedUnit().get(k); k++) {
-                    float tmpDis = currentLP.getDistanceMatrix()[indexOfPreSelectedUnit][nextLP.getIndexesOfPreSelectedUnit().get(k)];
 
-                    
+    private void selectFinalCandUnits() {
+        int beginSen = 0, endSen;       
+        for (int i = 0; i < getFoundLPhrs().size() - 1; i++) {
+            ///////////////////////////////////////////////////////
+            String phraseContent = getFoundLPhrs().get(i).getPhraseContent().trim();
+            if( i>0&&(phraseContent.compareTo("SILS") == 0 || phraseContent.compareTo("SIL") == 0) ){
+                endSen = i;
+                for (int j = beginSen; j < endSen - 1; j++) {
+                    //selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
+                    if(j==beginSen){
+                        getFoundLPhrs().get(j).getPreBestPaths().add(new Path(0, 0));
+                    }
+                    selectBestPath(j, j + 1);
+                }
+                Collections.sort(getFoundLPhrs().get(endSen).getPreBestPaths());
+                System.out.println("duong di ngan nhat: "+getFoundLPhrs().get(i).getPreBestPaths().size()+" : ");
+                beginSen = endSen + 1;
+            }
+            ///////////////////////////////////////////////////////
+//            LevelPhrase currentLP = getFoundLPhrs().get(i);
+//            LevelPhrase nextLP = getFoundLPhrs().get(i + 1);
+//            for (int j = 0; j < currentLP.getIndexesOfPreSelectedUnit().size(); j++) {
+//                int indexOfPreSelectedUnit = currentLP.getIndexesOfPreSelectedUnit().get(j);
+//                for (int k = 0; k < nextLP.getIndexesOfPreSelectedUnit().get(k); k++) {
+//                    float tmpDis = currentLP.getDistanceMatrix()[indexOfPreSelectedUnit][nextLP.getIndexesOfPreSelectedUnit().get(k)];
+//                }
+//            }
+            ///////////////////////////////
+        }//end for
+    }
+    /*
+     *
+     */
+
+    public void selectBestPath(int indexOfCurrentLP, int indexOfNextLP) {
+        ArrayList<Path> tmpPaths;
+        ArrayList<Path> finalPaths = new ArrayList<Path>();
+        ArrayList<Path> prePaths;
+        
+        LevelPhrase currentLP = getFoundLPhrs().get(indexOfCurrentLP);
+        LevelPhrase nextLP = getFoundLPhrs().get(indexOfCurrentLP + 1);
+        for (int j = 0; j < currentLP.getIndexesOfPreSelectedUnit().size(); j++) {
+            int indexOfPreSelectedUnitOfCurrentLp = currentLP.getIndexesOfPreSelectedUnit().get(j);
+            tmpPaths = new ArrayList<Path>();
+            for (int k = 0; k < nextLP.getIndexesOfPreSelectedUnit().size(); k++) {
+                float tmpDis = currentLP.getDistanceMatrix()[indexOfPreSelectedUnitOfCurrentLp][nextLP.getIndexesOfPreSelectedUnit().get(k)];
+                ArrayList<Path> pathByIndexOfCandUnit = currentLP.getPathByIndexOfCandUnit(indexOfPreSelectedUnitOfCurrentLp);
+                for (int i = 0; i < pathByIndexOfCandUnit.size(); i++) {
+                    System.out.println("size: "+pathByIndexOfCandUnit.size());
+                    Path p = new Path(pathByIndexOfCandUnit.get(i).getDistance()+tmpDis, nextLP.getIndexesOfPreSelectedUnit().get(k));
+                    nextLP.getPreBestPaths().add(p);
+                    System.out.println("added ");
                 }
             }
         }

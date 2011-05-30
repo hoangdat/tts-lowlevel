@@ -186,7 +186,7 @@ public class TextDBCreator {
         {
             streamWriter.writeStartElement("initial");
             streamWriter.writeAttribute("type", syl.getInitialType());
-            streamWriter.writeCharacters(syl.getInitiallPhoneme());
+            streamWriter.writeCharacters(syl.getInitialPhoneme());
             streamWriter.writeEndElement();
             ////////////////////////////////////////////////////////////////////
             streamWriter.writeStartElement("middle");
