@@ -127,7 +127,7 @@ public class SyllableAnalysis {
         leftHalfSyl.append("_");
         StringBuffer rightHalfSyl = new StringBuffer();
         String init, middle, nucleus, finalPh;
-        init = syllable.getInitiallPhoneme();
+        init = syllable.getInitialPhoneme();
         middle = syllable.getMiddlePhoneme();
         nucleus = syllable.getNucleusPhoneme();
         finalPh = syllable.getFinalPhoneme();
