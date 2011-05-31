@@ -192,7 +192,7 @@ public class UnitSearching {
                     if (indexFound == -1) {
                         break;
                     } else if (indexFound >= 0) {
-                        if (phContentToSearch.trim().compareTo("SIL") == 0 || phContentToSearch.compareTo("SILS") == 0 || phContentToSearch.compareTo("SILP") == 0) {
+                        if (phContentToSearch.trim().compareTo("SIL") == 0 || phContentToSearch.trim().compareTo("SILS") == 0 || phContentToSearch.trim().compareTo("SILP") == 0) {
                             if (levelPhrase.getFoundIndexes1().size() == 1) {
                                 break;
                             }

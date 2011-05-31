@@ -336,22 +336,28 @@ public class LevelPhrase extends Phrase {
      */
     public ArrayList<Path> getPathByIndexOfCandUnit(int indexOfCandUnit) {
         ArrayList<Path> result = new ArrayList<Path>();
+        result.removeAll(result);
         int maxPath = 10000;
         for (int i = 0; i < preBestPaths.size(); i++) {
-            ArrayList<Integer> indexesOfPreCandUnitsInPath = preBestPaths.get(i).getIndexesOfPreCandUnitsInPath();           
-                if (indexesOfPreCandUnitsInPath.get(indexesOfPreCandUnitsInPath.size()-1)== indexOfCandUnit) {
-                    result.add(preBestPaths.get(i));
-                }
+//            ArrayList<Integer> indexesOfPreCandUnitsInPath = preBestPaths.get(i).getIndexes();
+//            if (indexesOfPreCandUnitsInPath.get(indexesOfPreCandUnitsInPath.size() - 1) == indexOfCandUnit) {
+//                result.add(preBestPaths.get(i));
+//            }
+            Path pathByIndex = new Path();
+            pathByIndex = preBestPaths.get(i);
+            if(pathByIndex.getIndexOfCurrentCandUnitInPath()==indexOfCandUnit){
+                 result.add(pathByIndex);
+            }
         }
         Collections.sort(result);
-
-        if(result.size()<maxPath){
-           maxPath = result.size();
+        if (result.size() < maxPath) {
+            maxPath = result.size();
         }
         ArrayList<Path> subList = new ArrayList<Path>();
         for (int i = 0; i < maxPath; i++) {
             subList.add(result.get(i));
         }
+        System.out.println("sublist size: "+subList.size());
         return subList;
     }
 }
