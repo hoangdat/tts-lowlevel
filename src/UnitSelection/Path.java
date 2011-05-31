@@ -13,29 +13,47 @@ import sun.dc.pr.PathDasher;
  */
 public class Path implements Comparable<Path> {
 
-    private float distance;
-    private ArrayList<Integer> indexesOfPreCandUnitsInPath = new ArrayList<Integer>();//chi so cua cac don vi ung vien phia truoc LP hien tai
+    private float totalDistance;
+    private ArrayList<Integer> indexes = new ArrayList<Integer>();//chi so cua cac don vi ung vien phia truoc LP hien tai
     private int indexOfCurrentCandUnitInPath;//chi so cua don vi ung vien hien tai
-
+    private int[] indexArray = new int[50];
+    private int sizeOfIndexArray=0;
+    
     public Path() {
     }
 
     public Path(float d, int index) {
-        distance = d;
-        indexOfCurrentCandUnitInPath = index;
-        indexesOfPreCandUnitsInPath.add(index);
+          totalDistance = d;
+          indexOfCurrentCandUnitInPath = index;
+          indexes.add(index);
+          indexArray[sizeOfIndexArray++] = index;
     }
     public Path(float d,ArrayList<Integer> indexes, int index) {
-        distance = d;
-        indexesOfPreCandUnitsInPath = indexes;
+        totalDistance = d;
+        //this.indexesOfPreCandUnitsInPath = new ArrayList<Integer>();
+        //indexesOfPreCandUnitsInPath = indexes;
+        //this.indexesOfPreCandUnitsInPath = indexes;
+//        this.indexes.add(indexOfCurrentCandUnitInPath);
+//        indexOfCurrentCandUnitInPath = index;
+    }
+    public Path(float d, Path p, int index){
+        totalDistance = d+p.getTotalDistance();
+        for (int i = 0; i < p.getIndexes().size(); i++) {
+            Integer get = p.getIndexes().get(i);
+            this.indexes.add(get);
+        }
+        indexes.add(index);
         indexOfCurrentCandUnitInPath = index;
-        indexesOfPreCandUnitsInPath.add(index);
+        System.arraycopy(p.getIndexArray(), 0, this.indexArray, 0, p.getSizeOfIndexArray());
+        
+        sizeOfIndexArray = p.getSizeOfIndexArray();
+        indexArray[sizeOfIndexArray++] = index;
     }
 
     public int compareTo(Path o) {
-        if (this.distance > o.distance) {
+        if (this.totalDistance > o.totalDistance) {
             return 1;
-        }else if(this.distance == o.distance){
+        }else if(this.totalDistance == o.totalDistance){
             return 0;
         }else return -1;
     }
@@ -43,15 +61,15 @@ public class Path implements Comparable<Path> {
     /**
      * @return the distance
      */
-    public float getDistance() {
-        return distance;
+    public float getTotalDistance() {
+        return totalDistance;
     }
 
     /**
      * @param distance the distance to set
      */
     public void setDistance(float distance) {
-        this.distance = distance;
+        this.totalDistance = distance;
     }
 
     /**
@@ -71,14 +89,35 @@ public class Path implements Comparable<Path> {
     /**
      * @return the indexesOfPreCandUnitsInPath
      */
-    public ArrayList<Integer> getIndexesOfPreCandUnitsInPath() {
-        return indexesOfPreCandUnitsInPath;
+    public ArrayList<Integer> getIndexes() {
+        return indexes;
     }
 
     /**
      * @param indexesOfPreCandUnitsInPath the indexesOfPreCandUnitsInPath to set
      */
     public void setIndexesOfPreCandUnitsInPath(ArrayList<Integer> indexesOfPreCandUnitsInPath) {
-        this.indexesOfPreCandUnitsInPath = indexesOfPreCandUnitsInPath;
+        this.indexes = indexesOfPreCandUnitsInPath;
+    }
+
+    /**
+     * @return the indexArray
+     */
+    public int[] getIndexArray() {
+        return indexArray;
+    }
+
+    /**
+     * @return the sizeOfIndexArray
+     */
+    public int getSizeOfIndexArray() {
+        return sizeOfIndexArray;
+    }
+
+    /**
+     * @param sizeOfIndexArray the sizeOfIndexArray to set
+     */
+    public void setSizeOfIndexArray(int sizeOfIndexArray) {
+        this.sizeOfIndexArray = sizeOfIndexArray;
     }
 }

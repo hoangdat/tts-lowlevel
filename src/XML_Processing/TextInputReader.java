@@ -57,7 +57,7 @@ public class TextInputReader extends XML_Reader {
 
                     if (nameOfElement.compareTo("sentence") == 0) {
                         ReadSentenceDetails();
-                        addSilsToSen("SIL");
+                        addSilsToSen("SILS");
                     } else if (nameOfElement.compareTo("parse") == 0) {
                         ReadParseDetails();
                     } else if (nameOfElement.compareTo("root") == 0) {

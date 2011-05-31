@@ -27,7 +27,7 @@ public class UnitSelection {
 
     private UnitSearching us;
     private ArrayList<LevelPhrase> foundLPhrs;
-    private ArrayList<String> fileNames;
+    private ArrayList<String> fileNames  = new ArrayList<String>();;
     private String pathFile;
     ArrayList<Sentence> allSenInTextDB;
     private float minDistance, tmpCost;
@@ -48,9 +48,12 @@ public class UnitSelection {
         //printBestNextUnit(4);
         sortDistanceArray();
         selectPreFinalCandUnits();
-        System.out.println("");
+        System.out.println("keke");
         selectFinalCandUnits();
+        writeToTextFile();
         System.out.println("hichic");
+
+
     }
 
     public void selectLP() {
@@ -443,8 +446,7 @@ public class UnitSelection {
             System.out.println("ko biet la sai o cho nao");
         } else {
             for (int i = 0; i < lp.getMinDistanceToNextUnit().size(); i++) {
-                System.out.println("min dis: " + lp.getMinDistanceToNextUnit().get(i) + " tai: " + lp.getBestIndex().get(i) + " : "
-                        + lp.getIndexOfBestNextUnit().get(i));
+                System.out.println("min dis: " + lp.getMinDistanceToNextUnit().get(i) + " tai: " + lp.getBestIndex().get(i) + " : " + lp.getIndexOfBestNextUnit().get(i));
             }
         }
     }
@@ -489,22 +491,34 @@ public class UnitSelection {
     ////////
 
     private void selectFinalCandUnits() {
-        int beginSen = 0, endSen;       
-        for (int i = 0; i < getFoundLPhrs().size() - 1; i++) {
+        int beginSen = 0, endSen;
+        boolean isBeginSen = false;
+        for (int i = 0; i < getFoundLPhrs().size(); i++) {
             ///////////////////////////////////////////////////////
             String phraseContent = getFoundLPhrs().get(i).getPhraseContent().trim();
-            if( i>0&&(phraseContent.compareTo("SILS") == 0 || phraseContent.compareTo("SIL") == 0) ){
-                endSen = i;
-                for (int j = beginSen; j < endSen ; j++) {
-                    //selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
-                    if(j==beginSen){
-                        getFoundLPhrs().get(j).getPreBestPaths().add(new Path(0, 0));
+            if ((phraseContent.compareTo("SILS") == 0)) {
+                //|| phraseContent.compareTo("SIL") == 0
+                isBeginSen = !isBeginSen;
+                if (!isBeginSen) {
+                    //neu ket thuc cau
+                    endSen = i;
+                    for (int j = beginSen; j < endSen; j++) {
+                        System.out.println("j: " + j);
+                        //selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
+                        if (j == beginSen) {
+                            getFoundLPhrs().get(j).getPreBestPaths().add(new Path(0, getFoundLPhrs().get(j).getIndexesOfPreSelectedUnit().get(0)));
+                            System.out.println("begin Sen " + beginSen);
+                        }
+                        selectBestPath(j, j + 1);
                     }
-                    selectBestPath(j, j + 1);
+                    Collections.sort(getFoundLPhrs().get(endSen).getPreBestPaths());
+                    System.out.println("duong di ngan nhat: " + getFoundLPhrs().get(endSen).getPreBestPaths().size() + " : ");
+                    this.setIndexOfBestPath(beginSen, endSen, getFoundLPhrs().get(endSen).getPreBestPaths().get(0).getIndexes());
+                    //beginSen = endSen + 1;
+                } else {
+                    //neu bat dau cau
+                    beginSen = i;
                 }
-                Collections.sort(getFoundLPhrs().get(endSen).getPreBestPaths());
-                System.out.println("duong di ngan nhat: "+getFoundLPhrs().get(i).getPreBestPaths().size()+" : ");
-                beginSen = endSen + 1;
             }
             ///////////////////////////////////////////////////////
 //            LevelPhrase currentLP = getFoundLPhrs().get(i);
@@ -523,24 +537,55 @@ public class UnitSelection {
      */
 
     public void selectBestPath(int indexOfCurrentLP, int indexOfNextLP) {
-        ArrayList<Path> tmpPaths;
-        ArrayList<Path> finalPaths = new ArrayList<Path>();
-        ArrayList<Path> prePaths;
-        
+
+
         LevelPhrase currentLP = getFoundLPhrs().get(indexOfCurrentLP);
-        LevelPhrase nextLP = getFoundLPhrs().get(indexOfCurrentLP + 1);
+        LevelPhrase nextLP = getFoundLPhrs().get(indexOfNextLP);
         for (int j = 0; j < currentLP.getIndexesOfPreSelectedUnit().size(); j++) {
             int indexOfPreSelectedUnitOfCurrentLp = currentLP.getIndexesOfPreSelectedUnit().get(j);
-            tmpPaths = new ArrayList<Path>();
+            ArrayList<Path> pathByIndexOfCandUnit = currentLP.getPathByIndexOfCandUnit(indexOfPreSelectedUnitOfCurrentLp);
             for (int k = 0; k < nextLP.getIndexesOfPreSelectedUnit().size(); k++) {
                 float tmpDis = currentLP.getDistanceMatrix()[indexOfPreSelectedUnitOfCurrentLp][nextLP.getIndexesOfPreSelectedUnit().get(k)];
-                ArrayList<Path> pathByIndexOfCandUnit = currentLP.getPathByIndexOfCandUnit(indexOfPreSelectedUnitOfCurrentLp);
                 for (int i = 0; i < pathByIndexOfCandUnit.size(); i++) {
-                    System.out.println("size: "+pathByIndexOfCandUnit.size());
-                    Path p = new Path(pathByIndexOfCandUnit.get(i).getDistance()+tmpDis,pathByIndexOfCandUnit.get(i).getIndexesOfPreCandUnitsInPath(), nextLP.getIndexesOfPreSelectedUnit().get(k));
+                    Path pathByIndexI = pathByIndexOfCandUnit.get(i);
+                    //Path p = new Path(pathByIndexOfCandUnit.get(i).getTotalDistance() + tmpDis, pathByIndexOfCandUnit.get(i).getIndexes(), nextLP.getIndexesOfPreSelectedUnit().get(k));
+//                    Path p = new Path();
+//                    p.setDistance(pathByIndexI.getTotalDistance()+tmpDis);
+//                    p.setIndexOfCurrentCandUnitInPath(nextLP.getIndexesOfPreSelectedUnit().get(k));
+//                    p.setIndexesOfPreCandUnitsInPath(pathByIndexI.getIndexes());
+//                    p.getIndexes().add(p.getIndexOfCurrentCandUnitInPath());
+                    Path p = new Path(tmpDis, pathByIndexI, nextLP.getIndexesOfPreSelectedUnit().get(k));
                     nextLP.getPreBestPaths().add(p);
-                    System.out.println("added ");
                 }
+            }
+        }
+    }
+
+    private void setIndexOfBestPath(int beginIndexOfSen, int endIndexOfSen, ArrayList<Integer> indexes) {
+        if (indexes.size() - (endIndexOfSen - beginIndexOfSen) != 1) {
+            System.out.println("sai roi, hichic");
+        } else {
+            for (int i = beginIndexOfSen; i <= endIndexOfSen; i++) {
+                if (getFoundLPhrs().get(i).isFound() == 1) {
+                    Integer index = indexes.get(i - beginIndexOfSen);
+                    getFoundLPhrs().get(i).setSelectedSen(getFoundLPhrs().get(i).getFoundIndexes1().get(index));
+                    getFoundLPhrs().get(i).setSelectedSylPhrs(getFoundLPhrs().get(i).getFoundIndexes2().get(index));
+                    getFoundLPhrs().get(i).setSelectedSyllable(getFoundLPhrs().get(i).getFoundIndexes3().get(index));
+                } else {
+                    //System.out.println("khong thay: " + getFoundLPhrs().get(i).getPhraseContent());
+                }
+            }
+            /////////////////
+           
+            for (int i = beginIndexOfSen; i <= endIndexOfSen; i++) {
+                fileNames.add(UnitSearching.getAllSenInTextDB().get(foundLPhrs.get(i).getSelectedSen()).getCarryingFile());
+                int selectedSen = foundLPhrs.get(i).getSelectedSen();
+                int selectedSylPhrs = foundLPhrs.get(i).getSelectedSylPhrs();
+                int selectedSyllable = foundLPhrs.get(i).getSelectedSyllable();
+                int startIndex = UnitSearching.getAllSenInTextDB().get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable).getStartIndex();
+                int endIndex = UnitSearching.getAllSenInTextDB().get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable + foundLPhrs.get(i).getPhraseLen() - 1).getEndIndex();
+                foundLPhrs.get(i).setStartIndex(startIndex);
+                foundLPhrs.get(i).setEndIndex(endIndex);
             }
         }
     }
