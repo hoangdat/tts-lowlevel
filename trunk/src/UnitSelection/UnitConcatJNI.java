@@ -19,21 +19,21 @@ import javax.xml.stream.XMLStreamException;
 public class UnitConcatJNI {
 
    
-    String[] fileNames;
-    public native void UnitConcatenative(String fileLocation);
-
-    static {
-        System.loadLibrary("LowLevelJNI");
-    }
-
-    public UnitConcatJNI() throws XMLStreamException, FileNotFoundException {
-
-    }
-
-    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        UnitConcatJNI unitConcatJNI = new UnitConcatJNI();
-        UnitSelection us = new UnitSelection();
-        System.out.println("PathFile: "+us.getPathFile());
-        unitConcatJNI.UnitConcatenative(us.getPathFile());
-    }
+//    String[] fileNames;
+//    public native void UnitConcatenative(String fileLocation);
+//
+//    static {
+//        System.loadLibrary("LowLevelJNI");
+//    }
+//
+//    public UnitConcatJNI() throws XMLStreamException, FileNotFoundException {
+//
+//    }
+//
+//    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+//        UnitConcatJNI unitConcatJNI = new UnitConcatJNI();
+//        UnitSelection us = new UnitSelection();
+//        System.out.println("PathFile: "+us.getPathFile());
+//        unitConcatJNI.UnitConcatenative(us.getPathFile());
+//    }
 }

@@ -337,7 +337,7 @@ public class LevelPhrase extends Phrase {
     public ArrayList<Path> getPathByIndexOfCandUnit(int indexOfCandUnit) {
         ArrayList<Path> result = new ArrayList<Path>();
         result.removeAll(result);
-        int maxPath = 10000;
+        int maxPath = 200;
         for (int i = 0; i < preBestPaths.size(); i++) {
 //            ArrayList<Integer> indexesOfPreCandUnitsInPath = preBestPaths.get(i).getIndexes();
 //            if (indexesOfPreCandUnitsInPath.get(indexesOfPreCandUnitsInPath.size() - 1) == indexOfCandUnit) {
@@ -357,7 +357,7 @@ public class LevelPhrase extends Phrase {
         for (int i = 0; i < maxPath; i++) {
             subList.add(result.get(i));
         }
-        System.out.println("sublist size: "+subList.size());
+        //System.out.println("sublist size: "+subList.size());
         return subList;
     }
 }

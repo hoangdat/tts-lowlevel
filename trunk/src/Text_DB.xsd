@@ -1,3 +1,84 @@
+<<<<<<< .mine
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+ 
+    <!-- definition of attributes -->
+    <xs:attribute name="type_phoneme" type="xs:string"/>
+  
+    <!-- definition of complex elements -->
+    <xs:element name="syllable">
+        <xs:complexType>
+            <xs:attribute name = "id_syl" type="xs:integer"/>
+            <xs:attribute name = "name" type="xs:string"/>
+            <xs:attribute name = "start_index" type="xs:integer"/>
+            <xs:attribute name = "end_index" type="xs:integer"/>
+            <xs:attribute name = "position" type="xs:integer"/>
+            <xs:attribute name = "num_of_phone" type="xs:integer"/>
+            <xs:attribute name="energy" type="xs:float"/>
+            <xs:sequence>
+                <xs:element name = "initial" type ="xs:string">
+                    <xs:complexType>
+                        <xs:attribute ref="type_phoneme" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name = "middle" type ="xs:string">
+                    <xs:complexType>
+                        <xs:attribute ref="type_phoneme" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name = "nucleus" type ="xs:string">
+                    <xs:complexType>
+                        <xs:attribute ref="type_phoneme" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name = "final" type ="xs:string">
+                    <xs:complexType>
+                        <xs:attribute ref="type_phoneme" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name = "tone" type ="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!--                -->
+    <xs:element name="phrase">
+        <xs:complexType>
+            <xs:attribute name="id_phrase" type="xs:integer"/>
+            <xs:attribute name="length" type="xs:integer"/>
+            <xs:sequence>
+                <xs:element ref="syllable"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!--                           -->
+    <xs:element name="sentence">
+        <xs:complexType>
+            <xs:attribute name="id_sen" type="xs:integer"/>
+            <xs:sequence>
+                <xs:element ref="phrase"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!--                           -->
+    <xs:element name="file" >
+        <xs:complexType>
+            <xs:attribute name="id_file" type="xs:integer"/>
+            <xs:attribute name="file_name" type="xs:string" />
+            <xs:sequence>
+                <xs:element ref="sentence" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+   
+    <!--                  -->
+    <xs:element name="category">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="file"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+=======
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:attribute name="type_phoneme" use="optional" type="xs:string"/>
@@ -52,4 +133,5 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+>>>>>>> .r79
 </xs:schema>
