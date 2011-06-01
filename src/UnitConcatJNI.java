@@ -21,7 +21,7 @@ public class UnitConcatJNI {
 
    
     String[] fileNames;
-    public native void UnitConcatenative(String fileLocation);
+    public native void UnitConcatenative(String fileLocation, String nameOfWavFile);
 
     static {
         System.loadLibrary("LowLevelJNI");
@@ -32,10 +32,10 @@ public class UnitConcatJNI {
     }
 
     public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+        String nameOfWavFile = "nameOfWavFile";
         UnitConcatJNI unitConcatJNI = new UnitConcatJNI();
         UnitSelection us = new UnitSelection();
-        unitConcatJNI.UnitConcatenative(us.getPathFile());
+        unitConcatJNI.UnitConcatenative(us.getPathFile(),nameOfWavFile);
         System.out.println("hichic");
-
     }
 }
