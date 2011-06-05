@@ -16,6 +16,7 @@ public class Path implements Comparable<Path> {
     private float totalDistance;
     private ArrayList<Integer> indexes = new ArrayList<Integer>();//chi so cua cac don vi ung vien phia truoc LP hien tai
     private int indexOfCurrentCandUnitInPath;//chi so cua don vi ung vien hien tai
+    private int indexOfPreCandUnitInPath;
     private int[] indexArray = new int[50];
     private int sizeOfIndexArray=0;
     
@@ -48,6 +49,12 @@ public class Path implements Comparable<Path> {
         
         sizeOfIndexArray = p.getSizeOfIndexArray();
         indexArray[sizeOfIndexArray++] = index;
+    }
+    /////
+    public Path(float dis, int indexOfPre, int indexOfCurrent){
+        totalDistance += dis;
+        indexOfPreCandUnitInPath = indexOfPre;
+        indexOfCurrentCandUnitInPath = indexOfCurrent;
     }
 
     public int compareTo(Path o) {
@@ -119,5 +126,19 @@ public class Path implements Comparable<Path> {
      */
     public void setSizeOfIndexArray(int sizeOfIndexArray) {
         this.sizeOfIndexArray = sizeOfIndexArray;
+    }
+
+    /**
+     * @return the indexOfPreCandUnitInPath
+     */
+    public int getIndexOfPreCandUnitInPath() {
+        return indexOfPreCandUnitInPath;
+    }
+
+    /**
+     * @param indexOfPreCandUnitInPath the indexOfPreCandUnitInPath to set
+     */
+    public void setIndexOfPreCandUnitInPath(int indexOfPreCandUnitInPath) {
+        this.indexOfPreCandUnitInPath = indexOfPreCandUnitInPath;
     }
 }

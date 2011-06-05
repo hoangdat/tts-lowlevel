@@ -28,17 +28,17 @@ public class UnitSelection {
     private UnitSearching us;
     private ArrayList<LevelPhrase> foundLPhrs;
     private ArrayList<String> fileNames = new ArrayList<String>();
-
-    ;
     private String pathFile;
     ArrayList<Sentence> allSenInTextDB;
     private float minDistance, tmpCost;
     private static final int MAX_CAND_UNIT = 12;
+    private StringBuffer inputTextContent;
 
     public UnitSelection() throws XMLStreamException, FileNotFoundException {
         us = new UnitSearching();
         foundLPhrs = us.getFoundLPhs();
         allSenInTextDB = UnitSearching.getAllSenInTextDB();
+        this.setInputTextContent();
         //selectLP();//tong hop khi khong dung ham chi phi
         selectLPByCost();
         //printCostOf2LP(4);
@@ -49,15 +49,26 @@ public class UnitSelection {
         //this.printDetails();
         //printBestNextUnit(4);
         sortDistanceArray();
-        selectPreFinalCandUnits();
+        //selectPreFinalCandUnits();
+        System.out.println("keke");
+        selectFinalCandUnits();
+        writeToTextFile(); 
+        System.out.println("hichic");
+    }
+    //////////
+     public UnitSelection(File inputXMLFile) throws XMLStreamException, FileNotFoundException {
+        us = new UnitSearching(inputXMLFile);
+        foundLPhrs = us.getFoundLPhs();
+        allSenInTextDB = UnitSearching.getAllSenInTextDB();
+        this.setInputTextContent();
+        selectLPByCost();
+        sortDistanceArray();
         System.out.println("keke");
         selectFinalCandUnits();
         writeToTextFile();
         System.out.println("hichic");
-
-
     }
-
+    /////////////////
     public void selectLP() {
         for (int i = 0; i < getFoundLPhrs().size(); i++) {
             //System.out.println(i + getFoundLPhrs().get(i).getPhraseContent());
@@ -118,8 +129,8 @@ public class UnitSelection {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f), "UTF8"));
             for (int i = 0; i < foundLPhrs.size(); i++) {
-                if(i<foundLPhrs.size()-2){
-                    if(foundLPhrs.get(i).getPhraseContent().trim().compareTo("SILS")==0&&foundLPhrs.get(i+1).getPhraseContent().trim().compareTo("SILS")==0){
+                if (i < foundLPhrs.size() - 2) {
+                    if (foundLPhrs.get(i).getPhraseContent().trim().compareTo("SILS") == 0 && foundLPhrs.get(i + 1).getPhraseContent().trim().compareTo("SILS") == 0) {
                         continue;
                     }
                 }
@@ -398,11 +409,6 @@ public class UnitSelection {
     }
     /////////////////
 
-    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        new UnitSelection();
-
-    }
-
     private void selectBestNextUnitOfaCandUnit(LevelPhrase currentUnit, LevelPhrase nextUnit) {
         float minDistance = 210;
         int bestNextIndex = 0, bestIndex = 0;
@@ -496,6 +502,41 @@ public class UnitSelection {
         }
     }
     ////////
+    /*
+     * cai dat thuat toan quy hoach dong. Doi voi moi don vi ung vien, chi giu lai
+     * duong di ngan nhat toi no
+     */
+
+    private void selectPreFinalCandUnitsByViterbi(int beginIndex, int endIndex) {
+        if (getFoundLPhrs().get(beginIndex).getPreBestPaths().size() == 0) {
+            getFoundLPhrs().get(beginIndex).getPreBestPaths().add(new Path(0, 0));
+        }
+        /////////
+        //cai dat thuat toan quy hoach dong - Viterbi
+        for (int i = beginIndex; i < endIndex; i++) {
+            float[][] distanceMatrix = getFoundLPhrs().get(i).getDistanceMatrix();
+            LevelPhrase preLP = getFoundLPhrs().get(i);
+            LevelPhrase nextLP = getFoundLPhrs().get(i + 1);
+            for (int j = 0; j < nextLP.getFoundIndexes1().size(); j++) {
+                int indexOfPreCand = 0;
+                float minDisOfCandJofNextLP = distanceMatrix[indexOfPreCand][j] + preLP.getPreBestPaths().get(indexOfPreCand).getTotalDistance();
+
+                for (int k = 0; k < preLP.getFoundIndexes1().size(); k++) {
+                    float tmpDis = distanceMatrix[k][j] + preLP.getPreBestPaths().get(k).getTotalDistance();
+                    if (minDisOfCandJofNextLP > tmpDis) {
+                        minDisOfCandJofNextLP = tmpDis;
+                        indexOfPreCand = k;
+                    }
+                }
+                //System.out.println("minDis: " + minDisOfCandJofNextLP);
+                nextLP.getPreBestPaths().add(new Path(minDisOfCandJofNextLP, indexOfPreCand, j));
+                //nextLP.getPreBestPaths().add(new Path(minDisOfCandJofNextLP, preLP.getPreBestPaths().get(indexOfPreCand), j));
+            }
+        }
+        ///////////////////
+
+    }
+    ///////////////////////////
 
     private void selectFinalCandUnits() {
         int beginSen = 0, endSen;
@@ -512,30 +553,33 @@ public class UnitSelection {
                     for (int j = beginSen; j < endSen; j++) {
                         //System.out.println("j: " + j);
                         //selectBestNextUnitOfaCandUnit(getFoundLPhrs().get(j), getFoundLPhrs().get(j + 1));
-                        if (j == beginSen) {
-                            getFoundLPhrs().get(j).getPreBestPaths().add(new Path(0, getFoundLPhrs().get(j).getIndexesOfPreSelectedUnit().get(0)));
-                            System.out.println("begin Sen " + beginSen);
-                        }
-                        selectBestPath(j, j + 1);
+//                        if (j == beginSen) {
+//                            getFoundLPhrs().get(j).getPreBestPaths().add(new Path(0, getFoundLPhrs().get(j).getIndexesOfPreSelectedUnit().get(0)));
+//                            System.out.println("begin Sen " + beginSen);
+//                        }
+                        //selectBestPath(j, j + 1);
+                        selectPreFinalCandUnitsByViterbi(beginSen, endSen);
                     }
                     Collections.sort(getFoundLPhrs().get(endSen).getPreBestPaths());
                     System.out.println("duong di ngan nhat: " + getFoundLPhrs().get(endSen).getPreBestPaths().size() + " : ");
                     Path bestPath = getFoundLPhrs().get(endSen).getPreBestPaths().get(0);
                     System.out.println("best Path of Sentence start at number: " + beginSen + " distance: " + bestPath.getTotalDistance());
-                    float costToCheck = 0;
-                    for (int j = 0; j < bestPath.getIndexes().size(); j++) {
-                        int ind = j + beginSen;
-                        System.out.println("LP thu: " + ind + " co bestCand tai vi tri: " + bestPath.getIndexes().get(j));
-//                        if (j < bestPath.getIndexes().size()-2) {
-//                            costToCheck += getFoundLPhrs().get(ind).getDistanceMatrix()[bestPath.getIndexes().get(j)][bestPath.getIndexes().get(j) + 1];
-//                        }
-                    }
+
+//                    for (int j = 0; j < bestPath.getIndexes().size(); j++) {
+//                        int ind = j + beginSen;
+//                        System.out.println("LP thu: " + ind + " co bestCand tai vi tri: " + bestPath.getIndexes().get(j));
+////                        if (j < bestPath.getIndexes().size()-2) {
+////                            costToCheck += getFoundLPhrs().get(ind).getDistanceMatrix()[bestPath.getIndexes().get(j)][bestPath.getIndexes().get(j) + 1];
+////                        }
+//                    }
 //                    if (costToCheck != bestPath.getTotalDistance()) {
 //                        System.out.println("min distance ko dung");
 //                    }
                     System.out.println("");
-                    this.setIndexOfBestPath(beginSen, endSen, getFoundLPhrs().get(endSen).getPreBestPaths().get(0).getIndexes());
+                    setIndexOfBestPath(beginSen, endSen, bestPath);
+                    //this.setIndexOfBestPath(beginSen, endSen, getFoundLPhrs().get(endSen).getPreBestPaths().get(0).getIndexes());
                     //beginSen = endSen + 1;
+
                 } else {
                     //neu bat dau cau
                     beginSen = i;
@@ -608,6 +652,56 @@ public class UnitSelection {
                 foundLPhrs.get(i).setStartIndex(startIndex);
                 foundLPhrs.get(i).setEndIndex(endIndex);
             }
+        }
+    }
+    ////////////////////////
+
+    private void setIndexOfBestPath(int beginIndexOfSen, int endIndexOfSen, Path bestPath) {
+        int indexOfCurrentCandUnitInPath = getFoundLPhrs().get(endIndexOfSen).getPreBestPaths().get(0).getIndexOfCurrentCandUnitInPath();
+        int indexOfPreCandUnitInPath = getFoundLPhrs().get(endIndexOfSen).getPreBestPaths().get(0).getIndexOfPreCandUnitInPath();
+      
+        for (int i = endIndexOfSen; i >= beginIndexOfSen; i--) {
+            //indexOfCurrentCandUnitInPath = getFoundLPhrs().get(i).getPreBestPaths().get(indexOfCurrentCandUnitInPath).getIndexOfCurrentCandUnitInPath();
+            getFoundLPhrs().get(i).setSelectedSen(getFoundLPhrs().get(i).getFoundIndexes1().get(indexOfCurrentCandUnitInPath));
+            getFoundLPhrs().get(i).setSelectedSylPhrs(getFoundLPhrs().get(i).getFoundIndexes2().get(indexOfCurrentCandUnitInPath));
+            getFoundLPhrs().get(i).setSelectedSyllable(getFoundLPhrs().get(i).getFoundIndexes3().get(indexOfCurrentCandUnitInPath));
+            ///////
+            indexOfPreCandUnitInPath = getFoundLPhrs().get(i).getPreBestPaths().get(indexOfCurrentCandUnitInPath).getIndexOfPreCandUnitInPath();
+            indexOfCurrentCandUnitInPath = indexOfPreCandUnitInPath;
+        }
+        ////////////////////////
+        /////////////////
+            for (int i = beginIndexOfSen; i <= endIndexOfSen; i++) {
+                fileNames.add(UnitSearching.getAllSenInTextDB().get(foundLPhrs.get(i).getSelectedSen()).getCarryingFile());
+                int selectedSen = foundLPhrs.get(i).getSelectedSen();
+                int selectedSylPhrs = foundLPhrs.get(i).getSelectedSylPhrs();
+                int selectedSyllable = foundLPhrs.get(i).getSelectedSyllable();
+                int startIndex = UnitSearching.getAllSenInTextDB().get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable).getStartIndex();
+                int endIndex = UnitSearching.getAllSenInTextDB().get(selectedSen).getSylPhrases().get(selectedSylPhrs).getSyllablesInPh().get(selectedSyllable + foundLPhrs.get(i).getPhraseLen() - 1).getEndIndex();
+                foundLPhrs.get(i).setStartIndex(startIndex);
+                foundLPhrs.get(i).setEndIndex(endIndex);
+            }
+    }
+    /////////////////////////////
+
+    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
+        new UnitSelection();
+    }
+
+    /**
+     * @return the inputTextContent
+     */
+    public StringBuffer getInputTextContent() {
+        return inputTextContent;
+    }
+
+    /**
+     * @param inputTextContent the inputTextContent to set
+     */
+    public void setInputTextContent() {
+        inputTextContent = new StringBuffer();
+        for (int i = 0; i < us.allSenInTextInput.size(); i++) {
+            inputTextContent.append(us.allSenInTextInput.get(i).getSenContent()).append(" .\n");
         }
     }
 }

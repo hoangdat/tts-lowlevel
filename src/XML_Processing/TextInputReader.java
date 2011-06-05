@@ -6,6 +6,7 @@ package XML_Processing;
 
 import Units.LevelPhrase;
 import Units.Sentence;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.Integer;
 import java.util.ArrayList;
@@ -28,8 +29,19 @@ public class TextInputReader extends XML_Reader {
     private ArrayList<Integer> level;
     int id_levelPhrase;
 
-    public TextInputReader(String str)  {
+    public TextInputReader(String str) {
         super(str);
+        try {
+            setxMLStreamReader();
+            xMLStreamReader = getxMLStreamReader();
+            ReadDetails();
+        } catch (Exception e) {
+        }
+    }
+    ///////////////////////////
+
+    public TextInputReader(File file) {
+        super(file);
         try {
             setxMLStreamReader();
             xMLStreamReader = getxMLStreamReader();
@@ -77,11 +89,10 @@ public class TextInputReader extends XML_Reader {
                         //this.setLevelOfPhrase();//set lai level sau khi da add them subLevel
                         this.addSilsToSen("SILS");
                         this.getAllSentences().add(sentence);
-                    }else if(nameOfElement.compareTo("root") == 0){
+                    } else if (nameOfElement.compareTo("root") == 0) {
                         //this.addSilsToSen("SILS");
                     }
-                }  else if (eventType.equals(XMLEvent.END_DOCUMENT)){
-                    
+                } else if (eventType.equals(XMLEvent.END_DOCUMENT)) {
                 } else {
                     System.out.println("Don't know this event");
                 }
