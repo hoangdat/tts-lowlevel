@@ -14,6 +14,7 @@ import XML_Processing.HalfSylDBReader;
 import XML_Processing.SyllableAnalysis;
 import XML_Processing.TextDBReader;
 import XML_Processing.TextInputReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.xml.stream.XMLStreamException;
@@ -28,8 +29,8 @@ public class UnitSearching {
     /**
      * @return the allSenInTextDB
      */
-    static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\sentest\\sen7.xml");
-    //static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
+    //static TextInputReader textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\sentest\\sen7.xml");
+    TextInputReader textInputReader;
     static TextDBReader textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
     static SyllableAnalysis sylTransDic = new SyllableAnalysis();
     private static ArrayList<Sentence> allSenInTextDB;
@@ -44,6 +45,7 @@ public class UnitSearching {
         //textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
         //textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result7_fixed.xml");
         allSenInTextDB = textDBReader.getAllSentences();
+        textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result4.xml");
         allSenInTextInput = textInputReader.getAllSentences();
         sylDic = sylTransDic.getSylDic();
         textInputReader.printDetails();
@@ -51,7 +53,20 @@ public class UnitSearching {
         this.searchTextInput();
         this.setPosInSenOfPhrs();
     }
-    //
+    ////////////////////////////////
+    public UnitSearching(File inputTextFile) throws XMLStreamException, FileNotFoundException {
+        //textDBReader = new TextDBReader(System.getProperty("user.dir") + "\\Text_DB_Creator.xml");
+        //textInputReader = new TextInputReader(System.getProperty("user.dir") + "\\result7_fixed.xml");
+        allSenInTextDB = textDBReader.getAllSentences();
+        textInputReader = new TextInputReader(inputTextFile);
+        allSenInTextInput = textInputReader.getAllSentences();
+        sylDic = sylTransDic.getSylDic();
+        textInputReader.printDetails();
+        //allHalfSyls = halfSylDBReader.getAllHalfSyls();
+        this.searchTextInput();
+        this.setPosInSenOfPhrs();
+    }
+    /////////////////////////////////
 
     public static ArrayList<Sentence> getAllSenInTextDB() {
         return allSenInTextDB;
