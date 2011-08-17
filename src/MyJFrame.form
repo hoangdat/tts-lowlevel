@@ -26,7 +26,6 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jMenu1.text"/>
             <Property name="name" type="java.lang.String" value="jMenu1" noResource="true"/>
           </Properties>
           <SubComponents>
@@ -35,7 +34,6 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+O"/>
                 </Property>
-                <Property name="text" type="java.lang.String" resourceKey="OpenMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="OpenMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -44,7 +42,6 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+X"/>
                 </Property>
-                <Property name="text" type="java.lang.String" resourceKey="ExitMenuITem.text"/>
                 <Property name="name" type="java.lang.String" value="ExitMenuITem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -52,7 +49,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jMenu2.text"/>
             <Property name="name" type="java.lang.String" value="jMenu2" noResource="true"/>
           </Properties>
         </Menu>
@@ -61,7 +57,6 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
   <SyntheticProperties>
@@ -83,20 +78,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="optionPanel" min="-2" max="-2" attributes="0"/>
-          <Component id="textAreaPanel" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="timeLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="statusPanel" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="optionPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="170" max="32767" attributes="0"/>
+          </Group>
+          <Component id="textAreaPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="optionPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="optionPanel" min="-2" pref="39" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="textAreaPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -118,18 +116,22 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="openButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="synthesizeButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="195" max="32767" attributes="0"/>
+                  <Component id="openButton" min="-2" pref="78" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="synthesizeButton" min="-2" pref="93" max="-2" attributes="0"/>
+                  <EmptySpace pref="90" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                  <Component id="openButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="synthesizeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="openButton" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="synthesizeButton" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -172,7 +174,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" pref="266" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" alignment="1" pref="368" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -207,7 +209,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="253" max="32767" attributes="0"/>
+                  <EmptySpace pref="287" max="32767" attributes="0"/>
                   <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -231,7 +233,6 @@
     </Container>
     <Component class="javax.swing.JLabel" name="timeLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="timeLabel.text"/>
         <Property name="name" type="java.lang.String" value="timeLabel" noResource="true"/>
       </Properties>
     </Component>
